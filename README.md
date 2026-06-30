@@ -1,2 +1,2 @@
 # portofolio_santo
-websiite portofoli personal Santo Parningotan Hutapea
+websiite portofolio personal Santo Parningotan Hutapea
