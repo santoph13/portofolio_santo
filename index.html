@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santo Parningotan Hutapea | Portfolio</title>
+    <!-- Icon resmi dari FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Library CDN untuk menampilkan ikon teknologi secara otomatis -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        /* 1. VARIABEL WARNA (Default: Tema Gelap / Dark Mode) */
+        :root {
+            --bg-color: #030712;
+            --text-main: #ffffff;
+            --text-sub: #9ca3af;
+            --text-headline: #e5e7eb;
+            --nav-bg: rgba(10, 15, 30, 0.7);
+            --nav-border: rgba(88, 166, 255, 0.2);
+            --nav-active: rgba(88, 166, 255, 0.2);
+            --title-gradient: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
+            --btn-bg: rgba(31, 111, 235, 0.1);
+            --btn-border: rgba(88, 166, 255, 0.3);
+            --btn-hover: rgba(31, 111, 235, 0.2);
+            --star-color-1: rgba(88, 166, 255, 0.2);
+            --star-color-2: rgba(88, 166, 255, 0.1);
+            --shadow-glow: rgba(88, 166, 255, 0.3);
+            --cursor-glow: rgba(88, 166, 255, 0.4);
+            --card-bg: rgba(17, 24, 39, 0.6);
+        }
+
+        /* 2. VARIABEL WARNA (Alternatif: Tema Terang / Light Mode) */
+        [data-theme="light"] {
+            --bg-color: #f0f4f8;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --text-headline: #334155;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --nav-border: rgba(31, 111, 235, 0.2);
+            --nav-active: rgba(31, 111, 235, 0.15);
+            --title-gradient: linear-gradient(135deg, #1f6feb 0%, #0056b3 100%);
+            --btn-bg: rgba(31, 111, 235, 0.05);
+            --btn-border: rgba(31, 111, 235, 0.4);
+            --btn-hover: rgba(31, 111, 235, 0.15);
+            --star-color-1: rgba(31, 111, 235, 0.08);
+            --star-color-2: rgba(31, 111, 235, 0.04);
+            --shadow-glow: rgba(31, 111, 235, 0.15);
+            --cursor-glow: rgba(31, 111, 235, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(var(--star-color-1), transparent 2px),
+                radial-gradient(var(--star-color-2), transparent 1px);
+            background-size: 550px 550px, 350px 350px;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        a, button, nav a {
+            cursor: pointer;
+        }
+
+        /* BAYANGAN NEON MENGIKUTI KURSOR STANDAR */
+        .cursor-neon-glow {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--cursor-glow) 0%, rgba(0,0,0,0) 70%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+        }
+
+        /* FLOATING CAPSULE NAVBAR */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 20px;
+            z-index: 100;
+            padding: 0 15px;
+        }
+
+        .nav-container {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--nav-border);
+            padding: 8px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+            background: var(--nav-active);
+            box-shadow: 0 0 12px var(--shadow-glow);
+        }
+
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-size: 16px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--text-main);
+            transform: scale(1.15);
+        }
+
+        /* HERO LAYOUT CONTAINER */
+        .hero-section {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 150px 24px 40px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            min-height: calc(100vh - 60px);
+            align-items: center;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1.25fr 0.75fr;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .intro-text {
+            color: var(--text-sub);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 800;
+            background: var(--title-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .headline-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-headline);
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .sub-paragraph {
+            color: var(--text-sub);
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        /* TOMBOL GLASSMORPHISM */
+        .btn-wrapper {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn-glass {
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-main);
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+        }
+
+        .btn-glass:hover {
+            background: var(--btn-hover);
+            border-color: var(--text-main);
+            box-shadow: 0 0 15px var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        /* IKON SOSIAL MEDIA */
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--text-sub);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--text-main);
+            border-color: var(--text-main);
+            box-shadow: 0 0 10px var(--shadow-glow);
+        }
+
+        /* FOTO PROFIL LINGKARAN */
+        .hero-photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--btn-border);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==================== WORK EXPERIENCE SECTION ==================== */
+        .experience-section {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .experience-header, .skills-header, .projects-header, .achievements-header {
+            margin-bottom: 35px;
+        }
+
+        .experience-header h2, .skills-header h2, .projects-header h2, .achievements-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--title-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .experience-header p, .skills-header p, .projects-header p, .achievements-header p {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        .timeline {
+            position: relative;
+            border-left: 2px solid var(--btn-border);
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--cursor-glow);
+            box-shadow: 0 0 10px var(--cursor-glow);
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .job-company {
+            font-size: 14px;
+            font-weight: 600;
+            color: #58a6ff;
+            margin-bottom: 4px;
+        }
+
+        .job-duration {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .job-desc {
+            font-size: 13.5px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .job-desc-list {
+            margin-left: 16px;
+            margin-top: 6px;
+            color: var(--text-sub);
+            font-size: 13.5px;
+        }
+
+        .job-desc-list li {
+            margin-bottom: 4px;
+        }
+
+        /* ==================== SKILLS SECTION ==================== */
+        .skills-section {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .category-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-sub);
+            margin: 30px 0 15px 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .skill-card {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--text-main);
+            box-shadow: 0 8px 20px var(--shadow-glow);
+        }
+
+        .skill-card i {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* ==================== PROJECTS SECTION ==================== */
+        .projects-section {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            transition: 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-main);
+            box-shadow: 0 12px 30px var(--shadow-glow);
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .project-year {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+
+        .project-tech-icon {
+            font-size: 20px;
+            color: var(--text-sub);
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .project-desc {
+            font-size: 13.5px;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        /* ==================== ACHIEVEMENTS SECTION ==================== */
+        .achievements-section {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 24px 120px 24px;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .certifications-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(8px);
+            transition: 0.3s ease;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--text-main);
+            box-shadow: 0 10px 25px var(--shadow-glow);
+        }
+
+        .cert-icon-wrapper {
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .cert-info p {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        /* Media Query: Optimasi Tampilan Mobile */
+        @media (max-width: 767px) {
+            .cursor-neon-glow { display: none; }
+            header { top: 10px; }
+            .nav-container { padding: 6px 16px; gap: 8px; }
+            nav a { padding: 4px 10px; font-size: 11px; }
+            .hero-section { padding-top: 110px; text-align: center; gap: 30px; }
+            .hero-content { order: 2; align-items: center; }
+            .hero-photo-container { order: 1; }
+            .main-title { font-size: 38px; }
+            .sub-paragraph { margin-bottom: 24px; }
+            .btn-wrapper { justify-content: center; gap: 10px; margin-bottom: 24px; }
+            .photo-frame { width: 230px; height: 230px; }
+            .experience-section, .skills-section, .projects-section, .achievements-section { padding-bottom: 60px; }
+            .certification-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Elemen Efek Bayangan Neon Mengikuti Kursor Standar -->
+    <div class="cursor-neon-glow" id="cursorGlow"></div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <nav>
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+            </nav>
+            <button class="theme-toggle-btn" id="themeToggle" title="Switch Mode">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero-section">
+        <div class="hero-content">
+            <div class="intro-text">Hi, my name is</div>
+            <h1 class="main-title">Santo Parningotan Hutapea</h1>
+            
+            <div class="headline-text">
+                Data Science Student | Data Analyst IT & Operations Support
+            </div>
+            
+            <p class="sub-paragraph">
+                Saya adalah mahasiswa aktif program studi Sains Data di Universitas Terbuka yang memiliki kemampuan manajemen waktu dan disiplin yang tinggi. Berfokus pada pengelolaan basis data (SQL), pemrograman analitik Python, struktur data, serta pemodelan statistik. Memiliki ketersediaan waktu penuh dari sistem perkuliahan jarak jauh yang fleksibel untuk berkontribusi secara profesional di bidang analisis data dan dukungan operasional teknologi informasi.
+            </p>
+
+            <div class="btn-wrapper">
+                <a href="#projects" class="btn-glass">View My Projects</a>
+                <a href="SANTO HUTAPEA_CV.pdf" target="_blank" class="btn-glass">View Resume</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://github.com/santoph13" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:santoph13@gmail.com" class="social-icon"><i class="fa-regular fa-envelope"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="hero-photo-container">
+            <div class="photo-frame">
+                <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
+            </div>
+        </div>
+    </main>
+
+    <!-- Experience Section -->
+    <section class="experience-section" id="experience">
+        <div class="experience-header">
+            <h2>Work Experience</h2>
+            <p>Perjalanan karir profesional di bidang operasi digital, multimedia, dan analisis data.</p>
+        </div>
+
+        <div class="timeline">
+            <!-- Jabatan 1: Social Media Specialist & Operations -->
+            <div class="timeline-item">
+                <h3 class="job-title">Social Media Specialist & Operations</h3>
+                <div class="job-company">Santo Parningotan Hutapea (Professional Profile)</div>
+                <div class="job-duration">2026 – Sekarang</div>
+                <p class="job-desc">Memadukan analisis tren berbasis data dengan taktik operasional untuk mengoptimalkan pertumbuhan platform digital:</p>
+                <ul class="job-desc-list">
+                    <li><strong>Data-Driven Strategy:</strong> Mengevaluasi dan menganalisis metrik performa audiens menggunakan Meta Business Suite untuk menaikkan pertumbuhan secara organik hingga mencapai 70.000 pengikut.</li>
+                    <li><strong>Analisis Tren:</strong> Memetakan dan memproses tren data pasar berkala untuk merancang konten kreatif, menghasilkan rata-rata 10.000 engagement per unggahan.</li>
+                    <li><strong>Manajemen Kemitraan:</strong> Mengatur dan memimpin koordinasi operasional serta negosiasi bisnis profesional bersama mitra eksternal.</li>
+                </ul>
+            </div>
+
+            <!-- Jabatan 2: Multimedia & Broadcasting Staff -->
+            <div class="timeline-item">
+                <h3 class="job-title">Multimedia & Broadcasting Staff</h3>
+                <div class="job-company">Teknis & Infrastruktur Media</div>
+                <div class="job-duration">2020 – 2021</div>
+                <p class="job-desc">
+                    Bertanggung jawab penuh atas konfigurasi perangkat keras pendukung dan kelancaran teknis penyiaran langsung (live streaming) performa tinggi menggunakan software arsitektur OBS Studio. Mengelola manajemen aset digital secara real-time dan melakukan troubleshooting teknis langsung di lapangan guna meminimalkan latensi sistem.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="skills-header">
+            <h2>The Stack</h2>
+            <p>Kombinasi keahlian teknis data, bahasa pemrograman, dan sistem operasional yang saya kuasai.</p>
+        </div>
+
+        <div class="category-title">Bahasa Pemrograman & Tools Data</div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="devicon-python-plain colored"></i>
+                <span class="skill-name">Python</span>
+            </div>
+            <div class="skill-card">
+                <i class="devicon-java-plain colored"></i>
+                <span class="skill-name">Java</span>
+            </div>
+            <div class="skill-card">
+                <i class="devicon-html5-plain colored"></i>
+                <span class="skill-name">HTML</span>
+            </div>
+            <div class="skill-card">
+                <i class="devicon-mysql-original colored"></i>
+                <span class="skill-name">SQL</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i>
+                <span class="skill-name">Tableau</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-regular fa-file-excel" style="color: #107c41;"></i>
+                <span class="skill-name">Excel (Advanced)</span>
+            </div>
+        </div>
+
+        <div class="category-title">Sistem, Operasi & Teknis</div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-gears" style="color: #3b82f6;"></i>
+                <span class="skill-name">Operations Support</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-meta" style="color: #0668e1;"></i>
+                <span class="skill-name">Meta Business Suite</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-tower-broadcast" style="color: #ff4500;"></i>
+                <span class="skill-name">OBS Studio</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-cloud" style="color: #4285f4;"></i>
+                <span class="skill-name">Google Workspace</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="projects-header">
+            <h2>Featured Projects</h2>
+            <p>Eksplorasi riil pemrosesan data survei nasional, visi komputer, visualisasi metrik bisnis, dan otomasi.</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- PROYEK 1: AI DIGITAL CAMERA -->
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-year">2026</span>
+                    <i class="devicon-python-plain colored project-tech-icon"></i>
+                </div>
+                <h3 class="project-title">AI Digital Camera Vision</h3>
+                <p class="project-desc">Mengembangkan program kamera pintar berbasis Computer Vision untuk deteksi objek, wajah, dan pose tangan (hand gesture). Sistem dioptimalkan agar mampu memicu efek blur otomatis secara real-time dan berjalan responsif pada perangkat dengan spesifikasi RAM terbatas.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">OpenCV</span>
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">AI Tracking</span>
+                </div>
+            </div>
+
+            <!-- PROYEK 2: DATA SUSENAS -->
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-year">2026</span>
+                    <i class="fa-solid fa-database project-tech-icon" style="color: #3b82f6;"></i>
+                </div>
+                <h3 class="project-title">Analisis Data Susenas</h3>
+                <p class="project-desc">Melakukan pemrosesan, pembersihan data (data cleaning), dan analisis statistik mendalam pada kumpulan data berskala besar Survei Sosial Ekonomi Nasional (Susenas). Berfokus pada penarikan insight tren sosio-ekonomi penduduk secara akurat.</p>
+                <div class="project-tags">
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Susenas Data</span>
+                    <span class="tag">Statistics</span>
+                </div>
+            </div>
+
+            <!-- PROYEK 3: INTERACTIVE DASHBOARD TABLEAU -->
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-year">2025</span>
+                    <i class="fa-solid fa-chart-line project-tech-icon" style="color: #e47b24;"></i>
+                </div>
+                <h3 class="project-title">Interactive Dashboard</h3>
+                <p class="project-desc">Merancang dan mengembangkan visualisasi data analitis interaktif berskala korporat menggunakan Tableau Desktop. Berfokus pada pengolahan metrik mentah menjadi dasbor siap pakai guna mendukung proses pengambilan keputusan strategis bisnis secara objektif.</p>
+                <div class="project-tags">
+                    <span class="tag">Tableau</span>
+                    <span class="tag">Data Visualization</span>
+                    <span class="tag">Business Intelligence</span>
+                </div>
+            </div>
+
+            <!-- PROYEK 4: EXCEL AUTOMATION VIA PYTHON -->
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-year">2025</span>
+                    <i class="devicon-python-plain colored project-tech-icon"></i>
+                </div>
+                <h3 class="project-title">Excel Automation Scripting</h3>
+                <p class="project-desc">Mengoptimalkan efisiensi pemrosesan kumpulan data besar dengan memadukan fungsionalitas logika tingkat lanjut Microsoft Excel (VLOOKUP, Pivot Tables) dan integrasi skrip otomasi eksternal berbasis Python.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Excel Automation</span>
+                    <span class="tag">Data Manipulation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements-section" id="achievements">
+        <div class="achievements-header">
+            <h2>Achievements & Certifications</h2>
+            <p>Validasi kompetensi formal dalam jalur keahlian analisis data terstruktur.</p>
+        </div>
+
+        <div class="certifications-grid">
+            <!-- Sertifikasi 1: RevoU -->
+            <div class="certification-card">
+                <div class="cert-icon-wrapper">
+                    <i class="fa-solid fa-graduation-cap" style="color: #3b82f6;"></i>
+                </div>
+                <div class="cert-info">
+                    <h3>Intro to Data Analytics — RevoU</h3>
+                    <p>Sertifikasi kompetensi dasar formal yang memvalidasi pemahaman siklus analisis data, pengenalan tools data analitis, dan penyelesaian studi kasus berbasis metrik bisnis (Februari 2026).</p>
+                </div>
+            </div>
+
+            <!-- Sertifikasi 2: Tableau Zenith -->
+            <div class="certification-card">
+                <div class="cert-icon-wrapper">
+                    <i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i>
+                </div>
+                <div class="cert-info">
+                    <h3>Tableau Desktop Fundamentals — Zenith Academy</h3>
+                    <p>Sertifikasi penguasaan teknis tingkat lanjut dalam pemetaan arsitektur relasi data, kalkulasi kolom analitis, dan implementasi visual data storytelling interaktif menggunakan ekosistem Tableau (2025).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Logika -->
+    <script>
+        // --- 1. Logika Penggantian Tema (Dark / Light Mode) ---
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        });
+
+        // --- 2. Logika Efek Bayangan Neon (Mengekor Kursor Standar) ---
+        const cursorGlow = document.getElementById('cursorGlow');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorGlow.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 400, fill: "forwards" });
+        });
+
+        // --- 3. Logika Navbar Active Link On Scroll ---
+        const sections = document.querySelectorAll('section, main');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id') || '';
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href').substring(1);
+                if (href === current || (current === '' && href === '#')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
