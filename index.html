@@ -1,52 +1,51 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santo Parningotan Hutapea | Portfolio</title>
+    <title>Santo Parningotan Hutapea | 3D Portfolio</title>
     <!-- Icon resmi dari FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Library CDN untuk menampilkan ikon teknologi secara otomatis -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <!-- LIBRARY UTAMA UTK GRAPHIC 3D & EFEK TILT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    
     <style>
-        /* 1. VARIABEL WARNA (Default: Tema Gelap / Dark Mode) */
+        /* VARIABEL WARNA (Default: Tema Gelap / Dark Mode) */
         :root {
             --bg-color: #030712;
             --text-main: #ffffff;
             --text-sub: #9ca3af;
             --text-headline: #e5e7eb;
-            --nav-bg: rgba(10, 15, 30, 0.7);
+            --nav-bg: rgba(10, 15, 30, 0.6);
             --nav-border: rgba(88, 166, 255, 0.2);
             --nav-active: rgba(88, 166, 255, 0.2);
             --title-gradient: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
             --btn-bg: rgba(31, 111, 235, 0.1);
             --btn-border: rgba(88, 166, 255, 0.3);
             --btn-hover: rgba(31, 111, 235, 0.2);
-            --star-color-1: rgba(88, 166, 255, 0.2);
-            --star-color-2: rgba(88, 166, 255, 0.1);
             --shadow-glow: rgba(88, 166, 255, 0.3);
-            --cursor-glow: rgba(88, 166, 255, 0.4);
-            --card-bg: rgba(17, 24, 39, 0.6);
+            --card-bg: rgba(17, 24, 39, 0.55);
         }
 
-        /* 2. VARIABEL WARNA (Alternatif: Tema Terang / Light Mode) */
+        /* VARIABEL WARNA (Alternatif: Tema Terang / Light Mode) */
         [data-theme="light"] {
-            --bg-color: #f0f4f8;
+            --bg-color: #f8fafc;
             --text-main: #0f172a;
-            --text-sub: #64748b;
-            --text-headline: #334155;
-            --nav-bg: rgba(255, 255, 255, 0.8);
-            --nav-border: rgba(31, 111, 235, 0.2);
+            --text-sub: #475569;
+            --text-headline: #1e293b;
+            --nav-bg: rgba(255, 255, 255, 0.75);
+            --nav-border: rgba(31, 111, 235, 0.25);
             --nav-active: rgba(31, 111, 235, 0.15);
             --title-gradient: linear-gradient(135deg, #1f6feb 0%, #0056b3 100%);
-            --btn-bg: rgba(31, 111, 235, 0.05);
+            --btn-bg: rgba(31, 111, 235, 0.08);
             --btn-border: rgba(31, 111, 235, 0.4);
-            --btn-hover: rgba(31, 111, 235, 0.15);
-            --star-color-1: rgba(31, 111, 235, 0.08);
-            --star-color-2: rgba(31, 111, 235, 0.04);
-            --shadow-glow: rgba(31, 111, 235, 0.15);
-            --cursor-glow: rgba(31, 111, 235, 0.3);
-            --card-bg: rgba(255, 255, 255, 0.7);
+            --btn-hover: rgba(31, 111, 235, 0.18);
+            --shadow-glow: rgba(31, 111, 235, 0.25);
+            --card-bg: rgba(255, 255, 255, 0.75);
         }
 
         /* Base Reset */
@@ -55,7 +54,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
 
         html {
@@ -64,33 +62,26 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(var(--star-color-1), transparent 2px),
-                radial-gradient(var(--star-color-2), transparent 1px);
-            background-size: 550px 550px, 350px 350px;
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: default;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* CANVAS BACKGROUND THREE.JS */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
         }
 
         a, button, nav a {
             cursor: pointer;
-        }
-
-        /* BAYANGAN NEON MENGIKUTI KURSOR STANDAR */
-        .cursor-neon-glow {
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, var(--cursor-glow) 0%, rgba(0,0,0,0) 70%);
-            position: fixed;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
+            transition: 0.3s;
         }
 
         /* FLOATING CAPSULE NAVBAR */
@@ -129,7 +120,6 @@
             font-weight: 500;
             padding: 6px 16px;
             border-radius: 20px;
-            transition: 0.3s;
         }
 
         nav a:hover, nav a.active {
@@ -147,7 +137,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.3s;
         }
 
         .theme-toggle-btn:hover {
@@ -173,9 +162,17 @@
             }
         }
 
+        /* CARD HERO INTERAKTIF (3D TILT) */
         .hero-content {
             display: flex;
             flex-direction: column;
+            transform-style: preserve-3d;
+            padding: 35px;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--btn-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .intro-text {
@@ -185,10 +182,11 @@
             letter-spacing: 1.5px;
             margin-bottom: 12px;
             text-transform: uppercase;
+            transform: translateZ(30px);
         }
 
         .main-title {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 800;
             background: var(--title-gradient);
             -webkit-background-clip: text;
@@ -196,30 +194,34 @@
             line-height: 1.1;
             margin-bottom: 16px;
             letter-spacing: -0.5px;
+            transform: translateZ(60px);
+            display: inline-block;
         }
 
         .headline-text {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--text-headline);
             margin-bottom: 18px;
             line-height: 1.4;
+            transform: translateZ(45px);
         }
 
         .sub-paragraph {
             color: var(--text-sub);
-            font-size: 14.5px;
-            line-height: 1.7;
+            font-size: 14px;
+            line-height: 1.6;
             margin-bottom: 32px;
-            max-width: 600px;
+            max-width: 650px;
+            transform: translateZ(35px);
         }
 
-        /* TOMBOL GLASSMORPHISM */
         .btn-wrapper {
             display: flex;
             gap: 16px;
             margin-bottom: 40px;
             flex-wrap: wrap;
+            transform: translateZ(40px);
         }
 
         .btn-glass {
@@ -231,8 +233,6 @@
             color: var(--text-main);
             background: var(--btn-bg);
             border: 1px solid var(--btn-border);
-            backdrop-filter: blur(4px);
-            transition: 0.3s;
         }
 
         .btn-glass:hover {
@@ -242,10 +242,10 @@
             transform: translateY(-2px);
         }
 
-        /* IKON SOSIAL MEDIA */
         .social-links {
             display: flex;
             gap: 12px;
+            transform: translateZ(40px);
         }
 
         .social-icon {
@@ -260,7 +260,6 @@
             align-items: center;
             text-decoration: none;
             font-size: 14px;
-            transition: 0.3s;
         }
 
         .social-icon:hover {
@@ -269,20 +268,22 @@
             box-shadow: 0 0 10px var(--shadow-glow);
         }
 
-        /* FOTO PROFIL LINGKARAN */
+        /* FOTO PROFIL DENGAN TILT */
         .hero-photo-container {
             display: flex;
             justify-content: center;
             align-items: center;
+            transform-style: preserve-3d;
         }
 
         .photo-frame {
-            width: 320px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             overflow: hidden;
-            border: 1px solid var(--btn-border);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--btn-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: translateZ(50px);
         }
 
         .photo-frame img {
@@ -291,18 +292,18 @@
             object-fit: cover;
         }
 
-        /* ==================== WORK EXPERIENCE SECTION ==================== */
-        .experience-section {
+        /* ==================== SECTIONS COMMON ==================== */
+        .content-section {
             max-width: 1140px;
             margin: 0 auto;
             padding: 60px 24px;
         }
 
-        .experience-header, .skills-header, .projects-header, .achievements-header {
+        .section-header {
             margin-bottom: 35px;
         }
 
-        .experience-header h2, .skills-header h2, .projects-header h2, .achievements-header h2 {
+        .section-header h2 {
             font-size: 32px;
             font-weight: 800;
             background: var(--title-gradient);
@@ -311,11 +312,12 @@
             margin-bottom: 8px;
         }
 
-        .experience-header p, .skills-header p, .projects-header p, .achievements-header p {
+        .section-header p {
             color: var(--text-sub);
             font-size: 14px;
         }
 
+        /* ==================== EDUCATION & EXPERIENCE TIMELINE ==================== */
         .timeline {
             position: relative;
             border-left: 2px solid var(--btn-border);
@@ -336,54 +338,49 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: var(--cursor-glow);
-            box-shadow: 0 0 10px var(--cursor-glow);
+            background-color: #58a6ff;
+            box-shadow: 0 0 10px #58a6ff;
         }
 
-        .job-title {
+        .timeline-title {
             font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
         }
 
-        .job-company {
+        .timeline-subtitle {
             font-size: 14px;
             font-weight: 600;
             color: #58a6ff;
             margin-bottom: 4px;
         }
 
-        .job-duration {
+        .timeline-duration {
             font-size: 12px;
             color: var(--text-sub);
             margin-bottom: 10px;
             font-weight: 500;
         }
 
-        .job-desc {
+        .timeline-desc {
             font-size: 13.5px;
             color: var(--text-sub);
             line-height: 1.6;
         }
 
-        .job-desc-list {
+        .desc-list {
             margin-left: 16px;
             margin-top: 6px;
             color: var(--text-sub);
             font-size: 13.5px;
         }
 
-        .job-desc-list li {
-            margin-bottom: 4px;
+        .desc-list li {
+            margin-bottom: 6px;
+            line-height: 1.6;
         }
 
-        /* ==================== SKILLS SECTION ==================== */
-        .skills-section {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
-
+        /* ==================== SKILLS ==================== */
         .category-title {
             font-size: 11px;
             font-weight: 700;
@@ -395,25 +392,25 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 16px;
         }
 
         .skill-card {
-            background: var(--btn-bg);
+            background: var(--card-bg);
             border: 1px solid var(--btn-border);
             padding: 16px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .skill-card:hover {
-            transform: translateY(-3px);
             border-color: var(--text-main);
             box-shadow: 0 8px 20px var(--shadow-glow);
+            transform: translateY(-2px);
         }
 
         .skill-card i {
@@ -428,13 +425,7 @@
             color: var(--text-main);
         }
 
-        /* ==================== PROJECTS SECTION ==================== */
-        .projects-section {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
-
+        /* ==================== PROJECTS CARDS ==================== */
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -447,12 +438,6 @@
             }
         }
 
-        @media (min-width: 1024px) {
-            .projects-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--btn-border);
@@ -461,14 +446,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            backdrop-filter: blur(8px);
-            transition: 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--text-main);
-            box-shadow: 0 12px 30px var(--shadow-glow);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
         }
 
         .project-meta {
@@ -476,6 +455,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+            transform: translateZ(30px);
         }
 
         .project-year {
@@ -487,27 +467,45 @@
         .project-tech-icon {
             font-size: 20px;
             color: var(--text-sub);
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
         }
 
         .project-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 12px;
+            transform: translateZ(45px);
         }
 
         .project-desc {
-            font-size: 13.5px;
+            font-size: 13px;
             color: var(--text-sub);
             line-height: 1.6;
             margin-bottom: 20px;
             flex-grow: 1;
+            transform: translateZ(35px);
+        }
+
+        .project-desc-list {
+            margin-left: 14px;
+            margin-bottom: 15px;
+            font-size: 12.5px;
+            color: var(--text-sub);
+        }
+        
+        .project-desc-list li {
+            margin-bottom: 4px;
+            line-height: 1.5;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
+            transform: translateZ(40px);
         }
 
         .tag {
@@ -520,13 +518,7 @@
             border-radius: 12px;
         }
 
-        /* ==================== ACHIEVEMENTS SECTION ==================== */
-        .achievements-section {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 60px 24px 120px 24px;
-        }
-
+        /* ==================== ACHIEVEMENTS CARDS ==================== */
         .certifications-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -547,14 +539,17 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            backdrop-filter: blur(8px);
-            transition: 0.3s ease;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
         }
 
         .certification-card:hover {
-            transform: translateY(-3px);
             border-color: var(--text-main);
             box-shadow: 0 10px 25px var(--shadow-glow);
+            transform: translateY(-3px);
         }
 
         .cert-icon-wrapper {
@@ -562,6 +557,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transform: translateZ(35px);
+        }
+
+        .cert-info {
+            transform: translateZ(40px);
         }
 
         .cert-info h3 {
@@ -577,34 +577,33 @@
             line-height: 1.5;
         }
 
-        /* Media Query: Optimasi Tampilan Mobile */
+        /* Optimasi Tampilan Mobile */
         @media (max-width: 767px) {
-            .cursor-neon-glow { display: none; }
             header { top: 10px; }
             .nav-container { padding: 6px 16px; gap: 8px; }
             nav a { padding: 4px 10px; font-size: 11px; }
             .hero-section { padding-top: 110px; text-align: center; gap: 30px; }
-            .hero-content { order: 2; align-items: center; }
+            .hero-content { order: 2; align-items: center; padding: 25px 20px; }
             .hero-photo-container { order: 1; }
-            .main-title { font-size: 38px; }
+            .main-title { font-size: 34px; }
             .sub-paragraph { margin-bottom: 24px; }
             .btn-wrapper { justify-content: center; gap: 10px; margin-bottom: 24px; }
-            .photo-frame { width: 230px; height: 230px; }
-            .experience-section, .skills-section, .projects-section, .achievements-section { padding-bottom: 60px; }
+            .photo-frame { width: 220px; height: 220px; }
             .certification-card { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Elemen Efek Bayangan Neon Mengikuti Kursor Standar -->
-    <div class="cursor-neon-glow" id="cursorGlow"></div>
+    <!-- CANVAS ELEMENT UNTUK BACKGROUND BACKGROUND 3D (THREE.JS) -->
+    <canvas id="bg-canvas"></canvas>
 
     <!-- Navigation Bar -->
     <header>
         <div class="nav-container">
             <nav>
                 <a href="#" class="nav-link active">Home</a>
+                <a href="#education" class="nav-link">Education</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
@@ -618,232 +617,278 @@
 
     <!-- Hero Section -->
     <main class="hero-section">
-        <div class="hero-content">
+        <div class="hero-content" data-tilt>
+            <!-- DIUBAH JADI 'HI, MY NAME IS' -->
             <div class="intro-text">Hi, my name is</div>
             <h1 class="main-title">Santo Parningotan Hutapea</h1>
             
             <div class="headline-text">
-                Data Science Student | Data Analyst IT & Operations Support
+                Data Science Student | Data Analyst & IT/Operations Support
             </div>
             
             <p class="sub-paragraph">
-                Saya adalah mahasiswa aktif program studi Sains Data di Universitas Terbuka yang memiliki kemampuan manajemen waktu dan disiplin yang tinggi. Berfokus pada pengelolaan basis data (SQL), pemrograman analitik Python, struktur data, serta pemodelan statistik. Memiliki ketersediaan waktu penuh dari sistem perkuliahan jarak jauh yang fleksibel untuk berkontribusi secara profesional di bidang analisis data dan dukungan operasional teknologi informasi.
+                Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (data-driven) untuk optimasi operasional digital dan manajemen infrastruktur multimedia. Memiliki fleksibilitas waktu penuh untuk berkomitmen secara profesional sebagai Data Analyst, IT/Operations Support, maupun peran teknis lainnya.
             </p>
 
             <div class="btn-wrapper">
+                <a href="CV_SANTO HUTAPEA.pdf" target="_blank" class="btn-glass"><i class="fa-solid fa-file-pdf" style="margin-right: 5px;"></i> View My CV</a>
                 <a href="#projects" class="btn-glass">View My Projects</a>
-                <a href="SANTO HUTAPEA_CV.pdf" target="_blank" class="btn-glass">View Resume</a>
+                <a href="mailto:santoph13@gmail.com" class="btn-glass">Contact Me</a>
             </div>
 
             <div class="social-links">
-                <a href="https://github.com/santoph13" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:santoph13@gmail.com" class="social-icon"><i class="fa-regular fa-envelope"></i></a>
-                <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/santoph13" target="_blank" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:santoph13@gmail.com" class="social-icon" title="Email"><i class="fa-regular fa-envelope"></i></a>
+                <a href="#" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
         </div>
 
-        <div class="hero-photo-container">
+        <!-- Foto profil miring 3D (Cyingot) -->
+        <div class="hero-photo-container" data-tilt>
             <div class="photo-frame">
                 <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
             </div>
         </div>
     </main>
 
+    <!-- Education Section -->
+    <section class="content-section" id="education">
+        <div class="section-header">
+            <h2>Education</h2>
+            <p>Status akademik resmi dan fokus studi saat ini.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3 class="timeline-title">UNIVERSITAS TERBUKA</h3>
+                <div class="timeline-subtitle">Sarjana (S1) Sains Data - Mahasiswa Aktif (Semester 3)</div>
+                <div class="timeline-duration">2025 - Sekarang | Bogor, Indonesia</div>
+                <p class="timeline-desc"><strong>Fokus Studi:</strong> Sistem Basis Data (SQL), Pemrograman Python & Java, Struktur Data, Pemrograman Berorientasi Objek (OOP), dan Model Linear Terapan.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
-    <section class="experience-section" id="experience">
-        <div class="experience-header">
+    <section class="content-section" id="experience">
+        <div class="section-header">
+            <!-- DIUBAH JADI 'WORK EXPERIENCE' -->
             <h2>Work Experience</h2>
-            <p>Perjalanan karir profesional di bidang operasi digital, multimedia, dan analisis data.</p>
+            <p>Rekam jejak profesional dalam optimasi operasional digital dan manajemen teknologi.</p>
         </div>
 
         <div class="timeline">
-            <!-- Jabatan 1: Social Media Specialist & Operations -->
             <div class="timeline-item">
-                <h3 class="job-title">Social Media Specialist & Operations</h3>
-                <div class="job-company">Santo Parningotan Hutapea (Professional Profile)</div>
-                <div class="job-duration">2026 – Sekarang</div>
-                <p class="job-desc">Memadukan analisis tren berbasis data dengan taktik operasional untuk mengoptimalkan pertumbuhan platform digital:</p>
-                <ul class="job-desc-list">
-                    <li><strong>Data-Driven Strategy:</strong> Mengevaluasi dan menganalisis metrik performa audiens menggunakan Meta Business Suite untuk menaikkan pertumbuhan secara organik hingga mencapai 70.000 pengikut.</li>
-                    <li><strong>Analisis Tren:</strong> Memetakan dan memproses tren data pasar berkala untuk merancang konten kreatif, menghasilkan rata-rata 10.000 engagement per unggahan.</li>
-                    <li><strong>Manajemen Kemitraan:</strong> Mengatur dan memimpin koordinasi operasional serta negosiasi bisnis profesional bersama mitra eksternal.</li>
+                <h3 class="timeline-title">Social Media Specialist & Operations</h3>
+                <div class="job-company" style="color: #58a6ff; font-weight: 600; font-size: 14px;">Freelance/Kontrak</div>
+                <div class="timeline-duration">2019 – 2023 | Remote</div>
+                <ul class="desc-list">
+                    <li><strong>Data-Driven Strategy:</strong> Menganalisis metrik performa audiens secara berkala melalui Meta Business Suite untuk mengoptimalkan pertumbuhan akun hingga mencapai 70.000 pengikut secara organik.</li>
+                    <li><strong>Analisis Tren:</strong> Merancang strategi konten kreatif berdasarkan tren data pasar untuk meningkatkan retensi audiens dan mencapai rata-rata 10.000 engagement per unggahan.</li>
+                    <li><strong>Manajemen Kemitraan:</strong> Mengelola negosiasi profesional, administrasi data operasional, serta koordinasi harian dengan mitra eksternal.</li>
                 </ul>
             </div>
 
-            <!-- Jabatan 2: Multimedia & Broadcasting Staff -->
             <div class="timeline-item">
-                <h3 class="job-title">Multimedia & Broadcasting Staff</h3>
-                <div class="job-company">Teknis & Infrastruktur Media</div>
-                <div class="job-duration">2020 – 2021</div>
-                <p class="job-desc">
-                    Bertanggung jawab penuh atas konfigurasi perangkat keras pendukung dan kelancaran teknis penyiaran langsung (live streaming) performa tinggi menggunakan software arsitektur OBS Studio. Mengelola manajemen aset digital secara real-time dan melakukan troubleshooting teknis langsung di lapangan guna meminimalkan latensi sistem.
-                </p>
+                <h3 class="timeline-title">Multimedia & Broadcasting Staff</h3>
+                <div class="job-company" style="color: #58a6ff; font-weight: 600; font-size: 14px;">Part-time</div>
+                <div class="timeline-duration">2020 – 2021 | Bogor, Indonesia</div>
+                <ul class="desc-list">
+                    <li>Bertanggung jawab penuh atas konfigurasi teknis penyiaran langsung (live streaming) menggunakan perangkat lunak OBS Studio.</li>
+                    <li>Melakukan pemeliharaan jaringan secara berkala, instalasi, dan troubleshooting pada perangkat keras serta sistem pendukung siaran untuk meminimalisir kendala teknis.</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="skills-section" id="skills">
-        <div class="skills-header">
-            <h2>The Stack</h2>
-            <p>Kombinasi keahlian teknis data, bahasa pemrograman, dan sistem operasional yang saya kuasai.</p>
+    <section class="content-section" id="skills">
+        <div class="skills-header" style="margin-bottom: 35px;">
+            <!-- DIUBAH JADI 'TECH STACK & TOOLS' -->
+            <h2 style="font-size: 32px; font-weight: 800; background: var(--title-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tech Stack & Tools</h2>
+            <p style="color: var(--text-sub); font-size: 14px;">Kombinasi keahlian teknis data, bahasa pemrograman, dan sistem perangkat lunak.</p>
         </div>
 
-        <div class="category-title">Bahasa Pemrograman & Tools Data</div>
+        <!-- SEKARANG TECH NYA LENGKAP: ADA PYTHON, JAVA, SQL, HTML5, CSS3, JS -->
+        <div class="category-title">Core Tech Stack</div>
         <div class="skills-grid">
+            <div class="skill-card"><i class="devicon-python-plain colored"></i><span class="skill-name">Python</span></div>
+            <div class="skill-card"><i class="devicon-mysql-original colored"></i><span class="skill-name">SQL (MySQL)</span></div>
+            <!-- Tableau menggunakan logo SVG resmi -->
             <div class="skill-card">
-                <i class="devicon-python-plain colored"></i>
-                <span class="skill-name">Python</span>
-            </div>
-            <div class="skill-card">
-                <i class="devicon-java-plain colored"></i>
-                <span class="skill-name">Java</span>
-            </div>
-            <div class="skill-card">
-                <i class="devicon-html5-plain colored"></i>
-                <span class="skill-name">HTML</span>
-            </div>
-            <div class="skill-card">
-                <i class="devicon-mysql-original colored"></i>
-                <span class="skill-name">SQL</span>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: flex; align-items: center;">
+                    <path d="M11.25 2.25h1.5v4.5h-1.5zM11.25 17.25h1.5v4.5h-1.5zM17.25 11.25h4.5v1.5h-4.5zM2.25 11.25h4.5v1.5h-4.5z" fill="#E8762A"/>
+                    <path d="M11.25 8.25h1.5v7.5h-1.5zM8.25 11.25h7.5v1.5h-7.5z" fill="#E8762A"/>
+                    <path d="M6.75 5.25h1.5v3h-1.5zM15.75 5.25h1.5v3h-1.5zM6.75 15.75h1.5v3h-1.5zM15.75 15.75h1.5v3h-1.5z" fill="#6992C1"/>
+                    <path d="M5.25 6.75h3v1.5h-3zM15.75 6.75h3v1.5h-3zM5.25 15.75h3v1.5h-3zM15.75 15.75h3v1.5h-3z" fill="#6992C1"/>
+                </svg>
                 <span class="skill-name">Tableau</span>
             </div>
-            <div class="skill-card">
-                <i class="fa-regular fa-file-excel" style="color: #107c41;"></i>
-                <span class="skill-name">Excel (Advanced)</span>
-            </div>
+            <div class="skill-card"><i class="devicon-java-plain colored"></i><span class="skill-name">Java</span></div>
+            <div class="skill-card"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span></div>
+            <div class="skill-card"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span></div>
+            <div class="skill-card"><i class="devicon-javascript-plain colored"></i><span class="skill-name">JavaScript</span></div>
         </div>
 
-        <div class="category-title">Sistem, Operasi & Teknis</div>
+        <div class="category-title">Tools & Systems</div>
         <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fa-solid fa-gears" style="color: #3b82f6;"></i>
-                <span class="skill-name">Operations Support</span>
-            </div>
-            <div class="skill-card">
-                <i class="fa-brands fa-meta" style="color: #0668e1;"></i>
-                <span class="skill-name">Meta Business Suite</span>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-tower-broadcast" style="color: #ff4500;"></i>
-                <span class="skill-name">OBS Studio</span>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-cloud" style="color: #4285f4;"></i>
-                <span class="skill-name">Google Workspace</span>
-            </div>
+            <div class="skill-card"><i class="fa-regular fa-file-excel" style="color: #107c41;"></i><span class="skill-name">Excel (Advanced)</span></div>
+            <div class="skill-card"><i class="fa-solid fa-briefcase" style="color: #3b82f6;"></i><span class="skill-name">Business Intelligence</span></div>
+            <div class="skill-card"><i class="devicon-vscode-plain colored"></i><span class="skill-name">VS Code</span></div>
+            <div class="skill-card"><i class="fa-solid fa-tower-broadcast" style="color: #ff4500;"></i><span class="skill-name">OBS Studio</span></div>
+            <div class="skill-card"><i class="fa-solid fa-terminal" style="color: #3b82f6;"></i><span class="skill-name">Linux Terminal</span></div>
+            <div class="skill-card"><i class="fa-brands fa-meta" style="color: #0668e1;"></i><span class="skill-name">Meta Business Suite</span></div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="projects-section" id="projects">
-        <div class="projects-header">
+    <section class="content-section" id="projects">
+        <div class="section-header">
+            <!-- DIUBAH JADI 'FEATURED PROJECTS' -->
             <h2>Featured Projects</h2>
-            <p>Eksplorasi riil pemrosesan data survei nasional, visi komputer, visualisasi metrik bisnis, dan otomasi.</p>
+            <p>Eksplorasi riil pemrosesan data statistik, arsitektur algoritma, visi komputer, dan visualisasi bisnis.</p>
         </div>
 
         <div class="projects-grid">
-            <!-- PROYEK 1: AI DIGITAL CAMERA -->
-            <div class="project-card">
+            <!-- PROJECT 1: SUSENAS BPS (TULISAN KLIK IKON PANAH DIHAPUS) -->
+            <div class="project-card" data-tilt>
                 <div class="project-meta">
                     <span class="project-year">2026</span>
-                    <i class="devicon-python-plain colored project-tech-icon"></i>
+                    <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-tech-icon" title="Open PDF Report">
+                        <i class="devicon-python-plain colored" style="margin-right: 8px;"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px; color: #58a6ff;"></i>
+                    </a>
                 </div>
+                <h3 class="project-title">Pemodelan Prediktif & Machine Learning (Data SUSENAS BPS)</h3>
+                <ul class="project-desc-list">
+                    <li>Membangun model regresi logistik berganda menggunakan Python (statsmodels & pandas) untuk mengestimasi probabilitas kepemilikan aset transportasi berdasarkan karakteristik sosio-ekonomi rumah tangga.</li>
+                    <li>Melakukan tahap data preparation, pembersihan data (data cleansing), dan penanganan pencilan (outliers) pada draf mikro data nasional dari Portal Satu Data Indonesia.</li>
+                    <li>Mengevaluasi kelayakan model (goodness-of-fit) melalui uji serentak (Likelihood Ratio Test, p-value = 0.0001) serta menghasilkan nilai McFadden Pseudo R-Square sebesar 60,8%.</li>
+                </ul>
+                <div class="project-tags"><span class="tag">Python</span><span class="tag">Statsmodels</span><span class="tag">Pandas</span><span class="tag">Data Analytics</span></div>
+            </div>
+
+            <!-- PROJECT 2: JAVA & ALGORITMA -->
+            <div class="project-card" data-tilt>
+                <div class="project-meta"><span class="project-year">2025</span><i class="devicon-java-plain colored project-tech-icon"></i></div>
+                <h3 class="project-title">Pengembangan Logika Program & Struktur Data</h3>
+                <ul class="project-desc-list">
+                    <li>Mengimplementasikan konsep struktur data Array dan pemrograman berorientasi objek (OOP) menggunakan bahasa Java pada Visual Studio Code.</li>
+                    <li>Merancang logika algoritma yang efisien untuk penyelesaian komputasi matematis dan analisis data dasar.</li>
+                </ul>
+                <div class="project-tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">VS Code</span><span class="tag">Data Structures</span></div>
+            </div>
+
+            <!-- PROJECT 3: TABLEAU & EXCEL -->
+            <div class="project-card" data-tilt>
+                <div class="project-meta"><span class="project-year">2025</span><i class="fa-solid fa-chart-line project-tech-icon" style="color: #e47b24;"></i></div>
+                <h3 class="project-title">Interactive Business Dashboard & Excel Automation</h3>
+                <ul class="project-desc-list">
+                    <li>Mengembangkan dasbor analitis interaktif menggunakan Tableau Desktop untuk kebutuhan data storytelling manajemen.</li>
+                    <li>Mengotomatisasi laporan operasional berkala menggunakan fungsi Excel tingkat lanjut (VLOOKUP, INDEX/MATCH, Pivot Table).</li>
+                </ul>
+                <div class="project-tags"><span class="tag">Tableau</span><span class="tag">Advanced Excel</span><span class="tag">Data Viz</span><span class="tag">BI</span></div>
+            </div>
+
+            <!-- PROJECT 4: AI CAMERA VISION -->
+            <div class="project-card" data-tilt>
+                <div class="project-meta"><span class="project-year">2026</span><i class="devicon-python-plain colored project-tech-icon"></i></div>
                 <h3 class="project-title">AI Digital Camera Vision</h3>
-                <p class="project-desc">Mengembangkan program kamera pintar berbasis Computer Vision untuk deteksi objek, wajah, dan pose tangan (hand gesture). Sistem dioptimalkan agar mampu memicu efek blur otomatis secara real-time dan berjalan responsif pada perangkat dengan spesifikasi RAM terbatas.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">OpenCV</span>
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">AI Tracking</span>
-                </div>
-            </div>
-
-            <!-- PROYEK 2: DATA SUSENAS -->
-            <div class="project-card">
-                <div class="project-meta">
-                    <span class="project-year">2026</span>
-                    <i class="fa-solid fa-database project-tech-icon" style="color: #3b82f6;"></i>
-                </div>
-                <h3 class="project-title">Analisis Data Susenas</h3>
-                <p class="project-desc">Melakukan pemrosesan, pembersihan data (data cleaning), dan analisis statistik mendalam pada kumpulan data berskala besar Survei Sosial Ekonomi Nasional (Susenas). Berfokus pada penarikan insight tren sosio-ekonomi penduduk secara akurat.</p>
-                <div class="project-tags">
-                    <span class="tag">Data Analysis</span>
-                    <span class="tag">Susenas Data</span>
-                    <span class="tag">Statistics</span>
-                </div>
-            </div>
-
-            <!-- PROYEK 3: INTERACTIVE DASHBOARD TABLEAU -->
-            <div class="project-card">
-                <div class="project-meta">
-                    <span class="project-year">2025</span>
-                    <i class="fa-solid fa-chart-line project-tech-icon" style="color: #e47b24;"></i>
-                </div>
-                <h3 class="project-title">Interactive Dashboard</h3>
-                <p class="project-desc">Merancang dan mengembangkan visualisasi data analitis interaktif berskala korporat menggunakan Tableau Desktop. Berfokus pada pengolahan metrik mentah menjadi dasbor siap pakai guna mendukung proses pengambilan keputusan strategis bisnis secara objektif.</p>
-                <div class="project-tags">
-                    <span class="tag">Tableau</span>
-                    <span class="tag">Data Visualization</span>
-                    <span class="tag">Business Intelligence</span>
-                </div>
-            </div>
-
-            <!-- PROYEK 4: EXCEL AUTOMATION VIA PYTHON -->
-            <div class="project-card">
-                <div class="project-meta">
-                    <span class="project-year">2025</span>
-                    <i class="devicon-python-plain colored project-tech-icon"></i>
-                </div>
-                <h3 class="project-title">Excel Automation Scripting</h3>
-                <p class="project-desc">Mengoptimalkan efisiensi pemrosesan kumpulan data besar dengan memadukan fungsionalitas logika tingkat lanjut Microsoft Excel (VLOOKUP, Pivot Tables) dan integrasi skrip otomasi eksternal berbasis Python.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Excel Automation</span>
-                    <span class="tag">Data Manipulation</span>
-                </div>
+                <p class="project-desc" style="font-size: 13px; line-height: 1.5; padding-left: 5px;">Mengembangkan program kamera pintar berbasis Computer Vision untuk deteksi objek, wajah, dan pose tangan (hand gesture) secara real-time.</p>
+                <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span></div>
             </div>
         </div>
     </section>
 
     <!-- Achievements Section -->
-    <section class="achievements-section" id="achievements">
-        <div class="achievements-header">
+    <section class="content-section" id="achievements">
+        <div class="section-header">
+            <!-- DIUBAH JADI 'ACHIEVEMENTS & CERTIFICATIONS' -->
             <h2>Achievements & Certifications</h2>
-            <p>Validasi kompetensi formal dalam jalur keahlian analisis data terstruktur.</p>
+            <p>Sertifikasi formal yang memvalidasi kompetensi di bidang analisis data.</p>
         </div>
 
         <div class="certifications-grid">
-            <!-- Sertifikasi 1: RevoU -->
-            <div class="certification-card">
-                <div class="cert-icon-wrapper">
-                    <i class="fa-solid fa-graduation-cap" style="color: #3b82f6;"></i>
-                </div>
+            <!-- SERTIFIKAT 1: REVOU (TULISAN CLICK TO VIEW DIHAPUS BIAR RELEVAN SAMA PREFERENSI LU) -->
+            <a href="revou_sertif.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
+                <div class="cert-icon-wrapper"><i class="fa-solid fa-graduation-cap" style="color: #3b82f6;"></i></div>
                 <div class="cert-info">
-                    <h3>Intro to Data Analytics — RevoU</h3>
-                    <p>Sertifikasi kompetensi dasar formal yang memvalidasi pemahaman siklus analisis data, pengenalan tools data analitis, dan penyelesaian studi kasus berbasis metrik bisnis (Februari 2026).</p>
+                    <h3>Intro to Data Analytics — RevoU (2026)</h3>
+                    <p>Sertifikasi kompetensi dasar formal yang memvalidasi pemahaman siklus analisis data, pengenalan tools data analitis, dan penyelesaian studi kasus berbasis metrik bisnis.</p>
                 </div>
-            </div>
+            </a>
 
-            <!-- Sertifikasi 2: Tableau Zenith -->
-            <div class="certification-card">
-                <div class="cert-icon-wrapper">
-                    <i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i>
-                </div>
+            <!-- SERTIFIKAT 2: ZENITH ACADEMY -->
+            <a href="zenith_academy.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
+                <div class="cert-icon-wrapper"><i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i></div>
                 <div class="cert-info">
-                    <h3>Tableau Desktop Fundamentals — Zenith Academy</h3>
-                    <p>Sertifikasi penguasaan teknis tingkat lanjut dalam pemetaan arsitektur relasi data, kalkulasi kolom analitis, dan implementasi visual data storytelling interaktif menggunakan ekosistem Tableau (2025).</p>
+                    <h3>Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
+                    <p>Sertifikasi penguasaan teknis tingkat lanjut dalam pemetaan arsitektur relasi data, kalkulasi kolom analitis, dan implementasi visual data storytelling interaktif menggunakan ekosistem Tableau.</p>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
-    <!-- JavaScript Logika -->
+    <!-- SCRIPT ENGINE LOGIC -->
     <script>
-        // --- 1. Logika Penggantian Tema (Dark / Light Mode) ---
+        // --- LOGIKA BACKGROUND 3D PARTIKEL DATA (THREE.JS) ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const particlesCount = 2000;
+        const positionArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i++) {
+            positionArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.025,
+            color: 0x58a6ff,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 3;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        });
+
+        const clock = new THREE.Clock();
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            const elapsedTime = clock.getElapsedTime();
+
+            particlesMesh.rotation.y = elapsedTime * 0.02;
+            particlesMesh.rotation.x = -elapsedTime * 0.01;
+
+            particlesMesh.position.x += (mouseX * 0.4 - particlesMesh.position.x) * 0.05;
+            particlesMesh.position.y += (-mouseY * 0.4 - particlesMesh.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+        animate3D();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- MANAJER TOGGLE TEMA WARNA (DARK / LIGHT MODE) ---
         const themeToggleBtn = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
 
@@ -852,26 +897,33 @@
             if (currentTheme === 'light') {
                 document.documentElement.removeAttribute('data-theme');
                 themeIcon.className = 'fa-solid fa-moon';
+                particlesMaterial.color.setHex(0x58a6ff);
+                particlesMaterial.size = 0.025;
+                particlesMaterial.opacity = 0.6;
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 themeIcon.className = 'fa-solid fa-sun';
+                particlesMaterial.color.setHex(0x0056b3);
+                particlesMaterial.size = 0.045; 
+                particlesMaterial.opacity = 0.8;
             }
         });
 
-        // --- 2. Logika Efek Bayangan Neon (Mengekor Kursor Standar) ---
-        const cursorGlow = document.getElementById('cursorGlow');
+        // --- FORCE AKTIVASI MANUAL VANILLA TILT 3D CARD ---
+        function initTiltEffect() {
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 12,
+                speed: 400,
+                perspective: 1000,
+                glare: true,
+                "max-glare": 0.25,
+                scale: 1.02
+            });
+        }
+        document.addEventListener("DOMContentLoaded", initTiltEffect);
+        initTiltEffect();
 
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorGlow.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 400, fill: "forwards" });
-        });
-
-        // --- 3. Logika Navbar Active Link On Scroll ---
+        // --- NAVBAR ACTIVE LINK ON SCROLL ---
         const sections = document.querySelectorAll('section, main');
         const navLinks = document.querySelectorAll('.nav-link');
 
@@ -879,7 +931,6 @@
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
                 if (pageYOffset >= (sectionTop - 150)) {
                     current = section.getAttribute('id') || '';
                 }
@@ -894,6 +945,5 @@
             });
         });
     </script>
-
 </body>
 </html>
