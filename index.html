@@ -618,7 +618,6 @@
     <!-- Hero Section -->
     <main class="hero-section">
         <div class="hero-content" data-tilt>
-            <!-- DIUBAH JADI 'HI, MY NAME IS' -->
             <div class="intro-text">Hi, my name is</div>
             <h1 class="main-title">Santo Parningotan Hutapea</h1>
             
@@ -670,7 +669,6 @@
     <!-- Experience Section -->
     <section class="content-section" id="experience">
         <div class="section-header">
-            <!-- DIUBAH JADI 'WORK EXPERIENCE' -->
             <h2>Work Experience</h2>
             <p>Rekam jejak profesional dalam optimasi operasional digital dan manajemen teknologi.</p>
         </div>
@@ -702,17 +700,14 @@
     <!-- Skills Section -->
     <section class="content-section" id="skills">
         <div class="skills-header" style="margin-bottom: 35px;">
-            <!-- DIUBAH JADI 'TECH STACK & TOOLS' -->
             <h2 style="font-size: 32px; font-weight: 800; background: var(--title-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tech Stack & Tools</h2>
             <p style="color: var(--text-sub); font-size: 14px;">Kombinasi keahlian teknis data, bahasa pemrograman, dan sistem perangkat lunak.</p>
         </div>
 
-        <!-- SEKARANG TECH NYA LENGKAP: ADA PYTHON, JAVA, SQL, HTML5, CSS3, JS -->
         <div class="category-title">Core Tech Stack</div>
         <div class="skills-grid">
             <div class="skill-card"><i class="devicon-python-plain colored"></i><span class="skill-name">Python</span></div>
             <div class="skill-card"><i class="devicon-mysql-original colored"></i><span class="skill-name">SQL (MySQL)</span></div>
-            <!-- Tableau menggunakan logo SVG resmi -->
             <div class="skill-card">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: flex; align-items: center;">
                     <path d="M11.25 2.25h1.5v4.5h-1.5zM11.25 17.25h1.5v4.5h-1.5zM17.25 11.25h4.5v1.5h-4.5zM2.25 11.25h4.5v1.5h-4.5z" fill="#E8762A"/>
@@ -742,13 +737,28 @@
     <!-- Projects Section -->
     <section class="content-section" id="projects">
         <div class="section-header">
-            <!-- DIUBAH JADI 'FEATURED PROJECTS' -->
             <h2>Featured Projects</h2>
             <p>Eksplorasi riil pemrosesan data statistik, arsitektur algoritma, visi komputer, dan visualisasi bisnis.</p>
         </div>
 
         <div class="projects-grid">
-            <!-- PROJECT 1: SUSENAS BPS (TULISAN KLIK IKON PANAH DIHAPUS) -->
+            <!-- PROJECT 1: NEWLY ADDED - ECU DATA PARSER -->
+            <div class="project-card" data-tilt>
+                <div class="project-meta">
+                    <span class="project-year">2026</span>
+                    <i class="devicon-python-plain colored project-tech-icon" title="Python Project"></i>
+                </div>
+                <h3 class="project-title">ECU Data Parser & Mapping Simulator (WemuXHonda)</h3>
+                <ul class="project-desc-list">
+                    <li>Membangun skrip otomatisasi menggunakan Python dan NumPy untuk ekstraksi, penguraian (*parsing*), serta manipulasi data biner mentah (*binary dump*) memori flash ECU kendaraan.</li>
+                    <li>Mengembangkan algoritma pencarian pola byte (*hex signature*) untuk memetakan koordinat tabel parameter mesin secara dinamis.</li>
+                    <li>Melakukan konversi format bilangan biner heksadesimal ke nilai desimal fisik parameter operasional (*Fuel Map*, RPM, TPS, & *Ignition Timing*) secara presisi.</li>
+                    <li>Mengimplementasikan visualisasi data multi-dimensi interaktif menggunakan grafik 3D Surface dan kontur warna Matplotlib untuk mempermudah deteksi anomali pada pemetaan distribusi parameter mesin.</li>
+                </ul>
+                <div class="project-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Low-Level Data</span></div>
+            </div>
+
+            <!-- PROJECT 2: SUSENAS BPS -->
             <div class="project-card" data-tilt>
                 <div class="project-meta">
                     <span class="project-year">2026</span>
@@ -766,7 +776,7 @@
                 <div class="project-tags"><span class="tag">Python</span><span class="tag">Statsmodels</span><span class="tag">Pandas</span><span class="tag">Data Analytics</span></div>
             </div>
 
-            <!-- PROJECT 2: JAVA & ALGORITMA -->
+            <!-- PROJECT 3: JAVA & ALGORITMA -->
             <div class="project-card" data-tilt>
                 <div class="project-meta"><span class="project-year">2025</span><i class="devicon-java-plain colored project-tech-icon"></i></div>
                 <h3 class="project-title">Pengembangan Logika Program & Struktur Data</h3>
@@ -777,7 +787,7 @@
                 <div class="project-tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">VS Code</span><span class="tag">Data Structures</span></div>
             </div>
 
-            <!-- PROJECT 3: TABLEAU & EXCEL -->
+            <!-- PROJECT 4: TABLEAU & EXCEL -->
             <div class="project-card" data-tilt>
                 <div class="project-meta"><span class="project-year">2025</span><i class="fa-solid fa-chart-line project-tech-icon" style="color: #e47b24;"></i></div>
                 <h3 class="project-title">Interactive Business Dashboard & Excel Automation</h3>
@@ -788,7 +798,7 @@
                 <div class="project-tags"><span class="tag">Tableau</span><span class="tag">Advanced Excel</span><span class="tag">Data Viz</span><span class="tag">BI</span></div>
             </div>
 
-            <!-- PROJECT 4: AI CAMERA VISION -->
+            <!-- PROJECT 5: AI CAMERA VISION -->
             <div class="project-card" data-tilt>
                 <div class="project-meta"><span class="project-year">2026</span><i class="devicon-python-plain colored project-tech-icon"></i></div>
                 <h3 class="project-title">AI Digital Camera Vision</h3>
@@ -801,13 +811,11 @@
     <!-- Achievements Section -->
     <section class="content-section" id="achievements">
         <div class="section-header">
-            <!-- DIUBAH JADI 'ACHIEVEMENTS & CERTIFICATIONS' -->
             <h2>Achievements & Certifications</h2>
             <p>Sertifikasi formal yang memvalidasi kompetensi di bidang analisis data.</p>
         </div>
 
         <div class="certifications-grid">
-            <!-- SERTIFIKAT 1: REVOU (TULISAN CLICK TO VIEW DIHAPUS BIAR RELEVAN SAMA PREFERENSI LU) -->
             <a href="revou_sertif.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
                 <div class="cert-icon-wrapper"><i class="fa-solid fa-graduation-cap" style="color: #3b82f6;"></i></div>
                 <div class="cert-info">
@@ -816,7 +824,6 @@
                 </div>
             </a>
 
-            <!-- SERTIFIKAT 2: ZENITH ACADEMY -->
             <a href="zenith_academy.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
                 <div class="cert-icon-wrapper"><i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i></div>
                 <div class="cert-info">
