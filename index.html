@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -613,20 +613,16 @@
             color: var(--bg-color);
         }
 
-        /* TARGET EFEK GUNCANGAN TOTAL */
-        .shake-target {
-            display: block;
+        /* ENGINE ANARCHY: KELAS KHUSUS UNTUK HURUF YANG DICACAH */
+        .shake-char {
+            display: inline-block;
             will-change: transform;
+            white-space: pre; /* Biar spasi antar kata gak hilang pas dipotong */
         }
-        
-        header.shake-target {
-            display: grid;
-        }
-        
-        @media (min-width: 768px) {
-            header.shake-target {
-                display: flex;
-            }
+
+        /* Sisa elemen layout besar tetep bisa gerak berbarengan */
+        .shake-box {
+            will-change: transform;
         }
     </style>
 </head>
@@ -635,7 +631,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <!-- Header / Nav -->
-    <header class="shake-target">
+    <header class="shake-box">
         <div class="logo">SPH.</div>
         <nav>
             <a href="#" class="nav-link active">Home</a>
@@ -650,26 +646,25 @@
 
     <!-- Hero Section -->
     <main class="hero-section" id="home">
-        <div class="hero-left shake-target">
-            <div class="intro-tag">Science & Analytics</div>
-            <h1 class="giant-name">
-                SANTO<br>
-                <span class="outline-text">PARNINGOTAN</span><br>
-                <span class="accent-text">HUTAPEA.</span>
-            </h1>
-            <div class="headline-text">
+        <div class="hero-left">
+            <div class="intro-tag split-text">Science & Analytics</div>
+            <h1 class="giant-name split-text">SANTO</h1>
+            <h1 class="giant-name split-text"><span class="outline-text">PARNINGOTAN</span></h1>
+            <h1 class="giant-name split-text"><span class="accent-text">HUTAPEA.</span></h1>
+            
+            <div class="headline-text split-text">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
-            <p class="sub-paragraph">
+            <p class="sub-paragraph split-text">
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
-            <div class="btn-wrapper">
+            <div class="btn-wrapper shake-box">
                 <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
         
-        <div class="hero-right shake-target">
+        <div class="hero-right shake-box">
             <div class="photo-container-editorial">
                 <div class="photo-frame-brutal" data-tilt>
                     <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
@@ -685,14 +680,14 @@
 
     <!-- Education Section -->
     <section class="editorial-section" id="education">
-        <div class="section-meta shake-target">
+        <div class="section-meta shake-box">
             <h2>Education</h2>
         </div>
-        <div class="section-content shake-target">
+        <div class="section-content shake-box">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
-                        <h3>UNIVERSITAS TERBUKA</h3>
+                        <h3 class="split-text">UNIVERSITAS TERBUKA</h3>
                         <p>Sarjana (S1) Sains Data — Active Student</p>
                         <div class="node-duration">2025 — Present | Bogor, Indonesia</div>
                     </div>
@@ -707,10 +702,10 @@
 
     <!-- Experience Section -->
     <section class="editorial-section" id="experience">
-        <div class="section-meta shake-target">
+        <div class="section-meta shake-box">
             <h2>Experience</h2>
         </div>
-        <div class="section-content shake-target">
+        <div class="section-content shake-box">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
@@ -746,10 +741,10 @@
 
     <!-- Skills Section -->
     <section class="editorial-section" id="skills">
-        <div class="section-meta shake-target">
+        <div class="section-meta shake-box">
             <h2>Tech Stack</h2>
         </div>
-        <div class="section-content shake-target">
+        <div class="section-content shake-box">
             <div class="skills-container-editorial">
                 <div>
                     <div class="category-header-editorial">Programming & Core Data</div>
@@ -789,14 +784,14 @@
 
     <!-- Projects Section -->
     <section class="editorial-section" id="projects">
-        <div class="section-meta shake-target">
+        <div class="section-meta shake-box">
             <h2>Projects</h2>
         </div>
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
                 <!-- Project 1 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
                     <div>
                         <div class="project-header-editorial">
                             <span>01 / REVERSE ENGINEERING & DATA PARSING</span>
@@ -817,7 +812,7 @@
                 </a>
 
                 <!-- Project 2 -->
-                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial shake-target">
+                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial shake-box">
                     <div>
                         <div class="project-header-editorial">
                             <span>02 / INFERENCE STATISTICS & PREDICTIVE MODELING</span>
@@ -838,7 +833,7 @@
                 </a>
 
                 <!-- Project 3 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
                     <div>
                         <div class="project-header-editorial">
                             <span>03 / BUSINESS INTELLIGENCE & PIPELINE</span>
@@ -858,7 +853,7 @@
                 </a>
 
                 <!-- Project 4 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
                     <div>
                         <div class="project-header-editorial">
                             <span>04 / COMPUTER VISION & SPATIAL DATA</span>
@@ -883,12 +878,12 @@
 
     <!-- Achievements Section -->
     <section class="editorial-section" id="achievements">
-        <div class="section-meta shake-target">
+        <div class="section-meta shake-box">
             <h2>Credentials</h2>
         </div>
         <div class="section-content">
             <div class="achievements-editorial-grid">
-                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial shake-target">
+                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial shake-box">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h3 class="cert-title-editorial">Intro to Data Analytics — RevoU (2026)</h3>
                     <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis bisnis digital.</p>
@@ -904,7 +899,22 @@
 
     <!-- SCRIPT ENGINE LOGIC -->
     <script>
-        // --- 1. SCRIPT INSTANSI THREE.JS BACKGROUND ---
+        // --- 1. OTOMATISASI RE-ARRANGE TEKS JADI PER HURUF ---
+        // Mencari semua elemen yang ditandai kelas '.split-text' untuk dicacah jadi huruf individu
+        document.querySelectorAll('.split-text').forEach(el => {
+            const rawText = el.innerText;
+            el.innerHTML = ''; // Kosongkan kontainer teks asli
+            
+            // Bongkar teks asli jadi barisan array karakter huruf tunggal
+            Array.from(rawText).forEach(char => {
+                const span = document.createElement('span');
+                span.classList.add('shake-char');
+                span.innerText = char;
+                el.appendChild(span);
+            });
+        });
+
+        // --- 2. SCRIPT INSTANSI THREE.JS BACKGROUND ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
@@ -946,26 +956,23 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- 2. LOGIC SWITCH MODE & SHAKE PERMISSION INTEGRATION ---
+        // --- 3. LOGIC SWITCH MODE & SHAKE PERMISSION INTEGRATION ---
         const themeToggleBtn = document.getElementById('themeToggle');
-        const targets = document.querySelectorAll('.shake-target');
+        const chars = document.querySelectorAll('.shake-char');
+        const boxes = document.querySelectorAll('.shake-box');
 
         themeToggleBtn.addEventListener('click', () => {
-            // Jalankan fungsi ganti tema tanpa gangguan
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
-            
-            // Pemicu request izin sensor akselerometer HP sekali klik pertama
             initShakeLogic();
-        }, { once: false }); // Diubah biar tombol switch tema bisa diklik berkali-kali tanpa nge-stuck
+        }, { once: false });
 
         function initShakeLogic() {
             if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-                // Protokol keamanan khusus iOS/Safari
                 DeviceMotionEvent.requestPermission()
                     .then(state => {
                         if (state === 'granted') { 
@@ -974,12 +981,11 @@
                     })
                     .catch(console.error);
             } else {
-                // Protokol otomatis browser Android/Chrome via HTTPS
                 window.addEventListener('devicemotion', handleMotion);
             }
         }
 
-        // --- 3. CORE ENGINE SHAKE ANARCHY ---
+        // --- 4. CORE ENGINE SHAKE ANARCHY (PER HURUF & PER BLOK) ---
         let isShaking = false;
         let shakeTimeout;
 
@@ -987,42 +993,59 @@
             const accel = event.accelerationIncludingGravity;
             if (!accel) return;
 
-            // Rumus kalkulasi kekuatan guncangan vektor HP
             const force = Math.sqrt(accel.x ** 2 + accel.y ** 2 + accel.z ** 2);
 
-            // Threshold guncangan (24 cukup responsif)
+            // Threshold responsif akselerometer
             if (force > 24) { 
                 isShaking = true;
-                targets.forEach(el => {
-                    const randomX = (Math.random() - 0.5) * 70;    
-                    const randomY = (Math.random() - 0.5) * 70;    
-                    const randomRot = (Math.random() - 0.5) * 15;  
+                
+                // A. Goyang Setiap Huruf Tunggal secara Radikal (Efek Hancur Lebur)
+                chars.forEach(el => {
+                    const randomX = (Math.random() - 0.5) * 120; // Jarak lempar per huruf lebih jauh (120px)   
+                    const randomY = (Math.random() - 0.5) * 120;    
+                    const randomRot = (Math.random() - 0.5) * 45; // Putaran huruf lebih tajam (45 derajat) 
                     
-                    el.style.transition = 'transform 0.05s linear';
+                    el.style.transition = 'transform 0.04s linear';
                     el.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRot}deg)`;
+                });
+
+                // B. Goyang Elemen Layout Besar (Box Kontainer) Biar Tetap Dinamis
+                boxes.forEach(el => {
+                    const randomX = (Math.random() - 0.5) * 40;    
+                    const randomY = (Math.random() - 0.5) * 40;    
+                    
+                    el.style.transition = 'transform 0.04s linear';
+                    el.style.transform = `translate(${randomX}px, ${randomY}px)`;
                 });
                 
                 clearTimeout(shakeTimeout);
                 
                 shakeTimeout = setTimeout(() => {
                     isShaking = false;
-                    targets.forEach(el => {
-                        // Efek pegas kembali rapi elastis semula
-                        el.style.transition = 'transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    
+                    // Reset Semua Huruf ke Posisi Semula secara Mulus
+                    chars.forEach(el => {
+                        el.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                         el.style.transform = 'translate(0px, 0px) rotate(0deg)';
                     });
-                }, 400); 
+
+                    // Reset Semua Layout Box Kontainer
+                    boxes.forEach(el => {
+                        el.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                        el.style.transform = 'translate(0px, 0px)';
+                    });
+                }, 500); 
             }
         }
 
-        // --- 4. VANILLA TILT INIT ---
+        // --- 5. VANILLA TILT INIT ---
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
             max: 8,
             speed: 300,
             perspective: 1000
         });
 
-        // --- 5. NAVBAR SCROLL MONITOR ---
+        // --- 6. NAVBAR SCROLL MONITOR ---
         const sections = document.querySelectorAll('section, main');
         const navLinks = document.querySelectorAll('.nav-link');
 
