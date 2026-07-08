@@ -3,57 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santo Parningotan Hutapea | 3D Portfolio</title>
+    <title>Santo Parningotan Hutapea | Portfolio</title>
     <!-- Icon resmi dari FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Library CDN untuk menampilkan ikon teknologi secara otomatis -->
+    <!-- Library CDN untuk menampilkan ikon teknologi -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <!-- Google Fonts untuk tipografi editorial besar -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- LIBRARY UTAMA UTK GRAPHIC 3D & EFEK TILT -->
+    <!-- LIBRARY UTAMA GRAPHIC 3D & EFEK TILT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <style>
-        /* VARIABEL WARNA (Default: Tema Gelap / Dark Mode) */
+        /* ==================== SWISS EDITORIAL VARIABLES ==================== */
+        /* Default: Tema Terang / Light Mode ala Mariana */
         :root {
-            --bg-color: #030712;
-            --text-main: #ffffff;
-            --text-sub: #9ca3af;
-            --text-headline: #e5e7eb;
-            --nav-bg: rgba(10, 15, 30, 0.6);
-            --nav-border: rgba(88, 166, 255, 0.2);
-            --nav-active: rgba(88, 166, 255, 0.2);
-            --title-gradient: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
-            --btn-bg: rgba(31, 111, 235, 0.1);
-            --btn-border: rgba(88, 166, 255, 0.3);
-            --btn-hover: rgba(31, 111, 235, 0.2);
-            --shadow-glow: rgba(88, 166, 255, 0.3);
-            --card-bg: rgba(17, 24, 39, 0.55);
+            --bg-color: #fcfbf9;         /* Putih krem koran premium */
+            --text-main: #0a0a0a;        /* Hitam pekat solid */
+            --text-sub: #52525b;         /* Abu-abu gelap */
+            --accent-color: #059669;     /* Emerald Green Utama */
+            --grid-line: #18181b;        /* Garis grid hitam tegas */
+            --card-bg: transparent;       /* Brutalism style ga pake bg box */
+            --btn-bg: #0a0a0a;
+            --btn-text: #fcfbf9;
+            --particle-color: #059669;
         }
 
-        /* VARIABEL WARNA (Alternatif: Tema Terang / Light Mode) */
-        [data-theme="light"] {
-            --bg-color: #f8fafc;
-            --text-main: #0f172a;
-            --text-sub: #475569;
-            --text-headline: #1e293b;
-            --nav-bg: rgba(255, 255, 255, 0.75);
-            --nav-border: rgba(31, 111, 235, 0.25);
-            --nav-active: rgba(31, 111, 235, 0.15);
-            --title-gradient: linear-gradient(135deg, #1f6feb 0%, #0056b3 100%);
-            --btn-bg: rgba(31, 111, 235, 0.08);
-            --btn-border: rgba(31, 111, 235, 0.4);
-            --btn-hover: rgba(31, 111, 235, 0.18);
-            --shadow-glow: rgba(31, 111, 235, 0.25);
-            --card-bg: rgba(255, 255, 255, 0.75);
+        /* Dark Mode: Tetap mempertahankan Emerald Green sebagai warna utama */
+        [data-theme="dark"] {
+            --bg-color: #09090b;         /* Hitam pekat pekat */
+            --text-main: #fafafa;        /* Putih bersih */
+            --text-sub: #a1a1aa;         /* Abu-abu terang */
+            --accent-color: #059669;     /* Tetap Emerald Green konsisten bray! */
+            --grid-line: #fafafa;        /* Garis grid putih tegas */
+            --card-bg: transparent;
+            --btn-bg: #fafafa;
+            --btn-text: #09090b;
+            --particle-color: #059669;
         }
 
-        /* Base Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         html {
@@ -65,10 +59,9 @@
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* CANVAS BACKGROUND THREE.JS */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -77,760 +70,720 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
+            opacity: 0.15; /* Tipis di background biar ga ngerusak estetika koran */
         }
 
-        a, button, nav a {
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* FLOATING CAPSULE NAVBAR */
+        /* HEADER & FLOATING SWITCH */
         header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             width: 100%;
-            position: fixed;
-            top: 20px;
+            border-bottom: 1px solid var(--grid-line);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
             z-index: 100;
-            padding: 0 15px;
         }
 
-        .nav-container {
-            background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--nav-border);
-            padding: 8px 24px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            letter-spacing: 1px;
         }
 
         nav {
             display: flex;
-            gap: 4px;
+            gap: 24px;
         }
 
         nav a {
-            color: var(--text-sub);
+            color: var(--text-main);
             text-decoration: none;
             font-size: 13px;
-            font-weight: 500;
-            padding: 6px 16px;
-            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         nav a:hover, nav a.active {
-            color: var(--text-main);
-            background: var(--nav-active);
-            box-shadow: 0 0 12px var(--shadow-glow);
+            color: var(--accent-color);
         }
 
         .theme-toggle-btn {
             background: transparent;
-            border: none;
-            color: var(--text-sub);
-            font-size: 16px;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle-btn:hover {
+            border: 1px solid var(--grid-line);
             color: var(--text-main);
-            transform: scale(1.15);
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 0;
+            cursor: pointer;
         }
 
-        /* HERO LAYOUT CONTAINER */
+        /* BRUTALISM HERO: GIANT TYPOGRAPHY */
         .hero-section {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 150px 24px 40px 24px;
             display: grid;
             grid-template-columns: 1fr;
-            min-height: calc(100vh - 60px);
-            align-items: center;
-            gap: 40px;
+            border-bottom: 1px solid var(--grid-line);
         }
 
         @media (min-width: 768px) {
             .hero-section {
-                grid-template-columns: 1.25fr 0.75fr;
+                grid-template-columns: 1.2fr 0.8fr;
             }
         }
 
-        /* CARD HERO INTERAKTIF (3D TILT) */
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
-            padding: 35px;
-            border-radius: 24px;
-            background: var(--card-bg);
-            border: 1px solid var(--btn-border);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        .hero-left {
+            padding: 60px 40px;
+            border-right: none;
         }
 
-        .intro-text {
-            color: var(--text-sub);
+        @media (min-width: 768px) {
+            .hero-left {
+                border-right: 1px solid var(--grid-line);
+            }
+        }
+
+        .intro-tag {
             font-size: 12px;
             font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
             text-transform: uppercase;
-            transform: translateZ(30px);
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
         }
 
-        .main-title {
-            font-size: 48px;
-            font-weight: 800;
-            background: var(--title-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            transform: translateZ(60px);
-            display: inline-block;
+        /* Solusi nama panjang: font tinggi kurus dipotong per baris */
+        .giant-name {
+            font-family: 'Anton', sans-serif;
+            font-size: 14vw;
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .giant-name {
+                font-size: 8.5vw;
+            }
+        }
+
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--text-main);
+        }
+
+        .accent-text {
+            color: var(--accent-color);
         }
 
         .headline-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-headline);
-            margin-bottom: 18px;
-            line-height: 1.4;
-            transform: translateZ(45px);
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
         }
 
         .sub-paragraph {
             color: var(--text-sub);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 32px;
-            max-width: 650px;
-            transform: translateZ(35px);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
         .btn-wrapper {
             display: flex;
-            gap: 16px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            transform: translateZ(40px);
-        }
-
-        .btn-glass {
-            padding: 12px 28px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            color: var(--text-main);
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-        }
-
-        .btn-glass:hover {
-            background: var(--btn-hover);
-            border-color: var(--text-main);
-            box-shadow: 0 0 15px var(--shadow-glow);
-            transform: translateY(-2px);
-        }
-
-        .social-links {
-            display: flex;
             gap: 12px;
-            transform: translateZ(40px);
+            flex-wrap: wrap;
         }
 
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+        .btn-editorial {
+            padding: 14px 28px;
             background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            color: var(--text-sub);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: var(--btn-text);
             text-decoration: none;
-            font-size: 14px;
-        }
-
-        .social-icon:hover {
-            color: var(--text-main);
-            border-color: var(--text-main);
-            box-shadow: 0 0 10px var(--shadow-glow);
-        }
-
-        /* FOTO PROFIL DENGAN TILT */
-        .hero-photo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .photo-frame {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--btn-border);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            transform: translateZ(50px);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ==================== SECTIONS COMMON ==================== */
-        .content-section {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
-
-        .section-header {
-            margin-bottom: 35px;
-        }
-
-        .section-header h2 {
-            font-size: 32px;
-            font-weight: 800;
-            background: var(--title-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .section-header p {
-            color: var(--text-sub);
-            font-size: 14px;
-        }
-
-        /* ==================== EDUCATION & EXPERIENCE TIMELINE ==================== */
-        .timeline {
-            position: relative;
-            border-left: 2px solid var(--btn-border);
-            padding-left: 20px;
-            margin-left: 10px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 35px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -27px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #58a6ff;
-            box-shadow: 0 0 10px #58a6ff;
-        }
-
-        .timeline-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .timeline-subtitle {
-            font-size: 14px;
-            font-weight: 600;
-            color: #58a6ff;
-            margin-bottom: 4px;
-        }
-
-        .timeline-duration {
             font-size: 12px;
-            color: var(--text-sub);
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .timeline-desc {
-            font-size: 13.5px;
-            color: var(--text-sub);
-            line-height: 1.6;
-        }
-
-        .desc-list {
-            margin-left: 16px;
-            margin-top: 6px;
-            color: var(--text-sub);
-            font-size: 13.5px;
-        }
-
-        .desc-list li {
-            margin-bottom: 6px;
-            line-height: 1.6;
-        }
-
-        /* ==================== SKILLS ==================== */
-        .category-title {
-            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-sub);
-            margin: 30px 0 15px 0;
+            letter-spacing: 1px;
+            transition: 0.2s;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 16px;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            border: 1px solid var(--btn-border);
-            padding: 16px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            backdrop-filter: blur(5px);
-        }
-
-        .skill-card:hover {
-            border-color: var(--text-main);
-            box-shadow: 0 8px 20px var(--shadow-glow);
+        .btn-editorial:hover {
+            opacity: 0.8;
             transform: translateY(-2px);
         }
 
-        .skill-card i {
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-name {
-            font-size: 13px;
-            font-weight: 600;
+        .btn-outline {
+            background: transparent;
             color: var(--text-main);
+            border: 1px solid var(--grid-line);
         }
 
-        /* ==================== PROJECTS CARDS ==================== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        @media (min-width: 768px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--btn-border);
-            border-radius: 16px;
-            padding: 24px;
+        /* HERO RIGHT: FRAME FOTO ASIMETRIS */
+        .hero-right {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            backdrop-filter: blur(10px);
-            transform-style: preserve-3d;
+            padding: 40px;
+            background: rgba(0,0,0,0.02);
         }
 
-        .project-meta {
+        .photo-container-editorial {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 16px;
-            transform: translateZ(30px);
+            padding: 40px 0;
         }
 
-        .project-year {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-sub);
+        .photo-frame-brutal {
+            width: 280px;
+            height: 280px;
+            background: var(--accent-color);
+            padding: 10px; 
+            border: 1px solid var(--grid-line);
         }
 
-        .project-tech-icon {
-            font-size: 20px;
-            color: var(--text-sub);
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
+        .photo-frame-brutal img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Bikin fotonya hitam putih estetik ala koran */
+            transition: 0.3s;
         }
 
-        .project-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            transform: translateZ(45px);
+        .photo-frame-brutal:hover img {
+            filter: grayscale(0%); /* Berwarna pas di-hover */
         }
 
-        .project-desc {
-            font-size: 13px;
-            color: var(--text-sub);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
-            transform: translateZ(35px);
-        }
-
-        .project-desc-list {
-            margin-left: 14px;
-            margin-bottom: 15px;
-            font-size: 12.5px;
-            color: var(--text-sub);
-        }
-        
-        .project-desc-list li {
-            margin-bottom: 4px;
-            line-height: 1.5;
-        }
-
-        .project-tags {
+        .social-grid-editorial {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            transform: translateZ(40px);
-        }
-
-        .tag {
-            font-size: 11px;
-            font-weight: 600;
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 12px;
-        }
-
-        /* ==================== ACHIEVEMENTS CARDS ==================== */
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+            border-top: 1px solid var(--grid-line);
+            padding-top: 20px;
             gap: 20px;
         }
 
+        .social-link-editorial {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ==================== CONTENT SECTION GRID ==================== */
+        .editorial-section {
+            border-bottom: 1px solid var(--grid-line);
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
         @media (min-width: 768px) {
-            .certifications-grid {
+            .editorial-section {
+                grid-template-columns: 0.3fr 0.7fr;
+            }
+        }
+
+        .section-meta {
+            padding: 40px;
+            border-right: none;
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        @media (min-width: 768px) {
+            .section-meta {
+                border-right: 1px solid var(--grid-line);
+                border-bottom: none;
+            }
+        }
+
+        .section-meta h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .section-content {
+            padding: 40px;
+        }
+
+        /* TIMELINE SWISS LAYOUT */
+        .timeline-editorial {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .timeline-node {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            border-bottom: 1px dashed var(--grid-line);
+            padding-bottom: 30px;
+        }
+
+        .node-left h3 {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .node-left p {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .node-duration {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+
+        .node-right {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--text-sub);
+        }
+
+        .node-right strong {
+            color: var(--text-main);
+        }
+
+        .bullet-editorial {
+            margin-top: 10px;
+            padding-left: 16px;
+        }
+
+        .bullet-editorial li {
+            margin-bottom: 8px;
+        }
+
+        /* SKILLS SWISS GRID */
+        .skills-container-editorial {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .category-header-editorial {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .skills-flex-editorial {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag-editorial {
+            border: 1px solid var(--grid-line);
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-tag-editorial:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* PROJECTS 2-COLUMN GRID (Menerapkan Grid Mariana) */
+        .projects-editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 992px) {
+            .projects-editorial-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        .certification-card {
-            background: var(--card-bg);
-            border: 1px solid var(--btn-border);
-            border-radius: 16px;
-            padding: 24px;
+        .project-card-editorial {
+            border-top: 4px solid var(--text-main); /* Garis tebal di atas kartu ala koran */
+            padding-top: 15px;
             display: flex;
-            align-items: center;
-            gap: 20px;
-            backdrop-filter: blur(10px);
-            transform-style: preserve-3d;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-header-editorial {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        .project-title-editorial {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .project-body-editorial {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+        }
+
+        .project-tags-editorial {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag-editorial {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid var(--grid-line);
+            padding: 3px 8px;
+        }
+
+        /* INVERT VALUE BOX (Angka Gede data-driven) */
+        .metric-highlight {
+            font-family: 'Anton', sans-serif;
+            font-size: 28px;
+            color: var(--accent-color);
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* ACHIEVEMENT GRID */
+        .achievements-editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .achievements-editorial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .cert-card-editorial {
+            border: 1px solid var(--grid-line);
+            padding: 30px;
             text-decoration: none;
             color: inherit;
-            transition: 0.3s;
-        }
-
-        .certification-card:hover {
-            border-color: var(--text-main);
-            box-shadow: 0 10px 25px var(--shadow-glow);
-            transform: translateY(-3px);
-        }
-
-        .cert-icon-wrapper {
-            font-size: 32px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateZ(35px);
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .cert-info {
-            transform: translateZ(40px);
+        .cert-card-editorial:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
         }
 
-        .cert-info h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 4px;
+        .cert-card-editorial i {
+            font-size: 28px;
+            color: var(--accent-color);
         }
 
-        .cert-info p {
+        .cert-title-editorial {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .cert-desc-editorial {
             font-size: 13px;
-            color: var(--text-sub);
             line-height: 1.5;
+            color: var(--text-sub);
         }
 
-        /* Optimasi Tampilan Mobile */
-        @media (max-width: 767px) {
-            header { top: 10px; }
-            .nav-container { padding: 6px 16px; gap: 8px; }
-            nav a { padding: 4px 10px; font-size: 11px; }
-            .hero-section { padding-top: 110px; text-align: center; gap: 30px; }
-            .hero-content { order: 2; align-items: center; padding: 25px 20px; }
-            .hero-photo-container { order: 1; }
-            .main-title { font-size: 34px; }
-            .sub-paragraph { margin-bottom: 24px; }
-            .btn-wrapper { justify-content: center; gap: 10px; margin-bottom: 24px; }
-            .photo-frame { width: 220px; height: 220px; }
-            .certification-card { flex-direction: column; text-align: center; }
+        .cert-card-editorial:hover .cert-desc-editorial {
+            color: var(--bg-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- CANVAS ELEMENT UNTUK BACKGROUND BACKGROUND 3D (THREE.JS) -->
+    <!-- BACKGROUND 3D PARTIKEL DATA (THREE.JS) -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Navigation Bar -->
+    <!-- Header / Nav -->
     <header>
-        <div class="nav-container">
-            <nav>
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#achievements" class="nav-link">Achievements</a>
-            </nav>
-            <button class="theme-toggle-btn" id="themeToggle" title="Switch Mode">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-            </button>
-        </div>
+        <div class="logo">SPH.</div>
+        <nav>
+            <a href="#" class="nav-link active">Home</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#achievements" class="nav-link">Achievements</a>
+        </nav>
+        <button class="theme-toggle-btn" id="themeToggle">Switch Mode</button>
     </header>
 
-    <!-- Hero Section -->
-    <main class="hero-section">
-        <div class="hero-content" data-tilt>
-            <div class="intro-text">Hi, my name is</div>
-            <h1 class="main-title">Santo Parningotan Hutapea</h1>
+    <!-- Hero Section (Brutalist Style) -->
+    <main class="hero-section" id="home">
+        <div class="hero-left">
+            <div class="intro-tag">Science & Analytics</div>
+            
+            <!-- Trik Nama Panjang Lu: Dipotong per kata, tegak & outline tipis -->
+            <h1 class="giant-name">
+                SANTO<br>
+                <span class="outline-text">PARNINGOTAN</span><br>
+                <span class="accent-text">HUTAPEA.</span>
+            </h1>
             
             <div class="headline-text">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
-            
             <p class="sub-paragraph">
-                Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (data-driven) untuk optimasi operasional digital dan manajemen infrastruktur multimedia. Memiliki fleksibilitas waktu penuh untuk berkomitmen secara profesional sebagai Data Analyst, IT/Operations Support, maupun peran teknis lainnya.
+                Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
-
             <div class="btn-wrapper">
-                <a href="CV_SANTO HUTAPEA.pdf" target="_blank" class="btn-glass"><i class="fa-solid fa-file-pdf" style="margin-right: 5px;"></i> View My CV</a>
-                <a href="#projects" class="btn-glass">View My Projects</a>
-                <a href="mailto:santoph13@gmail.com" class="btn-glass">Contact Me</a>
-            </div>
-
-            <div class="social-links">
-                <a href="https://github.com/santoph13" target="_blank" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:santoph13@gmail.com" class="social-icon" title="Email"><i class="fa-regular fa-envelope"></i></a>
-                <a href="#" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="CV_SANTO HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
+                <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
-
-        <!-- Foto profil miring 3D (Cyingot) -->
-        <div class="hero-photo-container" data-tilt>
-            <div class="photo-frame">
-                <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
+        
+        <div class="hero-right">
+            <div class="photo-container-editorial">
+                <!-- Foto 3D Tilt Asimetris Hitam Putih -->
+                <div class="photo-frame-brutal" data-tilt>
+                    <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
+                </div>
+            </div>
+            
+            <div class="social-grid-editorial">
+                <a href="https://github.com/santoph13" target="_blank" class="social-link-editorial">Github</a>
+                <a href="mailto:santoph13@gmail.com" class="social-link-editorial">Email</a>
+                <a href="#" class="social-link-editorial">LinkedIn</a>
             </div>
         </div>
     </main>
 
     <!-- Education Section -->
-    <section class="content-section" id="education">
-        <div class="section-header">
+    <section class="editorial-section" id="education">
+        <div class="section-meta">
             <h2>Education</h2>
-            <p>Status akademik resmi dan fokus studi saat ini.</p>
         </div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3 class="timeline-title">UNIVERSITAS TERBUKA</h3>
-                <div class="timeline-subtitle">Sarjana (S1) Sains Data - Mahasiswa Aktif (Semester 3)</div>
-                <div class="timeline-duration">2025 - Sekarang | Bogor, Indonesia</div>
-                <p class="timeline-desc"><strong>Fokus Studi:</strong> Sistem Basis Data (SQL), Pemrograman Python & Java, Struktur Data, Pemrograman Berorientasi Objek (OOP), dan Model Linear Terapan.</p>
+        <div class="section-content">
+            <div class="timeline-editorial">
+                <div class="timeline-node">
+                    <div class="node-left">
+                        <h3>UNIVERSITAS TERBUKA</h3>
+                        <p>Sarjana (S1) Sains Data — Active Student</p>
+                        <div class="node-duration">2025 — Present | Bogor, Indonesia</div>
+                        <span class="metric-highlight">GPA: 3.88 / 4.00</span>
+                    </div>
+                    <div class="node-right">
+                        <strong>Fokus Kompetensi Inti Akademik:</strong><br>
+                        Sistem Basis Data (SQL), Pemrograman Python & Java, Struktur Data, Pemrograman Berorientasi Objek (OOP), dan Model Linear Terapan.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section class="content-section" id="experience">
-        <div class="section-header">
-            <h2>Work Experience</h2>
-            <p>Rekam jejak profesional dalam optimasi operasional digital dan manajemen teknologi.</p>
+    <section class="editorial-section" id="experience">
+        <div class="section-meta">
+            <h2>Experience</h2>
         </div>
+        <div class="section-content">
+            <div class="timeline-editorial">
+                <div class="timeline-node">
+                    <div class="node-left">
+                        <h3>Social Media Specialist & Operations</h3>
+                        <p>Freelance / Kontrak</p>
+                        <div class="node-duration">2019 – 2023 | Remote</div>
+                    </div>
+                    <div class="node-right">
+                        <ul class="bullet-editorial">
+                            <li><strong>Data-Driven Strategy:</strong> Menganalisis metrik performa audiens secara berkala melalui Meta Business Suite untuk mengoptimalkan pertumbuhan akun hingga mencapai 70.000 pengikut secara organik.</li>
+                            <li><strong>Analisis Tren:</strong> Merancang strategi konten kreatif berdasarkan tren data pasar untuk meningkatkan retensi audiens dan mencapai rata-rata 10.000 engagement per unggahan.</li>
+                            <li><strong>Manajemen Kemitraan:</strong> Mengelola negosiasi profesional, administrasi data operasional, serta koordinasi harian dengan mitra eksternal.</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3 class="timeline-title">Social Media Specialist & Operations</h3>
-                <div class="job-company" style="color: #58a6ff; font-weight: 600; font-size: 14px;">Freelance/Kontrak</div>
-                <div class="timeline-duration">2019 – 2023 | Remote</div>
-                <ul class="desc-list">
-                    <li><strong>Data-Driven Strategy:</strong> Menganalisis metrik performa audiens secara berkala melalui Meta Business Suite untuk mengoptimalkan pertumbuhan akun hingga mencapai 70.000 pengikut secara organik.</li>
-                    <li><strong>Analisis Tren:</strong> Merancang strategi konten kreatif berdasarkan tren data pasar untuk meningkatkan retensi audiens dan mencapai rata-rata 10.000 engagement per unggahan.</li>
-                    <li><strong>Manajemen Kemitraan:</strong> Mengelola negosiasi profesional, administrasi data operasional, serta koordinasi harian dengan mitra eksternal.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item">
-                <h3 class="timeline-title">Multimedia & Broadcasting Staff</h3>
-                <div class="job-company" style="color: #58a6ff; font-weight: 600; font-size: 14px;">Part-time</div>
-                <div class="timeline-duration">2020 – 2021 | Bogor, Indonesia</div>
-                <ul class="desc-list">
-                    <li>Bertanggung jawab penuh atas konfigurasi teknis penyiaran langsung (live streaming) menggunakan perangkat lunak OBS Studio.</li>
-                    <li>Melakukan pemeliharaan jaringan secara berkala, instalasi, dan troubleshooting pada perangkat keras serta sistem pendukung siaran untuk meminimalisir kendala teknis.</li>
-                </ul>
+                <div class="timeline-node">
+                    <div class="node-left">
+                        <h3>Multimedia & Broadcasting Staff</h3>
+                        <p>Part-time</p>
+                        <div class="node-duration">2020 – 2021 | Bogor, Indonesia</div>
+                    </div>
+                    <div class="node-right">
+                        <ul class="bullet-editorial">
+                            <li>Bertanggung jawab penuh atas konfigurasi teknis penyiaran langsung (live streaming) menggunakan perangkat lunak OBS Studio.</li>
+                            <li>Melakukan pemeliharaan jaringan secara berkala, instalasi, dan troubleshooting pada perangkat keras serta sistem pendukung siaran untuk meminimalisir kendala teknis.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="content-section" id="skills">
-        <div class="skills-header" style="margin-bottom: 35px;">
-            <h2 style="font-size: 32px; font-weight: 800; background: var(--title-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tech Stack & Tools</h2>
-            <p style="color: var(--text-sub); font-size: 14px;">Kombinasi keahlian teknis data, bahasa pemrograman, dan sistem perangkat lunak.</p>
+    <section class="editorial-section" id="skills">
+        <div class="section-meta">
+            <h2>Tech Stack</h2>
         </div>
-
-        <div class="category-title">Core Tech Stack</div>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="devicon-python-plain colored"></i><span class="skill-name">Python</span></div>
-            <div class="skill-card"><i class="devicon-mysql-original colored"></i><span class="skill-name">SQL (MySQL)</span></div>
-            <div class="skill-card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: flex; align-items: center;">
-                    <path d="M11.25 2.25h1.5v4.5h-1.5zM11.25 17.25h1.5v4.5h-1.5zM17.25 11.25h4.5v1.5h-4.5zM2.25 11.25h4.5v1.5h-4.5z" fill="#E8762A"/>
-                    <path d="M11.25 8.25h1.5v7.5h-1.5zM8.25 11.25h7.5v1.5h-7.5z" fill="#E8762A"/>
-                    <path d="M6.75 5.25h1.5v3h-1.5zM15.75 5.25h1.5v3h-1.5zM6.75 15.75h1.5v3h-1.5zM15.75 15.75h1.5v3h-1.5z" fill="#6992C1"/>
-                    <path d="M5.25 6.75h3v1.5h-3zM15.75 6.75h3v1.5h-3zM5.25 15.75h3v1.5h-3zM15.75 15.75h3v1.5h-3z" fill="#6992C1"/>
-                </svg>
-                <span class="skill-name">Tableau</span>
+        <div class="section-content">
+            <div class="skills-container-editorial">
+                <div>
+                    <div class="category-header-editorial">Core Technologies</div>
+                    <div class="skills-flex-editorial">
+                        <div class="skill-tag-editorial"><i class="devicon-python-plain colored"></i> Python</div>
+                        <div class="skill-tag-editorial"><i class="devicon-mysql-original colored"></i> SQL (MySQL)</div>
+                        <div class="skill-tag-editorial"><i class="devicon-java-plain colored"></i> Java</div>
+                        <div class="skill-tag-editorial"><i class="devicon-javascript-plain colored"></i> JavaScript</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="category-header-editorial">Data Architecture & Systems</div>
+                    <div class="skills-flex-editorial">
+                        <div class="skill-tag-editorial">Tableau BI</div>
+                        <div class="skill-tag-editorial">Excel (Advanced)</div>
+                        <div class="skill-tag-editorial">Linux Terminal</div>
+                        <div class="skill-tag-editorial">OBS Studio</div>
+                        <div class="skill-tag-editorial">Meta Business Suite</div>
+                    </div>
+                </div>
             </div>
-            <div class="skill-card"><i class="devicon-java-plain colored"></i><span class="skill-name">Java</span></div>
-            <div class="skill-card"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span></div>
-            <div class="skill-card"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span></div>
-            <div class="skill-card"><i class="devicon-javascript-plain colored"></i><span class="skill-name">JavaScript</span></div>
-        </div>
-
-        <div class="category-title">Tools & Systems</div>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="fa-regular fa-file-excel" style="color: #107c41;"></i><span class="skill-name">Excel (Advanced)</span></div>
-            <div class="skill-card"><i class="fa-solid fa-briefcase" style="color: #3b82f6;"></i><span class="skill-name">Business Intelligence</span></div>
-            <div class="skill-card"><i class="devicon-vscode-plain colored"></i><span class="skill-name">VS Code</span></div>
-            <div class="skill-card"><i class="fa-solid fa-tower-broadcast" style="color: #ff4500;"></i><span class="skill-name">OBS Studio</span></div>
-            <div class="skill-card"><i class="fa-solid fa-terminal" style="color: #3b82f6;"></i><span class="skill-name">Linux Terminal</span></div>
-            <div class="skill-card"><i class="fa-brands fa-meta" style="color: #0668e1;"></i><span class="skill-name">Meta Business Suite</span></div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="content-section" id="projects">
-        <div class="section-header">
-            <h2>Featured Projects</h2>
-            <p>Eksplorasi riil pemrosesan data statistik, arsitektur algoritma, visi komputer, dan visualisasi bisnis.</p>
+    <!-- Projects Section (UPDATED: Bener-bener Nunjukin Data & Analitik!) -->
+    <section class="editorial-section" id="projects">
+        <div class="section-meta">
+            <h2>Projects</h2>
         </div>
-
-        <div class="projects-grid">
-            <!-- PROJECT 1: NEWLY ADDED - ECU DATA PARSER -->
-            <div class="project-card" data-tilt>
-                <div class="project-meta">
-                    <span class="project-year">2026</span>
-                    <i class="devicon-python-plain colored project-tech-icon" title="Python Project"></i>
+        <div class="section-content">
+            <div class="projects-editorial-grid">
+                
+                <!-- PROJECT 1: ECU DATA PARSER -->
+                <div class="project-card-editorial">
+                    <div>
+                        <div class="project-header-editorial">
+                            <span>01 / REVERSE ENGINEERING & DATA PARSING</span>
+                            <span>2026</span>
+                        </div>
+                        <h3 class="project-title-editorial">ECU Hexadecimal Data Parser & 3D Mapping</h3>
+                        <p class="project-body-editorial">
+                            Melakukan ekstraksi data biner mentah (*binary dump*) memori flash ECU kendaraan melalui manipulasi berkas biner berukuran besar. Mengembangkan skrip Python otomatis berbasis pemetaan pola byte (*byte pattern algorithm*) untuk mengonversi data heksadesimal mentah menjadi matriks numerik terstruktur, serta mengimplementasikan visualisasi model permukaan 3D (*3D Surface Plot*) menggunakan Matplotlib untuk memvalidasi deviasi efisiensi volumetrik tabel injeksi secara presisi.
+                        </p>
+                        <span class="metric-highlight">Hex-to-Matrix Automation</span>
+                    </div>
+                    <div class="project-tags-editorial">
+                        <span class="tag-editorial">Python</span>
+                        <span class="tag-editorial">NumPy</span>
+                        <span class="tag-editorial">Matplotlib</span>
+                        <span class="tag-editorial">Binary Data</span>
+                    </div>
                 </div>
-                <h3 class="project-title">ECU Data Parser & Mapping Simulator (WemuXHonda)</h3>
-                <ul class="project-desc-list">
-                    <li>Membangun skrip otomatisasi menggunakan Python dan NumPy untuk ekstraksi, penguraian (*parsing*), serta manipulasi data biner mentah (*binary dump*) memori flash ECU kendaraan.</li>
-                    <li>Mengembangkan algoritma pencarian pola byte (*hex signature*) untuk memetakan koordinat tabel parameter mesin secara dinamis.</li>
-                    <li>Melakukan konversi format bilangan biner heksadesimal ke nilai desimal fisik parameter operasional (*Fuel Map*, RPM, TPS, & *Ignition Timing*) secara presisi.</li>
-                    <li>Mengimplementasikan visualisasi data multi-dimensi interaktif menggunakan grafik 3D Surface dan kontur warna Matplotlib untuk mempermudah deteksi anomali pada pemetaan distribusi parameter mesin.</li>
-                </ul>
-                <div class="project-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Low-Level Data</span></div>
-            </div>
 
-            <!-- PROJECT 2: SUSENAS BPS -->
-            <div class="project-card" data-tilt>
-                <div class="project-meta">
-                    <span class="project-year">2026</span>
-                    <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-tech-icon" title="Open PDF Report">
-                        <i class="devicon-python-plain colored" style="margin-right: 8px;"></i>
-                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px; color: #58a6ff;"></i>
-                    </a>
+                <!-- PROJECT 2: SUSENAS BPS -->
+                <div class="project-card-editorial">
+                    <div>
+                        <div class="project-header-editorial">
+                            <span>02 / INFERENCE STATISTICS & PREDICTIVE MODELING</span>
+                            <span>2026</span>
+                        </div>
+                        <h3 class="project-title-editorial">Econometric Modeling on National SUSENAS BPS Dataset</h3>
+                        <p class="project-body-editorial">
+                            Membangun model ekonometrika Regresi Logistik Berganda (*Multiple Logistic Regression*) menggunakan pustaka Pandas dan Statsmodels untuk memprediksi probabilitas kepemilikan aset transportasi domestik. Mengolah ribuan baris sampel mikro data nasional terstruktur dari BPS, menerapkan pembersihan data pencilan (*outlier handling*), uji multikolinieritas (VIF), dan berhasil mencapai nilai ukuran kelayakan model kuantitatif McFadden Pseudo R-Square sebesar 60,8%.
+                        </p>
+                        <span class="metric-highlight">McFadden R²: 60.8%</span>
+                    </div>
+                    <div class="project-tags-editorial">
+                        <span class="tag-editorial">Python</span>
+                        <span class="tag-editorial">Statsmodels</span>
+                        <span class="tag-editorial">Pandas</span>
+                        <span class="tag-editorial">Inference Stats</span>
+                    </div>
                 </div>
-                <h3 class="project-title">Pemodelan Prediktif & Machine Learning (Data SUSENAS BPS)</h3>
-                <ul class="project-desc-list">
-                    <li>Membangun model regresi logistik berganda menggunakan Python (statsmodels & pandas) untuk mengestimasi probabilitas kepemilikan aset transportasi berdasarkan karakteristik sosio-ekonomi rumah tangga.</li>
-                    <li>Melakukan tahap data preparation, pembersihan data (data cleansing), dan penanganan pencilan (outliers) pada draf mikro data nasional dari Portal Satu Data Indonesia.</li>
-                    <li>Mengevaluasi kelayakan model (goodness-of-fit) melalui uji serentak (Likelihood Ratio Test, p-value = 0.0001) serta menghasilkan nilai McFadden Pseudo R-Square sebesar 60,8%.</li>
-                </ul>
-                <div class="project-tags"><span class="tag">Python</span><span class="tag">Statsmodels</span><span class="tag">Pandas</span><span class="tag">Data Analytics</span></div>
-            </div>
 
-            <!-- PROJECT 3: JAVA & ALGORITMA -->
-            <div class="project-card" data-tilt>
-                <div class="project-meta"><span class="project-year">2025</span><i class="devicon-java-plain colored project-tech-icon"></i></div>
-                <h3 class="project-title">Pengembangan Logika Program & Struktur Data</h3>
-                <ul class="project-desc-list">
-                    <li>Mengimplementasikan konsep struktur data Array dan pemrograman berorientasi objek (OOP) menggunakan bahasa Java pada Visual Studio Code.</li>
-                    <li>Merancang logika algoritma yang efisien untuk penyelesaian komputasi matematis dan analisis data dasar.</li>
-                </ul>
-                <div class="project-tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">VS Code</span><span class="tag">Data Structures</span></div>
-            </div>
+                <!-- PROJECT 3: TABLEAU & EXCEL -->
+                <div class="project-card-editorial">
+                    <div>
+                        <div class="project-header-editorial">
+                            <span>03 / BUSINESS INTELLIGENCE & PIPELINE</span>
+                            <span>2025</span>
+                        </div>
+                        <h3 class="project-title-editorial">Enterprise Business Intelligence & Performance Dashboard</h3>
+                        <p class="project-body-editorial">
+                            Merancang visualisasi *data storytelling* interaktif tingkat lanjut menggunakan Tableau Desktop untuk memetakan performa metrik bisnis operasional secara dinamis. Mengintegrasikan fungsi-fungsi analisis matriks kompleks berbasis Excel (INDEX, MATCH, Pivot Cache) guna mengotomatisasi pemrosesan laporan berkala, menyederhanakan pelacakan KPI, serta mengeliminasi proses kompilasi manual data transaksional hingga 80%.
+                        </p>
+                        <span class="metric-highlight">80% Automation Rate</span>
+                    </div>
+                    <div class="project-tags-editorial">
+                        <span class="tag-editorial">Tableau BI</span>
+                        <span class="tag-editorial">Advanced Excel</span>
+                        <span class="tag-editorial">KPI Optimization</span>
+                    </div>
+                </div>
 
-            <!-- PROJECT 4: TABLEAU & EXCEL -->
-            <div class="project-card" data-tilt>
-                <div class="project-meta"><span class="project-year">2025</span><i class="fa-solid fa-chart-line project-tech-icon" style="color: #e47b24;"></i></div>
-                <h3 class="project-title">Interactive Business Dashboard & Excel Automation</h3>
-                <ul class="project-desc-list">
-                    <li>Mengembangkan dasbor analitis interaktif menggunakan Tableau Desktop untuk kebutuhan data storytelling manajemen.</li>
-                    <li>Mengotomatisasi laporan operasional berkala menggunakan fungsi Excel tingkat lanjut (VLOOKUP, INDEX/MATCH, Pivot Table).</li>
-                </ul>
-                <div class="project-tags"><span class="tag">Tableau</span><span class="tag">Advanced Excel</span><span class="tag">Data Viz</span><span class="tag">BI</span></div>
-            </div>
+                <!-- PROJECT 4: COMPUTER VISION -->
+                <div class="project-card-editorial">
+                    <div>
+                        <div class="project-header-editorial">
+                            <span>04 / COMPUTER VISION & SPATIAL DATA</span>
+                            <span>2026</span>
+                        </div>
+                        <h3 class="project-title-editorial">Real-Time Computer Vision Spatial & Gesture Tracking</h3>
+                        <p class="project-body-editorial">
+                            Mengembangkan modul pemrosesan citra digital dinamis berbasis Python dan OpenCV untuk mendeteksi objek, ekstraksi fitur wajah, serta pelacakan koordinat spasial pose tangan (*hand gesture tracking*) secara instan. Mengoptimalkan pipeline kalkulasi array matriks gambar untuk mengurangi latensi rendering frame gambar per detik (FPS), memastikan tingkat akurasi pemetaan koordinat matriks piksel tetap tinggi saat mendeteksi pergerakan objek.
+                        </p>
+                        <span class="metric-highlight">Real-Time Array Processing</span>
+                    </div>
+                    <div class="project-tags-editorial">
+                        <span class="tag-editorial">Python</span>
+                        <span class="tag-editorial">OpenCV</span>
+                        <span class="tag-editorial">Matrix Analysis</span>
+                    </div>
+                </div>
 
-            <!-- PROJECT 5: AI CAMERA VISION -->
-            <div class="project-card" data-tilt>
-                <div class="project-meta"><span class="project-year">2026</span><i class="devicon-python-plain colored project-tech-icon"></i></div>
-                <h3 class="project-title">AI Digital Camera Vision</h3>
-                <p class="project-desc" style="font-size: 13px; line-height: 1.5; padding-left: 5px;">Mengembangkan program kamera pintar berbasis Computer Vision untuk deteksi objek, wajah, dan pose tangan (hand gesture) secara real-time.</p>
-                <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span></div>
             </div>
         </div>
     </section>
 
     <!-- Achievements Section -->
-    <section class="content-section" id="achievements">
-        <div class="section-header">
-            <h2>Achievements & Certifications</h2>
-            <p>Sertifikasi formal yang memvalidasi kompetensi di bidang analisis data.</p>
+    <section class="editorial-section" id="achievements">
+        <div class="section-meta">
+            <h2>Credentials</h2>
         </div>
+        <div class="section-content">
+            <div class="achievements-editorial-grid">
+                
+                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h3 class="cert-title-editorial">Intro to Data Analytics — RevoU (2026)</h3>
+                    <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis bisnis digital.</p>
+                </a>
 
-        <div class="certifications-grid">
-            <a href="revou_sertif.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
-                <div class="cert-icon-wrapper"><i class="fa-solid fa-graduation-cap" style="color: #3b82f6;"></i></div>
-                <div class="cert-info">
-                    <h3>Intro to Data Analytics — RevoU (2026)</h3>
-                    <p>Sertifikasi kompetensi dasar formal yang memvalidasi pemahaman siklus analisis data, pengenalan tools data analitis, dan penyelesaian studi kasus berbasis metrik bisnis.</p>
-                </div>
-            </a>
+                <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <h3 class="cert-title-editorial">Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
+                    <p class="cert-desc-editorial">Sertifikasi teknis dalam relasi arsitektur data, kalkulasi kolom analitis, dan visual data storytelling menggunakan ekosistem Tableau.</p>
+                </a>
 
-            <a href="zenith_academy.jpeg" target="_blank" class="certification-card" data-tilt title="Open Certificate Image">
-                <div class="cert-icon-wrapper"><i class="fa-solid fa-chart-pie" style="color: #e47b24;"></i></div>
-                <div class="cert-info">
-                    <h3>Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
-                    <p>Sertifikasi penguasaan teknis tingkat lanjut dalam pemetaan arsitektur relasi data, kalkulasi kolom analitis, dan implementasi visual data storytelling interaktif menggunakan ekosistem Tableau.</p>
-                </div>
-            </a>
+            </div>
         </div>
     </section>
 
@@ -844,7 +797,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const particlesCount = 2000;
+        const particlesCount = 1500; 
         const positionArray = new Float32Array(particlesCount * 3);
 
         for (let i = 0; i < particlesCount * 3; i++) {
@@ -854,12 +807,13 @@
         const particlesGeometry = new THREE.BufferGeometry();
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
 
+        // Set Warna Default Awal (Emerald Green)
         const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.025,
-            color: 0x58a6ff,
+            size: 0.035,
+            color: 0x059669, 
             transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending
+            opacity: 0.4,
+            blending: THREE.NormalBlending
         });
 
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -879,11 +833,11 @@
             requestAnimationFrame(animate3D);
             const elapsedTime = clock.getElapsedTime();
 
-            particlesMesh.rotation.y = elapsedTime * 0.02;
-            particlesMesh.rotation.x = -elapsedTime * 0.01;
+            particlesMesh.rotation.y = elapsedTime * 0.015;
+            particlesMesh.rotation.x = -elapsedTime * 0.008;
 
-            particlesMesh.position.x += (mouseX * 0.4 - particlesMesh.position.x) * 0.05;
-            particlesMesh.position.y += (-mouseY * 0.4 - particlesMesh.position.y) * 0.05;
+            particlesMesh.position.x += (mouseX * 0.3 - particlesMesh.position.x) * 0.05;
+            particlesMesh.position.y += (-mouseY * 0.3 - particlesMesh.position.y) * 0.05;
 
             renderer.render(scene, camera);
         }
@@ -895,40 +849,34 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- MANAJER TOGGLE TEMA WARNA (DARK / LIGHT MODE) ---
+        // --- MANAJER TOGGLE TEMA WARNA (DARK / LIGHT MODE - EMERALD LOCK) ---
         const themeToggleBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'light') {
+            if (currentTheme === 'dark') {
                 document.documentElement.removeAttribute('data-theme');
-                themeIcon.className = 'fa-solid fa-moon';
-                particlesMaterial.color.setHex(0x58a6ff);
-                particlesMaterial.size = 0.025;
-                particlesMaterial.opacity = 0.6;
+                themeToggleBtn.innerText = "Switch Mode";
+                // Tetap Emerald Green bray di light mode!
+                particlesMaterial.color.setHex(0x059669); 
             } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeIcon.className = 'fa-solid fa-sun';
-                particlesMaterial.color.setHex(0x0056b3);
-                particlesMaterial.size = 0.045; 
-                particlesMaterial.opacity = 0.8;
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggleBtn.innerText = "Switch Mode";
+                // TETEP Emerald Green juga bray di dark mode!
+                particlesMaterial.color.setHex(0x059669); 
             }
         });
 
-        // --- FORCE AKTIVASI MANUAL VANILLA TILT 3D CARD ---
+        // --- ACTIVATE VANILLA TILT ---
         function initTiltEffect() {
             VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 12,
-                speed: 400,
+                max: 8,
+                speed: 300,
                 perspective: 1000,
-                glare: true,
-                "max-glare": 0.25,
-                scale: 1.02
+                scale: 1.01
             });
         }
         document.addEventListener("DOMContentLoaded", initTiltEffect);
-        initTiltEffect();
 
         // --- NAVBAR ACTIVE LINK ON SCROLL ---
         const sections = document.querySelectorAll('section, main');
