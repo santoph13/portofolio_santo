@@ -17,26 +17,24 @@
     
     <style>
         /* ==================== SWISS EDITORIAL VARIABLES ==================== */
-        /* Default: Tema Terang / Light Mode ala Mariana */
         :root {
-            --bg-color: #fcfbf9;         /* Putih krem koran premium */
-            --text-main: #0a0a0a;        /* Hitam pekat solid */
-            --text-sub: #52525b;         /* Abu-abu gelap */
-            --accent-color: #059669;     /* Emerald Green Utama */
-            --grid-line: #18181b;        /* Garis grid hitam tegas */
-            --card-bg: transparent;       /* Brutalism style ga pake bg box */
+            --bg-color: #fcfbf9;         
+            --text-main: #0a0a0a;        
+            --text-sub: #52525b;         
+            --accent-color: #059669;     
+            --grid-line: #18181b;        
+            --card-bg: transparent;       
             --btn-bg: #0a0a0a;
             --btn-text: #fcfbf9;
             --particle-color: #059669;
         }
 
-        /* Dark Mode: Tetap mempertahankan Emerald Green sebagai warna utama */
         [data-theme="dark"] {
-            --bg-color: #09090b;         /* Hitam pekat pekat */
-            --text-main: #fafafa;        /* Putih bersih */
-            --text-sub: #a1a1aa;         /* Abu-abu terang */
-            --accent-color: #059669;     /* Tetap Emerald Green konsisten bray! */
-            --grid-line: #fafafa;        /* Garis grid putih tegas */
+            --bg-color: #09090b;         
+            --text-main: #fafafa;        
+            --text-sub: #a1a1aa;         
+            --accent-color: #059669;     
+            --grid-line: #fafafa;        
             --card-bg: transparent;
             --btn-bg: #fafafa;
             --btn-text: #09090b;
@@ -70,40 +68,74 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.15; /* Tipis di background biar ga ngerusak estetika koran */
+            opacity: 0.15; 
         }
 
-        /* HEADER & FLOATING SWITCH */
+        /* HEADER & FIXED RESPONSIVE NAVBAR */
         header {
             width: 100%;
             border-bottom: 1px solid var(--grid-line);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
+            gap: 15px;
             position: sticky;
             top: 0;
             background: var(--bg-color);
             z-index: 100;
         }
 
-        .logo {
-            font-family: 'Anton', sans-serif;
-            font-size: 24px;
-            letter-spacing: 1px;
+        @media (min-width: 768px) {
+            header {
+                padding: 20px 40px;
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 22px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* Solusi Fix Meluber: Menggunakan Container Scroll Halus di HP */
         nav {
             display: flex;
-            gap: 24px;
+            gap: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Sembunyiin scrollbar bawaan biar tetep estetik */
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+        nav {
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                overflow-x: visible;
+                padding-bottom: 0;
+                gap: 24px;
+            }
         }
 
         nav a {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
+            display: inline-block;
         }
 
         nav a:hover, nav a.active {
@@ -114,15 +146,15 @@
             background: transparent;
             border: 1px solid var(--grid-line);
             color: var(--text-main);
-            padding: 6px 16px;
-            font-size: 12px;
+            padding: 6px 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            border-radius: 0;
             cursor: pointer;
+            white-space: nowrap;
         }
 
-        /* BRUTALISM HERO: GIANT TYPOGRAPHY */
+        /* HERO SECTION */
         .hero-section {
             display: grid;
             grid-template-columns: 1fr;
@@ -136,12 +168,12 @@
         }
 
         .hero-left {
-            padding: 60px 40px;
-            border-right: none;
+            padding: 40px 20px;
         }
 
         @media (min-width: 768px) {
             .hero-left {
+                padding: 60px 40px;
                 border-right: 1px solid var(--grid-line);
             }
         }
@@ -152,28 +184,34 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--accent-color);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        /* Solusi nama panjang: font tinggi kurus dipotong per baris */
         .giant-name {
             font-family: 'Anton', sans-serif;
-            font-size: 14vw;
+            font-size: 15vw;
             line-height: 0.85;
             text-transform: uppercase;
-            letter-spacing: -2px;
-            margin-bottom: 40px;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
         }
 
         @media (min-width: 768px) {
             .giant-name {
                 font-size: 8.5vw;
+                letter-spacing: -2px;
             }
         }
 
         .outline-text {
             color: transparent;
-            -webkit-text-stroke: 2px var(--text-main);
+            -webkit-text-stroke: 1.5px var(--text-main);
+        }
+        
+        @media (min-width: 768px) {
+            .outline-text {
+                -webkit-text-stroke: 2px var(--text-main);
+            }
         }
 
         .accent-text {
@@ -181,32 +219,47 @@
         }
 
         .headline-text {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             line-height: 1.3;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .headline-text {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
         }
 
         .sub-paragraph {
             color: var(--text-sub);
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 40px;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
             max-width: 600px;
+        }
+
+        @media (min-width: 768px) {
+            .sub-paragraph {
+                font-size: 15px;
+                line-height: 1.7;
+                margin-bottom: 40px;
+            }
         }
 
         .btn-wrapper {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .btn-editorial {
-            padding: 14px 28px;
+            padding: 12px 24px;
             background: var(--btn-bg);
             color: var(--btn-text);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -224,40 +277,53 @@
             border: 1px solid var(--grid-line);
         }
 
-        /* HERO RIGHT: FRAME FOTO ASIMETRIS */
         .hero-right {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 40px;
-            background: rgba(0,0,0,0.02);
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.01);
+        }
+
+        @media (min-width: 768px) {
+            .hero-right {
+                padding: 40px;
+            }
         }
 
         .photo-container-editorial {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
         .photo-frame-brutal {
-            width: 280px;
-            height: 280px;
+            width: 240px;
+            height: 240px;
             background: var(--accent-color);
-            padding: 10px; 
+            padding: 8px; 
             border: 1px solid var(--grid-line);
+        }
+
+        @media (min-width: 768px) {
+            .photo-frame-brutal {
+                width: 280px;
+                height: 280px;
+                padding: 10px;
+            }
         }
 
         .photo-frame-brutal img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%); /* Bikin fotonya hitam putih estetik ala koran */
+            filter: grayscale(100%);
             transition: 0.3s;
         }
 
         .photo-frame-brutal:hover img {
-            filter: grayscale(0%); /* Berwarna pas di-hover */
+            filter: grayscale(0%);
         }
 
         .social-grid-editorial {
@@ -265,6 +331,13 @@
             border-top: 1px solid var(--grid-line);
             padding-top: 20px;
             gap: 20px;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .social-grid-editorial {
+                justify-content: flex-start;
+            }
         }
 
         .social-link-editorial {
@@ -275,7 +348,7 @@
             text-transform: uppercase;
         }
 
-        /* ==================== CONTENT SECTION GRID ==================== */
+        /* EDITORIAL GRID SECTIONS */
         .editorial-section {
             border-bottom: 1px solid var(--grid-line);
             display: grid;
@@ -289,13 +362,13 @@
         }
 
         .section-meta {
-            padding: 40px;
-            border-right: none;
+            padding: 30px 20px;
             border-bottom: 1px solid var(--grid-line);
         }
 
         @media (min-width: 768px) {
             .section-meta {
+                padding: 40px;
                 border-right: 1px solid var(--grid-line);
                 border-bottom: none;
             }
@@ -303,17 +376,29 @@
 
         .section-meta h2 {
             font-family: 'Anton', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 1;
         }
 
-        .section-content {
-            padding: 40px;
+        @media (min-width: 768px) {
+            .section-meta h2 {
+                font-size: 32px;
+            }
         }
 
-        /* TIMELINE SWISS LAYOUT */
+        .section-content {
+            padding: 30px 20px;
+        }
+
+        @media (min-width: 768px) {
+            .section-content {
+                padding: 40px;
+            }
+        }
+
+        /* TIMELINE LAYOUT */
         .timeline-editorial {
             display: flex;
             flex-direction: column;
@@ -329,12 +414,18 @@
         }
 
         .node-left h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
         }
 
+        @media (min-width: 768px) {
+            .node-left h3 {
+                font-size: 20px;
+            }
+        }
+
         .node-left p {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--accent-color);
             text-transform: uppercase;
@@ -342,19 +433,15 @@
         }
 
         .node-duration {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--text-sub);
         }
 
         .node-right {
-            font-size: 14.5px;
+            font-size: 14px;
             line-height: 1.6;
             color: var(--text-sub);
-        }
-
-        .node-right strong {
-            color: var(--text-main);
         }
 
         .bullet-editorial {
@@ -366,7 +453,7 @@
             margin-bottom: 8px;
         }
 
-        /* SKILLS SWISS GRID */
+        /* SKILLS GRID */
         .skills-container-editorial {
             display: flex;
             flex-direction: column;
@@ -374,28 +461,28 @@
         }
 
         .category-header-editorial {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-color);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .skills-flex-editorial {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .skill-tag-editorial {
             border: 1px solid var(--grid-line);
-            padding: 10px 20px;
-            font-size: 13px;
+            padding: 8px 16px;
+            font-size: 12px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .skill-tag-editorial:hover {
@@ -403,7 +490,7 @@
             color: var(--bg-color);
         }
 
-        /* PROJECTS 2-COLUMN GRID (Menerapkan Grid Mariana) */
+        /* PROJECTS GRID */
         .projects-editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -417,7 +504,7 @@
         }
 
         .project-card-editorial {
-            border-top: 4px solid var(--text-main); /* Garis tebal di atas kartu ala koran */
+            border-top: 4px solid var(--text-main); 
             padding-top: 15px;
             display: flex;
             flex-direction: column;
@@ -427,23 +514,23 @@
         .project-header-editorial {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--text-sub);
             margin-bottom: 10px;
         }
 
         .project-title-editorial {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .project-body-editorial {
-            font-size: 13.5px;
+            font-size: 13px;
             line-height: 1.6;
             color: var(--text-sub);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .project-tags-editorial {
@@ -453,27 +540,26 @@
         }
 
         .tag-editorial {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             border: 1px solid var(--grid-line);
-            padding: 3px 8px;
+            padding: 2px 6px;
         }
 
-        /* INVERT VALUE BOX (Angka Gede data-driven) */
         .metric-highlight {
             font-family: 'Anton', sans-serif;
-            font-size: 28px;
+            font-size: 24px;
             color: var(--accent-color);
             margin-top: 10px;
             display: block;
         }
 
-        /* ACHIEVEMENT GRID */
+        /* ACHIEVEMENTS GRID */
         .achievements-editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 20px;
         }
 
         @media (min-width: 768px) {
@@ -484,12 +570,12 @@
 
         .cert-card-editorial {
             border: 1px solid var(--grid-line);
-            padding: 30px;
+            padding: 24px;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .cert-card-editorial:hover {
@@ -498,17 +584,17 @@
         }
 
         .cert-card-editorial i {
-            font-size: 28px;
+            font-size: 24px;
             color: var(--accent-color);
         }
 
         .cert-title-editorial {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
         }
 
         .cert-desc-editorial {
-            font-size: 13px;
+            font-size: 12.5px;
             line-height: 1.5;
             color: var(--text-sub);
         }
@@ -520,10 +606,9 @@
 </head>
 <body>
 
-    <!-- BACKGROUND 3D PARTIKEL DATA (THREE.JS) -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Header / Nav -->
+    <!-- Header / Nav (FIXED OVERFLOW) -->
     <header>
         <div class="logo">SPH.</div>
         <nav>
@@ -537,18 +622,15 @@
         <button class="theme-toggle-btn" id="themeToggle">Switch Mode</button>
     </header>
 
-    <!-- Hero Section (Brutalist Style) -->
+    <!-- Hero Section -->
     <main class="hero-section" id="home">
         <div class="hero-left">
             <div class="intro-tag">Science & Analytics</div>
-            
-            <!-- Trik Nama Panjang Lu: Dipotong per kata, tegak & outline tipis -->
             <h1 class="giant-name">
                 SANTO<br>
                 <span class="outline-text">PARNINGOTAN</span><br>
                 <span class="accent-text">HUTAPEA.</span>
             </h1>
-            
             <div class="headline-text">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
@@ -556,19 +638,17 @@
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
             <div class="btn-wrapper">
-                <a href="CV_SANTO HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
+                <a href="file/CV_SANTO_HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
         
         <div class="hero-right">
             <div class="photo-container-editorial">
-                <!-- Foto 3D Tilt Asimetris Hitam Putih -->
                 <div class="photo-frame-brutal" data-tilt>
                     <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
                 </div>
             </div>
-            
             <div class="social-grid-editorial">
                 <a href="https://github.com/santoph13" target="_blank" class="social-link-editorial">Github</a>
                 <a href="mailto:santoph13@gmail.com" class="social-link-editorial">Email</a>
@@ -577,7 +657,7 @@
         </div>
     </main>
 
-    <!-- Education Section -->
+    <!-- Education Section (GPA REMOVED) -->
     <section class="editorial-section" id="education">
         <div class="section-meta">
             <h2>Education</h2>
@@ -589,7 +669,6 @@
                         <h3>UNIVERSITAS TERBUKA</h3>
                         <p>Sarjana (S1) Sains Data — Active Student</p>
                         <div class="node-duration">2025 — Present | Bogor, Indonesia</div>
-                        <span class="metric-highlight">GPA: 3.88 / 4.00</span>
                     </div>
                     <div class="node-right">
                         <strong>Fokus Kompetensi Inti Akademik:</strong><br>
@@ -639,7 +718,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Section (FULL STACK RESTORED) -->
     <section class="editorial-section" id="skills">
         <div class="section-meta">
             <h2>Tech Stack</h2>
@@ -647,20 +726,33 @@
         <div class="section-content">
             <div class="skills-container-editorial">
                 <div>
-                    <div class="category-header-editorial">Core Technologies</div>
+                    <div class="category-header-editorial">Programming & Core Data</div>
                     <div class="skills-flex-editorial">
                         <div class="skill-tag-editorial"><i class="devicon-python-plain colored"></i> Python</div>
-                        <div class="skill-tag-editorial"><i class="devicon-mysql-original colored"></i> SQL (MySQL)</div>
+                        <div class="skill-tag-editorial"><i class="devicon-mysql-original colored"></i> SQL / MySQL</div>
                         <div class="skill-tag-editorial"><i class="devicon-java-plain colored"></i> Java</div>
                         <div class="skill-tag-editorial"><i class="devicon-javascript-plain colored"></i> JavaScript</div>
+                        <div class="skill-tag-editorial"><i class="devicon-html5-plain colored"></i> HTML5</div>
+                        <div class="skill-tag-editorial"><i class="devicon-css3-plain colored"></i> CSS3</div>
                     </div>
                 </div>
                 <div>
-                    <div class="category-header-editorial">Data Architecture & Systems</div>
+                    <div class="category-header-editorial">Libraries & Analytics Infrastructure</div>
+                    <div class="skills-flex-editorial">
+                        <div class="skill-tag-editorial">Pandas</div>
+                        <div class="skill-tag-editorial">NumPy</div>
+                        <div class="skill-tag-editorial">Matplotlib</div>
+                        <div class="skill-tag-editorial">Statsmodels</div>
+                        <div class="skill-tag-editorial">OpenCV (Computer Vision)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="category-header-editorial">Tools & Platforms</div>
                     <div class="skills-flex-editorial">
                         <div class="skill-tag-editorial">Tableau BI</div>
-                        <div class="skill-tag-editorial">Excel (Advanced)</div>
-                        <div class="skill-tag-editorial">Linux Terminal</div>
+                        <div class="skill-tag-editorial">Microsoft Excel (Advanced)</div>
+                        <div class="skill-tag-editorial"><i class="devicon-git-plain colored"></i> Git & GitHub</div>
+                        <div class="skill-tag-editorial"><i class="devicon-linux-plain colored"></i> Linux Terminal</div>
                         <div class="skill-tag-editorial">OBS Studio</div>
                         <div class="skill-tag-editorial">Meta Business Suite</div>
                     </div>
@@ -669,7 +761,7 @@
         </div>
     </section>
 
-    <!-- Projects Section (UPDATED: Bener-bener Nunjukin Data & Analitik!) -->
+    <!-- Projects Section -->
     <section class="editorial-section" id="projects">
         <div class="section-meta">
             <h2>Projects</h2>
@@ -677,7 +769,6 @@
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
-                <!-- PROJECT 1: ECU DATA PARSER -->
                 <div class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
@@ -698,7 +789,6 @@
                     </div>
                 </div>
 
-                <!-- PROJECT 2: SUSENAS BPS -->
                 <div class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
@@ -719,7 +809,6 @@
                     </div>
                 </div>
 
-                <!-- PROJECT 3: TABLEAU & EXCEL -->
                 <div class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
@@ -739,7 +828,6 @@
                     </div>
                 </div>
 
-                <!-- PROJECT 4: COMPUTER VISION -->
                 <div class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
@@ -770,26 +858,22 @@
         </div>
         <div class="section-content">
             <div class="achievements-editorial-grid">
-                
                 <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h3 class="cert-title-editorial">Intro to Data Analytics — RevoU (2026)</h3>
                     <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis bisnis digital.</p>
                 </a>
-
                 <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial">
                     <i class="fa-solid fa-chart-pie"></i>
                     <h3 class="cert-title-editorial">Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
                     <p class="cert-desc-editorial">Sertifikasi teknis dalam relasi arsitektur data, kalkulasi kolom analitis, dan visual data storytelling menggunakan ekosistem Tableau.</p>
                 </a>
-
             </div>
         </div>
     </section>
 
     <!-- SCRIPT ENGINE LOGIC -->
     <script>
-        // --- LOGIKA BACKGROUND 3D PARTIKEL DATA (THREE.JS) ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
@@ -807,7 +891,6 @@
         const particlesGeometry = new THREE.BufferGeometry();
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
 
-        // Set Warna Default Awal (Emerald Green)
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.035,
             color: 0x059669, 
@@ -849,20 +932,15 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- MANAJER TOGGLE TEMA WARNA (DARK / LIGHT MODE - EMERALD LOCK) ---
+        // --- MANAJER TOGGLE TEMA WARNA ---
         const themeToggleBtn = document.getElementById('themeToggle');
-
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'dark') {
                 document.documentElement.removeAttribute('data-theme');
-                themeToggleBtn.innerText = "Switch Mode";
-                // Tetap Emerald Green bray di light mode!
                 particlesMaterial.color.setHex(0x059669); 
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeToggleBtn.innerText = "Switch Mode";
-                // TETEP Emerald Green juga bray di dark mode!
                 particlesMaterial.color.setHex(0x059669); 
             }
         });
