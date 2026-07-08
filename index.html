@@ -101,7 +101,6 @@
             white-space: nowrap;
         }
 
-        /* Solusi Fix Meluber: Menggunakan Container Scroll Halus di HP */
         nav {
             display: flex;
             gap: 20px;
@@ -112,7 +111,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Sembunyiin scrollbar bawaan biar tetep estetik */
         nav::-webkit-scrollbar {
             display: none;
         }
@@ -490,7 +488,7 @@
             color: var(--bg-color);
         }
 
-        /* PROJECTS GRID */
+        /* PROJECTS GRID & CARDS AS LINKS */
         .projects-editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -509,6 +507,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card-editorial:hover {
+            transform: translateY(-2px);
         }
 
         .project-header-editorial {
@@ -608,7 +613,7 @@
 
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Header / Nav (FIXED OVERFLOW) -->
+    <!-- Header / Nav -->
     <header>
         <div class="logo">SPH.</div>
         <nav>
@@ -638,7 +643,8 @@
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
             <div class="btn-wrapper">
-                <a href="file/CV_SANTO_HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
+                <!-- FIX PATH: Menggunakan enkripsi URL (%20) buat spasi nama file CV lu -->
+                <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
@@ -657,7 +663,7 @@
         </div>
     </main>
 
-    <!-- Education Section (GPA REMOVED) -->
+    <!-- Education Section -->
     <section class="editorial-section" id="education">
         <div class="section-meta">
             <h2>Education</h2>
@@ -718,7 +724,7 @@
         </div>
     </section>
 
-    <!-- Skills Section (FULL STACK RESTORED) -->
+    <!-- Skills Section -->
     <section class="editorial-section" id="skills">
         <div class="section-meta">
             <h2>Tech Stack</h2>
@@ -761,7 +767,7 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section (UPDATED LINKS) -->
     <section class="editorial-section" id="projects">
         <div class="section-meta">
             <h2>Projects</h2>
@@ -769,7 +775,8 @@
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
-                <div class="project-card-editorial">
+                <!-- Project 1: ECU Parser (Link Ke GitHub Lu) -->
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>01 / REVERSE ENGINEERING & DATA PARSING</span>
@@ -787,9 +794,10 @@
                         <span class="tag-editorial">Matplotlib</span>
                         <span class="tag-editorial">Binary Data</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card-editorial">
+                <!-- Project 2: Susenas (LINK DIREKTORI KE LAPORAN PDF LU) -->
+                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>02 / INFERENCE STATISTICS & PREDICTIVE MODELING</span>
@@ -799,7 +807,7 @@
                         <p class="project-body-editorial">
                             Membangun model ekonometrika Regresi Logistik Berganda (*Multiple Logistic Regression*) menggunakan pustaka Pandas dan Statsmodels untuk memprediksi probabilitas kepemilikan aset transportasi domestik. Mengolah ribuan baris sampel mikro data nasional terstruktur dari BPS, menerapkan pembersihan data pencilan (*outlier handling*), uji multikolinieritas (VIF), dan berhasil mencapai nilai ukuran kelayakan model kuantitatif McFadden Pseudo R-Square sebesar 60,8%.
                         </p>
-                        <span class="metric-highlight">McFadden R²: 60.8%</span>
+                        <span class="metric-highlight">View PDF Report (McFadden R²: 60.8%)</span>
                     </div>
                     <div class="project-tags-editorial">
                         <span class="tag-editorial">Python</span>
@@ -807,9 +815,10 @@
                         <span class="tag-editorial">Pandas</span>
                         <span class="tag-editorial">Inference Stats</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card-editorial">
+                <!-- Project 3: Tableau -->
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>03 / BUSINESS INTELLIGENCE & PIPELINE</span>
@@ -826,9 +835,10 @@
                         <span class="tag-editorial">Advanced Excel</span>
                         <span class="tag-editorial">KPI Optimization</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card-editorial">
+                <!-- Project 4: OpenCV -->
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>04 / COMPUTER VISION & SPATIAL DATA</span>
@@ -845,7 +855,7 @@
                         <span class="tag-editorial">OpenCV</span>
                         <span class="tag-editorial">Matrix Analysis</span>
                     </div>
-                </div>
+                </a>
 
             </div>
         </div>
