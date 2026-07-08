@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santo Parningotan Hutapea | Portfolio</title>
-    <!-- Icon resmi dari FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Library CDN untuk menampilkan ikon teknologi -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <!-- Google Fonts untuk tipografi editorial besar -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- LIBRARY UTAMA GRAPHIC 3D & EFEK TILT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
@@ -192,6 +188,7 @@
             text-transform: uppercase;
             letter-spacing: -1px;
             margin-bottom: 30px;
+            display: block;
         }
 
         @media (min-width: 768px) {
@@ -607,14 +604,19 @@
         .cert-card-editorial:hover .cert-desc-editorial {
             color: var(--bg-color);
         }
+
+        /* KELAS KHUSUS KONTROL ANIMASI TARGET PERGERAKAN */
+        .shake-target {
+            display: inline-block;
+            will-change: transform;
+        }
     </style>
 </head>
 <body>
 
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Header / Nav -->
-    <header>
+    <header class="shake-target">
         <div class="logo">SPH.</div>
         <nav>
             <a href="#" class="nav-link active">Home</a>
@@ -627,35 +629,33 @@
         <button class="theme-toggle-btn" id="themeToggle">Switch Mode</button>
     </header>
 
-    <!-- Hero Section -->
     <main class="hero-section" id="home">
         <div class="hero-left">
-            <div class="intro-tag">Science & Analytics</div>
-            <h1 class="giant-name">
+            <div class="intro-tag shake-target">Science & Analytics</div>
+            <h1 class="giant-name shake-target">
                 SANTO<br>
                 <span class="outline-text">PARNINGOTAN</span><br>
                 <span class="accent-text">HUTAPEA.</span>
             </h1>
-            <div class="headline-text">
+            <div class="headline-text shake-target">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
-            <p class="sub-paragraph">
+            <p class="sub-paragraph shake-target">
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
-            <div class="btn-wrapper">
-                <!-- FIX PATH: Menggunakan enkripsi URL (%20) buat spasi nama file CV lu -->
+            <div class="btn-wrapper shake-target">
                 <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
         
         <div class="hero-right">
-            <div class="photo-container-editorial">
+            <div class="photo-container-editorial shake-target">
                 <div class="photo-frame-brutal" data-tilt>
                     <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
                 </div>
             </div>
-            <div class="social-grid-editorial">
+            <div class="social-grid-editorial shake-target">
                 <a href="https://github.com/santoph13" target="_blank" class="social-link-editorial">Github</a>
                 <a href="mailto:santoph13@gmail.com" class="social-link-editorial">Email</a>
                 <a href="#" class="social-link-editorial">LinkedIn</a>
@@ -663,12 +663,11 @@
         </div>
     </main>
 
-    <!-- Education Section -->
     <section class="editorial-section" id="education">
-        <div class="section-meta">
+        <div class="section-meta shake-target">
             <h2>Education</h2>
         </div>
-        <div class="section-content">
+        <div class="section-content shake-target">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
@@ -685,12 +684,11 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section class="editorial-section" id="experience">
-        <div class="section-meta">
+        <div class="section-meta shake-target">
             <h2>Experience</h2>
         </div>
-        <div class="section-content">
+        <div class="section-content shake-target">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
@@ -724,12 +722,11 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section class="editorial-section" id="skills">
-        <div class="section-meta">
+        <div class="section-meta shake-target">
             <h2>Tech Stack</h2>
         </div>
-        <div class="section-content">
+        <div class="section-content shake-target">
             <div class="skills-container-editorial">
                 <div>
                     <div class="category-header-editorial">Programming & Core Data</div>
@@ -767,16 +764,14 @@
         </div>
     </section>
 
-    <!-- Projects Section (UPDATED LINKS) -->
     <section class="editorial-section" id="projects">
-        <div class="section-meta">
+        <div class="section-meta shake-target">
             <h2>Projects</h2>
         </div>
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
-                <!-- Project 1: ECU Parser (Link Ke GitHub Lu) -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
                             <span>01 / REVERSE ENGINEERING & DATA PARSING</span>
@@ -796,8 +791,7 @@
                     </div>
                 </a>
 
-                <!-- Project 2: Susenas (LINK DIREKTORI KE LAPORAN PDF LU) -->
-                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial">
+                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
                             <span>02 / INFERENCE STATISTICS & PREDICTIVE MODELING</span>
@@ -817,8 +811,7 @@
                     </div>
                 </a>
 
-                <!-- Project 3: Tableau -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
                             <span>03 / BUSINESS INTELLIGENCE & PIPELINE</span>
@@ -837,8 +830,7 @@
                     </div>
                 </a>
 
-                <!-- Project 4: OpenCV -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
                             <span>04 / COMPUTER VISION & SPATIAL DATA</span>
@@ -861,19 +853,18 @@
         </div>
     </section>
 
-    <!-- Achievements Section -->
     <section class="editorial-section" id="achievements">
-        <div class="section-meta">
+        <div class="section-meta shake-target">
             <h2>Credentials</h2>
         </div>
         <div class="section-content">
             <div class="achievements-editorial-grid">
-                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial">
+                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial shake-target">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h3 class="cert-title-editorial">Intro to Data Analytics — RevoU (2026)</h3>
                     <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis bisnis digital.</p>
                 </a>
-                <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial">
+                <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial shake-target">
                     <i class="fa-solid fa-chart-pie"></i>
                     <h3 class="cert-title-editorial">Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
                     <p class="cert-desc-editorial">Sertifikasi teknis dalam relasi arsitektur data, kalkulasi kolom analitis, dan visual data storytelling menggunakan ekosistem Tableau.</p>
@@ -882,8 +873,8 @@
         </div>
     </section>
 
-    <!-- SCRIPT ENGINE LOGIC -->
     <script>
+        // --- INSTANSI THREE.JS (BACKGROUND PARTICLES) ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
@@ -980,13 +971,4 @@
             });
 
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href').substring(1);
-                if (href === current || (current === '' && href === '#')) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                link.
