@@ -1,13 +1,17 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santo Parningotan Hutapea | Portfolio</title>
+    <!-- Icon resmi dari FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Library CDN untuk menampilkan ikon teknologi -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <!-- Google Fonts untuk tipografi editorial besar -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- LIBRARY UTAMA GRAPHIC 3D & EFEK TILT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
@@ -137,15 +141,16 @@
         }
 
         .theme-toggle-btn {
-            background: transparent;
+            background: var(--btn-bg);
             border: 1px solid var(--grid-line);
-            color: var(--text-main);
+            color: var(--btn-text);
             padding: 6px 12px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
             white-space: nowrap;
+            transition: 0.2s;
         }
 
         /* HERO SECTION */
@@ -478,6 +483,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            background: transparent;
+            color: var(--text-main);
         }
 
         .skill-tag-editorial:hover {
@@ -578,6 +585,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            transition: 0.2s;
         }
 
         .cert-card-editorial:hover {
@@ -605,10 +613,20 @@
             color: var(--bg-color);
         }
 
-        /* KELAS KHUSUS KONTROL ANIMASI TARGET PERGERAKAN */
+        /* TARGET EFEK GUNCANGAN TOTAL */
         .shake-target {
-            display: inline-block;
+            display: block;
             will-change: transform;
+        }
+        
+        header.shake-target {
+            display: grid;
+        }
+        
+        @media (min-width: 768px) {
+            header.shake-target {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -616,6 +634,7 @@
 
     <canvas id="bg-canvas"></canvas>
 
+    <!-- Header / Nav -->
     <header class="shake-target">
         <div class="logo">SPH.</div>
         <nav>
@@ -624,38 +643,39 @@
             <a href="#experience" class="nav-link">Experience</a>
             <a href="#skills" class="nav-link">Skills</a>
             <a href="#projects" class="nav-link">Projects</a>
-            <a href="#achievements" class="nav-link">Achievements</a>
+            <a href="#achievements" class="nav-link">Credentials</a>
         </nav>
         <button class="theme-toggle-btn" id="themeToggle">Switch Mode</button>
     </header>
 
+    <!-- Hero Section -->
     <main class="hero-section" id="home">
-        <div class="hero-left">
-            <div class="intro-tag shake-target">Science & Analytics</div>
-            <h1 class="giant-name shake-target">
+        <div class="hero-left shake-target">
+            <div class="intro-tag">Science & Analytics</div>
+            <h1 class="giant-name">
                 SANTO<br>
                 <span class="outline-text">PARNINGOTAN</span><br>
                 <span class="accent-text">HUTAPEA.</span>
             </h1>
-            <div class="headline-text shake-target">
+            <div class="headline-text">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
-            <p class="sub-paragraph shake-target">
+            <p class="sub-paragraph">
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
-            <div class="btn-wrapper shake-target">
+            <div class="btn-wrapper">
                 <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
         
-        <div class="hero-right">
-            <div class="photo-container-editorial shake-target">
+        <div class="hero-right shake-target">
+            <div class="photo-container-editorial">
                 <div class="photo-frame-brutal" data-tilt>
                     <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
                 </div>
             </div>
-            <div class="social-grid-editorial shake-target">
+            <div class="social-grid-editorial">
                 <a href="https://github.com/santoph13" target="_blank" class="social-link-editorial">Github</a>
                 <a href="mailto:santoph13@gmail.com" class="social-link-editorial">Email</a>
                 <a href="#" class="social-link-editorial">LinkedIn</a>
@@ -663,6 +683,7 @@
         </div>
     </main>
 
+    <!-- Education Section -->
     <section class="editorial-section" id="education">
         <div class="section-meta shake-target">
             <h2>Education</h2>
@@ -684,6 +705,7 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section class="editorial-section" id="experience">
         <div class="section-meta shake-target">
             <h2>Experience</h2>
@@ -722,6 +744,7 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section class="editorial-section" id="skills">
         <div class="section-meta shake-target">
             <h2>Tech Stack</h2>
@@ -764,6 +787,7 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section class="editorial-section" id="projects">
         <div class="section-meta shake-target">
             <h2>Projects</h2>
@@ -771,6 +795,7 @@
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
+                <!-- Project 1 -->
                 <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
@@ -791,6 +816,7 @@
                     </div>
                 </a>
 
+                <!-- Project 2 -->
                 <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
@@ -811,6 +837,7 @@
                     </div>
                 </a>
 
+                <!-- Project 3 -->
                 <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
@@ -830,6 +857,7 @@
                     </div>
                 </a>
 
+                <!-- Project 4 -->
                 <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-target">
                     <div>
                         <div class="project-header-editorial">
@@ -853,6 +881,7 @@
         </div>
     </section>
 
+    <!-- Achievements Section -->
     <section class="editorial-section" id="achievements">
         <div class="section-meta shake-target">
             <h2>Credentials</h2>
@@ -873,8 +902,9 @@
         </div>
     </section>
 
+    <!-- SCRIPT ENGINE LOGIC -->
     <script>
-        // --- INSTANSI THREE.JS (BACKGROUND PARTICLES) ---
+        // --- 1. SCRIPT INSTANSI THREE.JS BACKGROUND ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
@@ -896,33 +926,16 @@
             size: 0.035,
             color: 0x059669, 
             transparent: true,
-            opacity: 0.4,
-            blending: THREE.NormalBlending
+            opacity: 0.4
         });
 
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particlesMesh);
-
         camera.position.z = 3;
 
-        let mouseX = 0;
-        let mouseY = 0;
-        window.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) - 0.5;
-            mouseY = (event.clientY / window.innerHeight) - 0.5;
-        });
-
-        const clock = new THREE.Clock();
         function animate3D() {
             requestAnimationFrame(animate3D);
-            const elapsedTime = clock.getElapsedTime();
-
-            particlesMesh.rotation.y = elapsedTime * 0.015;
-            particlesMesh.rotation.x = -elapsedTime * 0.008;
-
-            particlesMesh.position.x += (mouseX * 0.3 - particlesMesh.position.x) * 0.05;
-            particlesMesh.position.y += (-mouseY * 0.3 - particlesMesh.position.y) * 0.05;
-
+            particlesMesh.rotation.y += 0.001;
             renderer.render(scene, camera);
         }
         animate3D();
@@ -933,31 +946,83 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- MANAJER TOGGLE TEMA WARNA ---
+        // --- 2. LOGIC SWITCH MODE & SHAKE PERMISSION INTEGRATION ---
         const themeToggleBtn = document.getElementById('themeToggle');
+        const targets = document.querySelectorAll('.shake-target');
+
         themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
+            // Jalankan fungsi ganti tema tanpa gangguan
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
-                particlesMaterial.color.setHex(0x059669); 
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                particlesMaterial.color.setHex(0x059669); 
             }
+            
+            // Pemicu request izin sensor akselerometer HP sekali klik pertama
+            initShakeLogic();
+        }, { once: false }); // Diubah biar tombol switch tema bisa diklik berkali-kali tanpa nge-stuck
+
+        function initShakeLogic() {
+            if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+                // Protokol keamanan khusus iOS/Safari
+                DeviceMotionEvent.requestPermission()
+                    .then(state => {
+                        if (state === 'granted') { 
+                            window.addEventListener('devicemotion', handleMotion); 
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Protokol otomatis browser Android/Chrome via HTTPS
+                window.addEventListener('devicemotion', handleMotion);
+            }
+        }
+
+        // --- 3. CORE ENGINE SHAKE ANARCHY ---
+        let isShaking = false;
+        let shakeTimeout;
+
+        function handleMotion(event) {
+            const accel = event.accelerationIncludingGravity;
+            if (!accel) return;
+
+            // Rumus kalkulasi kekuatan guncangan vektor HP
+            const force = Math.sqrt(accel.x ** 2 + accel.y ** 2 + accel.z ** 2);
+
+            // Threshold guncangan (24 cukup responsif)
+            if (force > 24) { 
+                isShaking = true;
+                targets.forEach(el => {
+                    const randomX = (Math.random() - 0.5) * 70;    
+                    const randomY = (Math.random() - 0.5) * 70;    
+                    const randomRot = (Math.random() - 0.5) * 15;  
+                    
+                    el.style.transition = 'transform 0.05s linear';
+                    el.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRot}deg)`;
+                });
+                
+                clearTimeout(shakeTimeout);
+                
+                shakeTimeout = setTimeout(() => {
+                    isShaking = false;
+                    targets.forEach(el => {
+                        // Efek pegas kembali rapi elastis semula
+                        el.style.transition = 'transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                        el.style.transform = 'translate(0px, 0px) rotate(0deg)';
+                    });
+                }, 400); 
+            }
+        }
+
+        // --- 4. VANILLA TILT INIT ---
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 8,
+            speed: 300,
+            perspective: 1000
         });
 
-        // --- ACTIVATE VANILLA TILT ---
-        function initTiltEffect() {
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 8,
-                speed: 300,
-                perspective: 1000,
-                scale: 1.01
-            });
-        }
-        document.addEventListener("DOMContentLoaded", initTiltEffect);
-
-        // --- NAVBAR ACTIVE LINK ON SCROLL ---
+        // --- 5. NAVBAR SCROLL MONITOR ---
         const sections = document.querySelectorAll('section, main');
         const navLinks = document.querySelectorAll('.nav-link');
 
@@ -971,4 +1036,13 @@
             });
 
             navLinks.forEach(link => {
-                link.
+                link.classList.remove('active');
+                const href = link.getAttribute('href').substring(1);
+                if (href === current || (current === '' && href === '#')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
