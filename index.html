@@ -4,41 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santo Parningotan Hutapea | Portfolio</title>
-    <!-- Icon resmi dari FontAwesome -->
+    <!-- Icon resmi FontAwesome & DevIcon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Library CDN untuk menampilkan ikon teknologi -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <!-- Google Fonts untuk tipografi editorial besar -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Anton (Editorial Headlines) & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- LIBRARY UTAMA GRAPHIC 3D & EFEK TILT -->
+    <!-- Three.js & Vanilla Tilt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <style>
-        /* ==================== SWISS EDITORIAL VARIABLES ==================== */
+        /* ==================== EDITORIAL BLUE THEME VARIABLES ==================== */
         :root {
-            --bg-color: #fcfbf9;         
-            --text-main: #0a0a0a;        
-            --text-sub: #52525b;         
-            --accent-color: #059669;     
-            --grid-line: #18181b;        
-            --card-bg: transparent;       
-            --btn-bg: #0a0a0a;
-            --btn-text: #fcfbf9;
-            --particle-color: #059669;
+            --bg-color: #f4f1ea;          /* Creamy/Off-white canvas */
+            --bg-card: #ffffff;
+            --text-main: #0a0f1d;        /* Deep Off-Black */
+            --text-sub: #4b5563;         
+            --accent-blue: #2563eb;      /* Electric Royal Blue */
+            --accent-blue-light: #dbeafe; 
+            --border-thick: #0a0f1d;     /* High-contrast thick borders */
+            --btn-bg: #0a0f1d;
+            --btn-text: #f4f1ea;
+            --badge-bg: #2563eb;
+            --badge-text: #ffffff;
         }
 
         [data-theme="dark"] {
-            --bg-color: #09090b;         
-            --text-main: #fafafa;        
-            --text-sub: #a1a1aa;         
-            --accent-color: #059669;     
-            --grid-line: #fafafa;        
-            --card-bg: transparent;
-            --btn-bg: #fafafa;
-            --btn-text: #09090b;
-            --particle-color: #059669;
+            --bg-color: #0b0f19;         
+            --bg-card: #111827;
+            --text-main: #f9fafb;        
+            --text-sub: #9ca3af;         
+            --accent-blue: #3b82f6;      
+            --accent-blue-light: #1e3a8a;
+            --border-thick: #f9fafb;     
+            --btn-bg: #f9fafb;
+            --btn-text: #0b0f19;
+            --badge-bg: #3b82f6;
+            --badge-text: #ffffff;
         }
 
         * {
@@ -68,18 +71,17 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.15; 
+            opacity: 0.12; 
         }
 
-        /* HEADER & FIXED RESPONSIVE NAVBAR */
+        /* HEADER & NAVBAR */
         header {
             width: 100%;
-            border-bottom: 1px solid var(--grid-line);
+            border-bottom: 3px solid var(--border-thick);
             padding: 15px 20px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
             position: sticky;
             top: 0;
             background: var(--bg-color);
@@ -88,42 +90,31 @@
 
         @media (min-width: 768px) {
             header {
-                padding: 20px 40px;
-                display: flex;
-                justify-content: space-between;
+                padding: 18px 40px;
             }
         }
 
         .logo {
             font-family: 'Anton', sans-serif;
-            font-size: 22px;
-            letter-spacing: 1px;
-            white-space: nowrap;
+            font-size: 26px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         nav {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             overflow-x: auto;
             white-space: nowrap;
-            padding-bottom: 5px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2px;
         }
 
-        nav::-webkit-scrollbar {
-            display: none;
-        }
-        nav {
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        }
+        nav::-webkit-scrollbar { display: none; }
+        nav { -ms-overflow-style: none; scrollbar-width: none; }
 
         @media (min-width: 768px) {
             nav {
-                overflow-x: visible;
-                padding-bottom: 0;
-                gap: 24px;
+                gap: 28px;
             }
         }
 
@@ -131,38 +122,45 @@
             color: var(--text-main);
             text-decoration: none;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            display: inline-block;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
         }
 
         nav a:hover, nav a.active {
-            color: var(--accent-color);
+            color: var(--accent-blue);
         }
 
         .theme-toggle-btn {
-            background: var(--btn-bg);
-            border: 1px solid var(--grid-line);
-            color: var(--btn-text);
-            padding: 6px 12px;
+            background: var(--accent-blue);
+            border: 2px solid var(--border-thick);
+            color: #ffffff;
+            padding: 8px 16px;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            white-space: nowrap;
+            border-radius: 20px;
             transition: 0.2s;
+            box-shadow: 2px 2px 0px var(--border-thick);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px var(--border-thick);
         }
 
         /* HERO SECTION */
         .hero-section {
             display: grid;
             grid-template-columns: 1fr;
-            border-bottom: 1px solid var(--grid-line);
+            border-bottom: 3px solid var(--border-thick);
         }
 
         @media (min-width: 768px) {
             .hero-section {
-                grid-template-columns: 1.2fr 0.8fr;
+                grid-template-columns: 1.1fr 0.9fr;
             }
         }
 
@@ -173,56 +171,58 @@
         @media (min-width: 768px) {
             .hero-left {
                 padding: 60px 40px;
-                border-right: 1px solid var(--grid-line);
+                border-right: 3px solid var(--border-thick);
             }
         }
 
-        .intro-tag {
+        .pill-badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+            padding: 6px 18px;
+            border-radius: 50px;
+            border: 2px solid var(--border-thick);
+            margin-bottom: 20px;
+            box-shadow: 3px 3px 0px var(--border-thick);
         }
 
         .giant-name {
             font-family: 'Anton', sans-serif;
-            font-size: 15vw;
-            line-height: 0.85;
+            font-size: 14vw;
+            line-height: 0.88;
             text-transform: uppercase;
             letter-spacing: -1px;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
             display: block;
         }
 
         @media (min-width: 768px) {
             .giant-name {
-                font-size: 8.5vw;
+                font-size: 7.5vw;
                 letter-spacing: -2px;
             }
         }
 
         .outline-text {
             color: transparent;
-            -webkit-text-stroke: 1.5px var(--text-main);
-        }
-        
-        @media (min-width: 768px) {
-            .outline-text {
-                -webkit-text-stroke: 2px var(--text-main);
-            }
+            -webkit-text-stroke: 2px var(--text-main);
         }
 
         .accent-text {
-            color: var(--accent-color);
+            color: var(--accent-blue);
         }
 
         .headline-text {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.3;
+            margin-top: 20px;
             margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         @media (min-width: 768px) {
@@ -235,22 +235,14 @@
         .sub-paragraph {
             color: var(--text-sub);
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 30px;
             max-width: 600px;
         }
 
-        @media (min-width: 768px) {
-            .sub-paragraph {
-                font-size: 15px;
-                line-height: 1.7;
-                margin-bottom: 40px;
-            }
-        }
-
         .btn-wrapper {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
@@ -260,29 +252,31 @@
             color: var(--btn-text);
             text-decoration: none;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 2px solid var(--border-thick);
+            border-radius: 30px;
+            box-shadow: 3px 3px 0px var(--border-thick);
             transition: 0.2s;
         }
 
         .btn-editorial:hover {
-            opacity: 0.8;
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--border-thick);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--text-main);
-            border: 1px solid var(--grid-line);
         }
 
         .hero-right {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 20px;
-            background: rgba(0,0,0,0.01);
+            padding: 40px 20px;
+            background: var(--bg-card);
         }
 
         @media (min-width: 768px) {
@@ -299,18 +293,20 @@
         }
 
         .photo-frame-brutal {
-            width: 240px;
-            height: 240px;
-            background: var(--accent-color);
+            width: 260px;
+            height: 260px;
+            background: var(--accent-blue);
             padding: 8px; 
-            border: 1px solid var(--grid-line);
+            border: 3px solid var(--border-thick);
+            border-radius: 24px;
+            box-shadow: 6px 6px 0px var(--border-thick);
+            overflow: hidden;
         }
 
         @media (min-width: 768px) {
             .photo-frame-brutal {
-                width: 280px;
-                height: 280px;
-                padding: 10px;
+                width: 300px;
+                height: 300px;
             }
         }
 
@@ -318,6 +314,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 16px;
             filter: grayscale(100%);
             transition: 0.3s;
         }
@@ -328,29 +325,28 @@
 
         .social-grid-editorial {
             display: flex;
-            border-top: 1px solid var(--grid-line);
+            border-top: 2px solid var(--border-thick);
             padding-top: 20px;
             gap: 20px;
             justify-content: center;
-        }
-
-        @media (min-width: 768px) {
-            .social-grid-editorial {
-                justify-content: flex-start;
-            }
         }
 
         .social-link-editorial {
             color: var(--text-main);
             text-decoration: none;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
+            transition: color 0.2s;
         }
 
-        /* EDITORIAL GRID SECTIONS */
+        .social-link-editorial:hover {
+            color: var(--accent-blue);
+        }
+
+        /* SECTIONS GENERAL */
         .editorial-section {
-            border-bottom: 1px solid var(--grid-line);
+            border-bottom: 3px solid var(--border-thick);
             display: grid;
             grid-template-columns: 1fr;
         }
@@ -363,29 +359,23 @@
 
         .section-meta {
             padding: 30px 20px;
-            border-bottom: 1px solid var(--grid-line);
+            border-bottom: 3px solid var(--border-thick);
+            background: var(--bg-card);
         }
 
         @media (min-width: 768px) {
             .section-meta {
                 padding: 40px;
-                border-right: 1px solid var(--grid-line);
+                border-right: 3px solid var(--border-thick);
                 border-bottom: none;
             }
         }
 
         .section-meta h2 {
             font-family: 'Anton', sans-serif;
-            font-size: 28px;
+            font-size: 32px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            line-height: 1;
-        }
-
-        @media (min-width: 768px) {
-            .section-meta h2 {
-                font-size: 32px;
-            }
         }
 
         .section-content {
@@ -402,15 +392,20 @@
         .timeline-editorial {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 35px;
         }
 
         .timeline-node {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
-            border-bottom: 1px dashed var(--grid-line);
-            padding-bottom: 30px;
+            border-bottom: 2px dashed var(--border-thick);
+            padding-bottom: 25px;
+        }
+
+        .timeline-node:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .node-left h3 {
@@ -418,23 +413,17 @@
             font-weight: 800;
         }
 
-        @media (min-width: 768px) {
-            .node-left h3 {
-                font-size: 20px;
-            }
-        }
-
         .node-left p {
             font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-color);
+            font-weight: 800;
+            color: var(--accent-blue);
             text-transform: uppercase;
             margin-top: 2px;
         }
 
         .node-duration {
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-sub);
         }
 
@@ -461,42 +450,45 @@
         }
 
         .category-header-editorial {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent-color);
+            color: var(--accent-blue);
             margin-bottom: 12px;
         }
 
         .skills-flex-editorial {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
 
         .skill-tag-editorial {
-            border: 1px solid var(--grid-line);
+            border: 2px solid var(--border-thick);
+            border-radius: 20px;
             padding: 8px 16px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: transparent;
+            background: var(--bg-card);
             color: var(--text-main);
+            box-shadow: 2px 2px 0px var(--border-thick);
+            transition: 0.2s;
         }
 
         .skill-tag-editorial:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
+            background: var(--accent-blue);
+            color: #ffffff;
         }
 
-        /* PROJECTS GRID & CARDS AS LINKS */
+        /* PROJECTS GRID */
         .projects-editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 30px;
         }
 
         @media (min-width: 992px) {
@@ -506,26 +498,30 @@
         }
 
         .project-card-editorial {
-            border-top: 4px solid var(--text-main); 
-            padding-top: 15px;
+            background: var(--bg-card);
+            border: 3px solid var(--border-thick);
+            border-radius: 16px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.2s ease;
+            box-shadow: 5px 5px 0px var(--border-thick);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .project-card-editorial:hover {
-            transform: translateY(-2px);
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px var(--border-thick);
         }
 
         .project-header-editorial {
             display: flex;
             justify-content: space-between;
             font-size: 11px;
-            font-weight: 700;
-            color: var(--text-sub);
+            font-weight: 800;
+            color: var(--accent-blue);
             margin-bottom: 10px;
         }
 
@@ -550,21 +546,23 @@
 
         .tag-editorial {
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            border: 1px solid var(--grid-line);
-            padding: 2px 6px;
+            border: 1px solid var(--border-thick);
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: var(--bg-color);
         }
 
         .metric-highlight {
             font-family: 'Anton', sans-serif;
-            font-size: 24px;
-            color: var(--accent-color);
+            font-size: 20px;
+            color: var(--accent-blue);
             margin-top: 10px;
             display: block;
         }
 
-        /* ACHIEVEMENTS GRID */
+        /* CREDENTIALS GRID */
         .achievements-editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -578,51 +576,50 @@
         }
 
         .cert-card-editorial {
-            border: 1px solid var(--grid-line);
-            padding: 24px;
+            background: var(--bg-card);
+            border: 3px solid var(--border-thick);
+            border-radius: 16px;
+            padding: 20px;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            box-shadow: 4px 4px 0px var(--border-thick);
             transition: 0.2s;
         }
 
         .cert-card-editorial:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px var(--border-thick);
+            border-color: var(--accent-blue);
         }
 
         .cert-card-editorial i {
-            font-size: 24px;
-            color: var(--accent-color);
+            font-size: 26px;
+            color: var(--accent-blue);
         }
 
         .cert-title-editorial {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
         }
 
         .cert-desc-editorial {
-            font-size: 12.5px;
+            font-size: 12px;
             line-height: 1.5;
             color: var(--text-sub);
         }
 
-        .cert-card-editorial:hover .cert-desc-editorial {
-            color: var(--bg-color);
-        }
-
-        /* ENGINE ANARCHY: KELAS KHUSUS UNTUK HURUF YANG DICACAH */
-        .shake-char {
-            display: inline-block;
-            will-change: transform;
-            white-space: pre; /* Biar spasi antar kata gak hilang pas dipotong */
-        }
-
-        /* Sisa elemen layout besar tetep bisa gerak berbarengan */
-        .shake-box {
-            will-change: transform;
+        .cert-badge-tag {
+            align-self: flex-start;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+            border-radius: 10px;
+            margin-top: auto;
         }
     </style>
 </head>
@@ -631,7 +628,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <!-- Header / Nav -->
-    <header class="shake-box">
+    <header>
         <div class="logo">SPH.</div>
         <nav>
             <a href="#" class="nav-link active">Home</a>
@@ -647,24 +644,24 @@
     <!-- Hero Section -->
     <main class="hero-section" id="home">
         <div class="hero-left">
-            <div class="intro-tag split-text">Science & Analytics</div>
-            <h1 class="giant-name split-text">SANTO</h1>
-            <h1 class="giant-name split-text"><span class="outline-text">PARNINGOTAN</span></h1>
-            <h1 class="giant-name split-text"><span class="accent-text">HUTAPEA.</span></h1>
+            <div class="pill-badge">Data Analytics & Software</div>
+            <h1 class="giant-name">SANTO</h1>
+            <h1 class="giant-name"><span class="outline-text">PARNINGOTAN</span></h1>
+            <h1 class="giant-name"><span class="accent-text">HUTAPEA.</span></h1>
             
-            <div class="headline-text split-text">
+            <div class="headline-text">
                 Data Science Student | Data Analyst & IT/Operations Support
             </div>
-            <p class="sub-paragraph split-text">
+            <p class="sub-paragraph">
                 Mahasiswa Sains Data yang berfokus pada pengolahan data, pemrograman, dan pemodelan statistik. Memiliki keahlian teknis dalam mengelola serta memvisualisasikan data menggunakan Python, SQL, Tableau, dan Excel untuk menghasilkan analisis prediktif. Berpengalaman dalam menerapkan strategi berbasis data (*data-driven*) untuk optimasi operasional digital dan manajemen infrastruktur multimedia.
             </p>
-            <div class="btn-wrapper shake-box">
+            <div class="btn-wrapper">
                 <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn-editorial"><i class="fa-solid fa-file-pdf"></i> View My CV</a>
                 <a href="#projects" class="btn-editorial btn-outline">Explore Projects</a>
             </div>
         </div>
         
-        <div class="hero-right shake-box">
+        <div class="hero-right">
             <div class="photo-container-editorial">
                 <div class="photo-frame-brutal" data-tilt>
                     <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea">
@@ -680,14 +677,14 @@
 
     <!-- Education Section -->
     <section class="editorial-section" id="education">
-        <div class="section-meta shake-box">
+        <div class="section-meta">
             <h2>Education</h2>
         </div>
-        <div class="section-content shake-box">
+        <div class="section-content">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
-                        <h3 class="split-text">UNIVERSITAS TERBUKA</h3>
+                        <h3>UNIVERSITAS TERBUKA</h3>
                         <p>Sarjana (S1) Sains Data — Active Student</p>
                         <div class="node-duration">2025 — Present | Bogor, Indonesia</div>
                     </div>
@@ -702,10 +699,10 @@
 
     <!-- Experience Section -->
     <section class="editorial-section" id="experience">
-        <div class="section-meta shake-box">
+        <div class="section-meta">
             <h2>Experience</h2>
         </div>
-        <div class="section-content shake-box">
+        <div class="section-content">
             <div class="timeline-editorial">
                 <div class="timeline-node">
                     <div class="node-left">
@@ -741,10 +738,10 @@
 
     <!-- Skills Section -->
     <section class="editorial-section" id="skills">
-        <div class="section-meta shake-box">
+        <div class="section-meta">
             <h2>Tech Stack</h2>
         </div>
-        <div class="section-content shake-box">
+        <div class="section-content">
             <div class="skills-container-editorial">
                 <div>
                     <div class="category-header-editorial">Programming & Core Data</div>
@@ -784,14 +781,14 @@
 
     <!-- Projects Section -->
     <section class="editorial-section" id="projects">
-        <div class="section-meta shake-box">
+        <div class="section-meta">
             <h2>Projects</h2>
         </div>
         <div class="section-content">
             <div class="projects-editorial-grid">
                 
                 <!-- Project 1 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>01 / REVERSE ENGINEERING & DATA PARSING</span>
@@ -812,7 +809,7 @@
                 </a>
 
                 <!-- Project 2 -->
-                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial shake-box">
+                <a href="laporan_analisis_susenas.pdf" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>02 / INFERENCE STATISTICS & PREDICTIVE MODELING</span>
@@ -833,7 +830,7 @@
                 </a>
 
                 <!-- Project 3 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>03 / BUSINESS INTELLIGENCE & PIPELINE</span>
@@ -853,7 +850,7 @@
                 </a>
 
                 <!-- Project 4 -->
-                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial shake-box">
+                <a href="https://github.com/santoph13" target="_blank" class="project-card-editorial">
                     <div>
                         <div class="project-header-editorial">
                             <span>04 / COMPUTER VISION & SPATIAL DATA</span>
@@ -876,45 +873,61 @@
         </div>
     </section>
 
-    <!-- Achievements Section -->
+    <!-- Credentials Section -->
     <section class="editorial-section" id="achievements">
-        <div class="section-meta shake-box">
+        <div class="section-meta">
             <h2>Credentials</h2>
         </div>
         <div class="section-content">
             <div class="achievements-editorial-grid">
-                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial shake-box">
+                
+                <!-- Cert 1: Snowflake -->
+                <a href="#" target="_blank" class="cert-card-editorial">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <h3 class="cert-title-editorial">Snowflake Discover AI — Snowflake (2026)</h3>
+                    <p class="cert-desc-editorial">Certificate of Attendance untuk pemahaman arsitektur Data Cloud, pemrosesan data berbasis AI, dan infrastruktur modern data lakehouse Snowflake.</p>
+                    <span class="cert-badge-tag">AI & Cloud Data</span>
+                </a>
+
+                <!-- Cert 2: Peking University -->
+                <a href="https://coursera.org/verify/DJ9x8ZHf0TVN" target="_blank" class="cert-card-editorial">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h3 class="cert-title-editorial">Chinese for HSK 1 — Peking University / Coursera (2026)</h3>
+                    <p class="cert-desc-editorial">Sertifikasi kompetensi bahasa Mandarin tingkat dasar (HSK Level 1) yang diterbitkan resmi oleh Peking University melalui platform Coursera.</p>
+                    <span class="cert-badge-tag">Foreign Language</span>
+                </a>
+
+                <!-- Cert 3: Yonsei University -->
+                <a href="#" target="_blank" class="cert-card-editorial">
+                    <i class="fa-solid fa-globe"></i>
+                    <h3 class="cert-title-editorial">First Step Korean — Yonsei University / Coursera (2026)</h3>
+                    <p class="cert-desc-editorial">Sertifikasi resmi penguasaan bahasa Korea tingkat pemula dari Yonsei University, mencakup struktur percakapan dan fonetik Hangul.</p>
+                    <span class="cert-badge-tag">Foreign Language</span>
+                </a>
+
+                <!-- Cert 4: RevoU -->
+                <a href="revou_sertif.jpeg" target="_blank" class="cert-card-editorial">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h3 class="cert-title-editorial">Intro to Data Analytics — RevoU (2026)</h3>
-                    <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis bisnis digital.</p>
+                    <p class="cert-desc-editorial">Sertifikasi formal yang memvalidasi siklus analisis data, pengenalan tools analitis, dan penyelesaian studi kasus metrik bisnis digital.</p>
+                    <span class="cert-badge-tag">Data Analytics</span>
                 </a>
-                <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial shake-target">
+
+                <!-- Cert 5: Tableau -->
+                <a href="zenith_academy.jpeg" target="_blank" class="cert-card-editorial">
                     <i class="fa-solid fa-chart-pie"></i>
                     <h3 class="cert-title-editorial">Tableau Desktop Fundamentals — Zenith Academy (2025)</h3>
                     <p class="cert-desc-editorial">Sertifikasi teknis dalam relasi arsitektur data, kalkulasi kolom analitis, dan visual data storytelling menggunakan ekosistem Tableau.</p>
+                    <span class="cert-badge-tag">Business Intelligence</span>
                 </a>
+
             </div>
         </div>
     </section>
 
     <!-- SCRIPT ENGINE LOGIC -->
     <script>
-        // --- 1. OTOMATISASI RE-ARRANGE TEKS JADI PER HURUF ---
-        // Mencari semua elemen yang ditandai kelas '.split-text' untuk dicacah jadi huruf individu
-        document.querySelectorAll('.split-text').forEach(el => {
-            const rawText = el.innerText;
-            el.innerHTML = ''; // Kosongkan kontainer teks asli
-            
-            // Bongkar teks asli jadi barisan array karakter huruf tunggal
-            Array.from(rawText).forEach(char => {
-                const span = document.createElement('span');
-                span.classList.add('shake-char');
-                span.innerText = char;
-                el.appendChild(span);
-            });
-        });
-
-        // --- 2. SCRIPT INSTANSI THREE.JS BACKGROUND ---
+        // --- 1. THREE.JS BACKGROUND ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true, antialias: true });
@@ -934,7 +947,7 @@
 
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.035,
-            color: 0x059669, 
+            color: 0x2563eb, // Electric Blue Particles
             transparent: true,
             opacity: 0.4
         });
@@ -956,10 +969,8 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- 3. LOGIC SWITCH MODE & SHAKE PERMISSION INTEGRATION ---
+        // --- 2. SWITCH MODE LOGIC ---
         const themeToggleBtn = document.getElementById('themeToggle');
-        const chars = document.querySelectorAll('.shake-char');
-        const boxes = document.querySelectorAll('.shake-box');
 
         themeToggleBtn.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -968,84 +979,16 @@
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
-            initShakeLogic();
-        }, { once: false });
+        });
 
-        function initShakeLogic() {
-            if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-                DeviceMotionEvent.requestPermission()
-                    .then(state => {
-                        if (state === 'granted') { 
-                            window.addEventListener('devicemotion', handleMotion); 
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                window.addEventListener('devicemotion', handleMotion);
-            }
-        }
-
-        // --- 4. CORE ENGINE SHAKE ANARCHY (PER HURUF & PER BLOK) ---
-        let isShaking = false;
-        let shakeTimeout;
-
-        function handleMotion(event) {
-            const accel = event.accelerationIncludingGravity;
-            if (!accel) return;
-
-            const force = Math.sqrt(accel.x ** 2 + accel.y ** 2 + accel.z ** 2);
-
-            // Threshold responsif akselerometer
-            if (force > 24) { 
-                isShaking = true;
-                
-                // A. Goyang Setiap Huruf Tunggal secara Radikal (Efek Hancur Lebur)
-                chars.forEach(el => {
-                    const randomX = (Math.random() - 0.5) * 120; // Jarak lempar per huruf lebih jauh (120px)   
-                    const randomY = (Math.random() - 0.5) * 120;    
-                    const randomRot = (Math.random() - 0.5) * 45; // Putaran huruf lebih tajam (45 derajat) 
-                    
-                    el.style.transition = 'transform 0.04s linear';
-                    el.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRot}deg)`;
-                });
-
-                // B. Goyang Elemen Layout Besar (Box Kontainer) Biar Tetap Dinamis
-                boxes.forEach(el => {
-                    const randomX = (Math.random() - 0.5) * 40;    
-                    const randomY = (Math.random() - 0.5) * 40;    
-                    
-                    el.style.transition = 'transform 0.04s linear';
-                    el.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                });
-                
-                clearTimeout(shakeTimeout);
-                
-                shakeTimeout = setTimeout(() => {
-                    isShaking = false;
-                    
-                    // Reset Semua Huruf ke Posisi Semula secara Mulus
-                    chars.forEach(el => {
-                        el.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        el.style.transform = 'translate(0px, 0px) rotate(0deg)';
-                    });
-
-                    // Reset Semua Layout Box Kontainer
-                    boxes.forEach(el => {
-                        el.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        el.style.transform = 'translate(0px, 0px)';
-                    });
-                }, 500); 
-            }
-        }
-
-        // --- 5. VANILLA TILT INIT ---
+        // --- 3. VANILLA TILT INIT ---
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
             max: 8,
             speed: 300,
             perspective: 1000
         });
 
-        // --- 6. NAVBAR SCROLL MONITOR ---
+        // --- 4. NAVBAR SCROLL MONITOR ---
         const sections = document.querySelectorAll('section, main');
         const navLinks = document.querySelectorAll('.nav-link');
 
