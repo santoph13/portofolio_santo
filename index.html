@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santo Parningotan Hutapea | Portfolio</title>
+    <title>Santo Parningotan Hutapea | Data Analyst & Developer Portfolio</title>
+    
+    <!-- Open Graph Meta Tags (Untuk Preview Rapi di WhatsApp & LinkedIn) -->
+    <meta property="og:title" content="Santo Parningotan Hutapea - Portfolio">
+    <meta property="og:description" content="Data Science Undergraduate | Data Analyst & Developer Portfolio">
+    <meta property="og:image" content="cyingot.jpeg">
+    <meta property="og:type" content="website">
+
+    <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
+            --bg: #0F172A;
+            --card-bg: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: #334155;
+            --accent: #3B82F6;
+            --accent-light: rgba(59, 130, 246, 0.15);
+        }
+
+        [data-theme="light"] {
             --bg: #F8FAFC;
             --card-bg: #FFFFFF;
             --text-main: #0F172A;
@@ -18,21 +37,12 @@
             --accent-light: #EFF6FF;
         }
 
-        [data-theme="dark"] {
-            --bg: #0F172A;
-            --card-bg: #1E293B;
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
-            --border: #334155;
-            --accent: #3B82F6;
-            --accent-light: #1E293B;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            word-break: break-word; /* Solusi teks overflow di HP */
         }
 
         body {
@@ -40,56 +50,76 @@
             color: var(--text-main);
             line-height: 1.6;
             font-size: 14px;
-            padding: 40px 20px;
+            padding: 20px 16px;
             transition: background 0.3s, color 0.3s;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        /* HEADER */
+        /* HEADER MOBILE-FIRST */
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 16px;
             padding-bottom: 24px;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
+        }
+
+        @media (min-width: 640px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
 
         .header-title h1 {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 800;
+            line-height: 1.2;
             letter-spacing: -0.5px;
+        }
+
+        @media (min-width: 640px) {
+            .header-title h1 { font-size: 26px; }
         }
 
         .header-title p {
             color: var(--text-muted);
-            font-size: 14px;
-            margin-top: 2px;
+            font-size: 13px;
+            margin-top: 4px;
         }
 
         .top-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 600;
             text-decoration: none;
             cursor: pointer;
             border: 1px solid var(--border);
             background: var(--card-bg);
             color: var(--text-main);
-            transition: 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .btn-primary {
@@ -98,24 +128,26 @@
             border-color: var(--accent);
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .btn-primary:hover {
+            background: #2563EB;
+            color: #FFFFFF;
         }
 
-        /* SECTION HEADER */
+        /* SECTION HEADERS */
         .section-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin: 40px 0 20px 0;
+            margin: 36px 0 16px 0;
         }
 
         .section-header h2 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-muted);
+            white-space: nowrap;
         }
 
         .section-header::after {
@@ -125,27 +157,31 @@
             background: var(--border);
         }
 
-        /* PROFILE CARD */
+        /* PROFILE SUMMARY CARD */
         .profile-summary {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
+            align-items: center;
+            text-align: center;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .profile-summary {
                 flex-direction: row;
-                align-items: center;
+                text-align: left;
+                align-items: flex-start;
+                padding: 24px;
             }
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--border);
@@ -155,37 +191,67 @@
         .profile-info h3 {
             font-size: 18px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .profile-info p {
             color: var(--text-muted);
             font-size: 13px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (min-width: 640px) {
+            .contact-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-item a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
 
         /* TECH STACK GRID */
         .tech-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 12px;
         }
 
-        @media (min-width: 768px) {
-            .tech-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (min-width: 640px) {
+            .tech-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         .tech-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 18px;
+            padding: 16px;
         }
 
         .tech-card h4 {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 12px;
@@ -201,72 +267,82 @@
         .tag {
             background: var(--accent-light);
             color: var(--accent);
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 11px;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        /* PROJECTS LIST (TEXT-ONLY) */
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .project-item {
+        /* GENERIC CARDS (EXPERIENCE, EDUCATION, PROJECTS) */
+        .card-item {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .project-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
             gap: 8px;
         }
 
-        .project-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .project-metric {
-            font-size: 11px;
-            font-weight: 700;
-            background: var(--accent);
-            color: #FFFFFF;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .project-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* CERTIFICATES GRID (WITH IMAGES & LEARNED CONTENT) */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         @media (min-width: 640px) {
-            .cert-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .card-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
             }
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .card-date {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .card-sub {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .card-desc ul { padding-left: 16px; }
+
+        .project-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        /* CERTIFICATES GRID & ZOOM MODAL */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+            .cert-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         .cert-card {
@@ -281,90 +357,76 @@
         .cert-img-container {
             width: 100%;
             height: 160px;
-            background: #E2E8F0;
+            background: #334155;
             border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .cert-img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-img-container:hover img {
+            transform: scale(1.05);
         }
 
         .cert-info {
-            padding: 16px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             flex-grow: 1;
         }
 
-        .cert-title {
-            font-size: 14px;
-            font-weight: 700;
+        .cert-title { font-size: 13px; font-weight: 700; }
+        .cert-issuer { font-size: 11px; color: var(--accent); font-weight: 600; }
+        .cert-learned { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+        /* MODAL LIGHTBOX STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
         }
 
-        .cert-issuer {
-            font-size: 12px;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .cert-learned {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
-            line-height: 1.5;
-        }
-
-        /* EXPERIENCE & EDUCATION ITEMS */
-        .timeline-item {
-            background: var(--card-bg);
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .timeline-title {
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .timeline-date {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .timeline-sub {
-            font-size: 12px;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .timeline-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .timeline-desc ul {
-            padding-left: 16px;
-        }
-
-        /* FOOTER */
         footer {
-            margin-top: 60px;
-            padding-top: 20px;
+            margin-top: 50px;
+            padding-top: 16px;
             border-top: 1px solid var(--border);
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
         }
     </style>
@@ -379,7 +441,7 @@
             <p>Data Science Undergraduate | Data Analyst & Developer</p>
         </div>
         <div class="top-actions">
-            <button class="btn" id="themeToggle"><i class="fa-solid fa-moon"></i> Mode</button>
+            <button class="btn" id="themeToggle"><i class="fa-solid fa-sun"></i> Theme</button>
             <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
     </header>
@@ -392,22 +454,20 @@
             <p>
                 Data Science student based in Bogor with strong expertise in data analytical pipelines, econometric modeling, and full-stack front-end development. Experienced in turning raw datasets into actionable predictive insights and building interactive digital applications.
             </p>
-            <div style="font-size: 12px; display: flex; gap: 16px; color: var(--text-muted);">
-                <span><i class="fa-solid fa-location-dot"></i> Bogor, Indonesia</span>
-                <span><i class="fa-regular fa-envelope"></i> santoph13@gmail.com</span>
-                <span><i class="fa-brands fa-github"></i> github.com/santoph13</span>
+            <div class="contact-list">
+                <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Bogor, ID</div>
+                <div class="contact-item"><i class="fa-regular fa-envelope"></i> <a href="mailto:santoph13@gmail.com">santoph13@gmail.com</a></div>
+                <div class="contact-item"><i class="fa-brands fa-github"></i> <a href="https://github.com/santoph13" target="_blank">github.com/santoph13</a></div>
             </div>
         </div>
     </div>
 
-    <!-- Full Tech Stack -->
+    <!-- Technical Stack -->
     <section>
-        <div class="section-header">
-            <h2>Technical Stack</h2>
-        </div>
+        <div class="section-header"><h2>Technical Stack</h2></div>
         <div class="tech-grid">
             <div class="tech-card">
-                <h4>Programming & Languages</h4>
+                <h4>Programming</h4>
                 <div class="skills-tags">
                     <span class="tag"><i class="devicon-python-plain colored"></i> Python</span>
                     <span class="tag"><i class="devicon-mysql-original colored"></i> SQL / MySQL</span>
@@ -417,9 +477,8 @@
                     <span class="tag"><i class="devicon-java-plain colored"></i> Java</span>
                 </div>
             </div>
-
             <div class="tech-card">
-                <h4>Data Analysis & Libraries</h4>
+                <h4>Data Analytics</h4>
                 <div class="skills-tags">
                     <span class="tag">Pandas</span>
                     <span class="tag">NumPy</span>
@@ -428,13 +487,12 @@
                     <span class="tag">OpenCV</span>
                 </div>
             </div>
-
             <div class="tech-card">
                 <h4>Tools & Platforms</h4>
                 <div class="skills-tags">
                     <span class="tag">Tableau BI</span>
                     <span class="tag">Advanced Excel</span>
-                    <span class="tag"><i class="devicon-git-plain colored"></i> Git & GitHub</span>
+                    <span class="tag"><i class="devicon-git-plain colored"></i> Git</span>
                     <span class="tag"><i class="devicon-linux-plain colored"></i> Linux</span>
                     <span class="tag">OBS Studio</span>
                     <span class="tag">Meta Suite</span>
@@ -443,30 +501,31 @@
         </div>
     </section>
 
-    <!-- Experience & Education -->
+    <!-- SECTION DIPISAH: EDUCATION -->
     <section>
-        <div class="section-header">
-            <h2>Education & Experience</h2>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <span class="timeline-title">Universitas Terbuka</span>
-                <span class="timeline-date">2025 — Present</span>
+        <div class="section-header"><h2>Education</h2></div>
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">Universitas Terbuka</span>
+                <span class="card-date">2025 — Present</span>
             </div>
-            <div class="timeline-sub">Bachelor of Science in Data Science | Bogor, ID</div>
-            <div class="timeline-desc">
-                Core Competencies: Database Systems (SQL), Applied Linear Models, Data Structures, Python/Java OOP, and Statistical Inference.
+            <div class="card-sub">Bachelor of Science in Data Science | Bogor, Indonesia</div>
+            <div class="card-desc">
+                Core Coursework: Database Systems (SQL), Applied Linear Models, Data Structures, Python/Java OOP, and Statistical Inference.
             </div>
         </div>
+    </section>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <span class="timeline-title">Social Media & Operations Specialist</span>
-                <span class="timeline-date">2019 — 2023</span>
+    <!-- SECTION DIPISAH: EXPERIENCE -->
+    <section>
+        <div class="section-header"><h2>Experience</h2></div>
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">Social Media & Operations Specialist</span>
+                <span class="card-date">2019 — 2023</span>
             </div>
-            <div class="timeline-sub">Freelance / Contract</div>
-            <div class="timeline-desc">
+            <div class="card-sub">Freelance / Contract</div>
+            <div class="card-desc">
                 <ul>
                     <li>Analyzed metric performance via Meta Business Suite to scale organic account reach up to 70,000 followers.</li>
                     <li>Formulated content strategy based on audience retention patterns, averaging 10,000 engagements per post.</li>
@@ -474,167 +533,142 @@
             </div>
         </div>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <span class="timeline-title">Multimedia & Broadcasting Staff</span>
-                <span class="timeline-date">2020 — 2021</span>
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">Multimedia & Broadcasting Staff</span>
+                <span class="card-date">2020 — 2021</span>
             </div>
-            <div class="timeline-sub">Part-time | Bogor, ID</div>
-            <div class="timeline-desc">
+            <div class="card-sub">Part-time | Bogor, Indonesia</div>
+            <div class="card-desc">
                 Managed OBS Studio streaming setups, network routing, and hardware troubleshooting ensuring continuous zero downtime live broadcasts.
             </div>
         </div>
     </section>
 
-    <!-- Projects (Text-Only with Full Keterangan) -->
+    <!-- Projects (Diberi Action Link Buka Repo/PDF) -->
     <section>
-        <div class="section-header">
-            <h2>Projects</h2>
+        <div class="section-header"><h2>Featured Projects</h2></div>
+        
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">01 / ECU Hexadecimal Data Parser & 3D Mapping</span>
+                <span class="card-date">Hex-to-Matrix Automation</span>
+            </div>
+            <div class="card-desc">
+                Extracted raw binary memory dumps from vehicle ECU flash memory. Developed automated Python scripts using byte-pattern matching to convert raw hexadecimal data into structured numerical matrices for interactive 3D surface visualizations.
+            </div>
+            <div class="skills-tags">
+                <span class="tag">Python</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">Binary Parsing</span>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/santoph13" target="_blank" class="btn"><i class="fa-brands fa-github"></i> View Source Code</a>
+            </div>
         </div>
-        <div class="projects-list">
-            
-            <!-- Project 1 -->
-            <div class="project-item">
-                <div class="project-top">
-                    <span class="project-title">01 / ECU Hexadecimal Data Parser & 3D Mapping</span>
-                    <span class="project-metric">Hex-to-Matrix Automation</span>
-                </div>
-                <div class="project-desc">
-                    Extracted raw binary memory dumps from vehicle ECU flash memory. Developed automated Python scripts using byte-pattern matching to convert raw hexadecimal data into structured numerical matrices for interactive 3D surface visualizations.
-                </div>
-                <div class="skills-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">Matplotlib</span>
-                    <span class="tag">Binary Parsing</span>
-                </div>
-            </div>
 
-            <!-- Project 2 -->
-            <div class="project-item">
-                <div class="project-top">
-                    <span class="project-title">02 / Econometric Logistic Regression Modeling (SUSENAS BPS)</span>
-                    <span class="project-metric">McFadden Pseudo R²: 60.8%</span>
-                </div>
-                <div class="project-desc">
-                    Constructed a Multiple Logistic Regression econometric model using Pandas and Statsmodels to predict household vehicle asset ownership. Processed thousands of micro-sample rows from BPS national survey data, performing data cleaning, outlier removal, and multicollinearity diagnostics.
-                </div>
-                <div class="skills-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Statsmodels</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Inference Stats</span>
-                </div>
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">02 / Econometric Logistic Regression (SUSENAS BPS)</span>
+                <span class="card-date">McFadden Pseudo R²: 60.8%</span>
             </div>
-
-            <!-- Project 3 -->
-            <div class="project-item">
-                <div class="project-top">
-                    <span class="project-title">03 / Enterprise Business Intelligence Dashboard</span>
-                    <span class="project-metric">80% Workflow Automation</span>
-                </div>
-                <div class="project-desc">
-                    Designed interactive business intelligence dashboards in Tableau Desktop to track operational KPIs. Integrated complex Excel matrix functions (XLOOKUP, INDEX/MATCH, Pivot Tables) to streamline periodic reporting workflows.
-                </div>
-                <div class="skills-tags">
-                    <span class="tag">Tableau BI</span>
-                    <span class="tag">Advanced Excel</span>
-                    <span class="tag">KPI Optimization</span>
-                </div>
+            <div class="card-desc">
+                Constructed a Multiple Logistic Regression econometric model using Pandas and Statsmodels to predict household vehicle asset ownership. Processed thousands of micro-sample rows from BPS national survey data, performing data cleaning, outlier removal, and multicollinearity diagnostics.
             </div>
-
-            <!-- Project 4 -->
-            <div class="project-item">
-                <div class="project-top">
-                    <span class="project-title">04 / Real-Time Computer Vision Spatial Tracking</span>
-                    <span class="project-metric">Real-Time Processing</span>
-                </div>
-                <div class="project-desc">
-                    Developed a real-time digital image processing module using Python and OpenCV for spatial gesture tracking, object detection, and dynamic array calculations.
-                </div>
-                <div class="skills-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">OpenCV</span>
-                    <span class="tag">Matrix Processing</span>
-                </div>
+            <div class="skills-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Statsmodels</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">Inference Stats</span>
             </div>
+            <div class="project-actions">
+                <a href="https://github.com/santoph13" target="_blank" class="btn"><i class="fa-brands fa-github"></i> View Notebook</a>
+            </div>
+        </div>
 
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">03 / Enterprise Business Intelligence Dashboard</span>
+                <span class="card-date">80% Reporting Automation</span>
+            </div>
+            <div class="card-desc">
+                Designed interactive business intelligence dashboards in Tableau Desktop to track operational KPIs. Integrated complex Excel matrix functions (XLOOKUP, INDEX/MATCH, Pivot Tables) to streamline periodic reporting workflows.
+            </div>
+            <div class="skills-tags">
+                <span class="tag">Tableau BI</span>
+                <span class="tag">Advanced Excel</span>
+                <span class="tag">KPI Optimization</span>
+            </div>
         </div>
     </section>
 
-    <!-- Certificates Grid (With Images + Key Learnings) -->
+    <!-- Certifications (Klik Gambar Buat Popup Zoom) -->
     <section>
-        <div class="section-header">
-            <h2>Certifications & Credentials</h2>
-        </div>
+        <div class="section-header"><h2>Certifications</h2></div>
         <div class="cert-grid">
             
-            <!-- Cert 1 -->
             <div class="cert-card">
-                <div class="cert-img-container">
+                <div class="cert-img-container" onclick="openModal(this)">
                     <img src="revou_sertif.jpeg" alt="RevoU Certificate" onerror="this.src='https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=500&q=80'">
                 </div>
                 <div class="cert-info">
                     <div class="cert-title">Intro to Data Analytics</div>
                     <div class="cert-issuer">RevoU (2026)</div>
                     <div class="cert-learned">
-                        <strong>Key Learnings:</strong> Mastered the core data analytics lifecycle, data storytelling framework, exploratory data analysis (EDA), and evaluating business case study metrics.
+                        <strong>Key Learnings:</strong> Core data analytics lifecycle, data storytelling framework, exploratory data analysis (EDA), and business case study metrics.
                     </div>
                 </div>
             </div>
 
-            <!-- Cert 2 -->
             <div class="cert-card">
-                <div class="cert-img-container">
+                <div class="cert-img-container" onclick="openModal(this)">
                     <img src="zenith_academy.jpeg" alt="Tableau Certificate" onerror="this.src='https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=500&q=80'">
                 </div>
                 <div class="cert-info">
                     <div class="cert-title">Tableau Desktop Fundamentals</div>
                     <div class="cert-issuer">Zenith Academy (2025)</div>
                     <div class="cert-learned">
-                        <strong>Key Learnings:</strong> Learned data source modeling, calculated fields, dynamic parameters, interactive dashboard design, and visual best practices.
+                        <strong>Key Learnings:</strong> Data source modeling, calculated fields, dynamic parameters, interactive dashboard design, and visual analytics.
                     </div>
                 </div>
             </div>
 
-            <!-- Cert 3 -->
             <div class="cert-card">
-                <div class="cert-img-container">
+                <div class="cert-img-container" onclick="openModal(this)">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80" alt="Snowflake Certificate">
                 </div>
                 <div class="cert-info">
                     <div class="cert-title">Snowflake Discover AI</div>
                     <div class="cert-issuer">Snowflake (2026)</div>
                     <div class="cert-learned">
-                        <strong>Key Learnings:</strong> Explored cloud data lakehouse architecture, scalable AI-driven data pipelines, and distributed data warehousing concepts.
+                        <strong>Key Learnings:</strong> Cloud data lakehouse architecture, scalable AI-driven data pipelines, and distributed data warehousing.
                     </div>
                 </div>
             </div>
 
-            <!-- Cert 4 -->
             <div class="cert-card">
-                <div class="cert-img-container">
+                <div class="cert-img-container" onclick="openModal(this)">
                     <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80" alt="Peking University Certificate">
                 </div>
                 <div class="cert-info">
                     <div class="cert-title">Chinese for HSK 1</div>
                     <div class="cert-issuer">Peking University / Coursera (2026)</div>
                     <div class="cert-learned">
-                        <strong>Key Learnings:</strong> Gained basic Mandarin Chinese communication proficiency, Pinyin phonetics, structural vocabulary, and HSK 1 level grammar.
+                        <strong>Key Learnings:</strong> Mandarin Chinese communication proficiency, Pinyin phonetics, structural vocabulary, and HSK 1 grammar.
                     </div>
                 </div>
             </div>
 
-            <!-- Cert 5 -->
             <div class="cert-card">
-                <div class="cert-img-container">
+                <div class="cert-img-container" onclick="openModal(this)">
                     <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80" alt="Yonsei Certificate">
                 </div>
                 <div class="cert-info">
                     <div class="cert-title">First Step Korean</div>
                     <div class="cert-issuer">Yonsei University / Coursera (2026)</div>
                     <div class="cert-learned">
-                        <strong>Key Learnings:</strong> Acquired foundational Korean language skills, Hangul writing/reading system, everyday expressions, and conversational structures.
+                        <strong>Key Learnings:</strong> Foundational Korean language skills, Hangul writing/reading system, everyday expressions, and conversational structures.
                     </div>
                 </div>
             </div>
@@ -647,16 +681,36 @@
     </footer>
 </div>
 
+<!-- Modal Pop-Up Image Viewer -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" class="modal-content">
+</div>
+
 <script>
+    // Theme Switcher (Dark / Light Mode)
     const themeToggleBtn = document.getElementById('themeToggle');
     themeToggleBtn.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        if (isLight) {
             document.documentElement.removeAttribute('data-theme');
         } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.setAttribute('data-theme', 'light');
         }
     });
+
+    // Lightbox Modal for Certificate Preview
+    function openModal(container) {
+        const img = container.querySelector('img');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
 </script>
 </body>
 </html>
