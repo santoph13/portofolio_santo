@@ -276,6 +276,38 @@
             gap: 5px;
         }
 
+        /* LANGUAGE GRID */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (min-width: 640px) {
+            .lang-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .lang-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .lang-level {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
         /* GENERIC CARDS */
         .card-item {
             background: var(--card-bg);
@@ -452,7 +484,7 @@
         <div class="profile-info">
             <h3>About Me</h3>
             <p>
-                Data Science student based in Bogor operating as a **Full-Stack Data Analyst** & **Full-Stack Web Developer**. Capable of managing end-to-end data pipelines—from raw database extraction (SQL, Go, Python) to advanced statistical modeling and BI dashboards—as well as engineering scalable web applications using **Laravel, Go, JavaScript, and Tailwind CSS**.
+                Data Science student based in Bogor operating as a <strong>Full-Stack Data Analyst</strong> & <strong>Full-Stack Web Developer</strong>. Capable of managing end-to-end data pipelines—from raw database extraction (SQL, Go, Python) to advanced statistical modeling and BI dashboards—as well as engineering scalable web applications using <strong>Laravel, Go, React, Vue, TypeScript, and Tailwind CSS</strong>.
             </p>
             <div class="contact-list">
                 <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Bogor, ID</div>
@@ -462,7 +494,7 @@
         </div>
     </div>
 
-    <!-- Technical Stack (UPDATED) -->
+    <!-- Technical Stack -->
     <section>
         <div class="section-header"><h2>Technical Stack</h2></div>
         <div class="tech-grid">
@@ -478,14 +510,17 @@
                 </div>
             </div>
             <div class="tech-card">
-                <h4>Frontend & Interactive UI</h4>
+                <h4>Frontend & UI Engineering</h4>
                 <div class="skills-tags">
                     <span class="tag"><i class="devicon-javascript-plain colored"></i> JavaScript (ES6+)</span>
+                    <span class="tag"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                    <span class="tag"><i class="devicon-react-original colored"></i> React.js</span>
+                    <span class="tag"><i class="devicon-vuejs-plain colored"></i> Vue.js</span>
                     <span class="tag"><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
                     <span class="tag"><i class="devicon-html5-plain colored"></i> HTML5 & CSS3</span>
-                    <span class="tag">Three.js</span>
+                    <span class="tag">RESTful API Integration</span>
+                    <span class="tag">Three.js & GSAP</span>
                     <span class="tag">Chart.js</span>
-                    <span class="tag">GSAP</span>
                 </div>
             </div>
             <div class="tech-card">
@@ -498,6 +533,37 @@
                     <span class="tag"><i class="devicon-git-plain colored"></i> Git</span>
                     <span class="tag"><i class="devicon-linux-plain colored"></i> Linux</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LANGUAGES SECTION -->
+    <section>
+        <div class="section-header"><h2>Languages</h2></div>
+        <div class="lang-grid">
+            <div class="lang-card">
+                <div class="lang-title">Indonesian</div>
+                <div class="lang-level">Native / Fluent</div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-title">English</div>
+                <div class="lang-level">Professional</div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-title">Spanish</div>
+                <div class="lang-level">Basic / Elementary</div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-title">Korean</div>
+                <div class="lang-level">Basic (Yonsei Cert)</div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-title">Mandarin</div>
+                <div class="lang-level">Basic (HSK 1 / Peking)</div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-title">German</div>
+                <div class="lang-level">Basic / Elementary</div>
             </div>
         </div>
     </section>
@@ -546,11 +612,10 @@
         </div>
     </section>
 
-    <!-- FEATURED PROJECTS (UPDATED WITH VAPE POS & FULLSTACK DATA) -->
+    <!-- FEATURED PROJECTS -->
     <section>
         <div class="section-header"><h2>Featured Projects</h2></div>
         
-        <!-- NEW: POS System Project -->
         <div class="card-item">
             <div class="card-header">
                 <span class="card-title">01 / Full-Stack Vape Store POS & Financial System</span>
