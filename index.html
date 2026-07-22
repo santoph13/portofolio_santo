@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santo Parningotan Hutapea | Data Analyst & Developer Portfolio</title>
+    <title>Santo Parningotan Hutapea | Full-Stack Developer & Full-Stack Data Analyst</title>
     
-    <!-- Open Graph Meta Tags (Untuk Preview Rapi di WhatsApp & LinkedIn) -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Santo Parningotan Hutapea - Portfolio">
-    <meta property="og:description" content="Data Science Undergraduate | Data Analyst & Developer Portfolio">
+    <meta property="og:description" content="Data Science Undergraduate | Full-Stack Developer & Full-Stack Data Analyst Portfolio">
     <meta property="og:image" content="cyingot.jpeg">
     <meta property="og:type" content="website">
 
@@ -42,7 +42,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            word-break: break-word; /* Solusi teks overflow di HP */
+            word-break: break-word;
         }
 
         body {
@@ -276,7 +276,7 @@
             gap: 5px;
         }
 
-        /* GENERIC CARDS (EXPERIENCE, EDUCATION, PROJECTS) */
+        /* GENERIC CARDS */
         .card-item {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -438,7 +438,7 @@
     <header>
         <div class="header-title">
             <h1>Santo Parningotan Hutapea</h1>
-            <p>Data Science Undergraduate | Data Analyst & Developer</p>
+            <p>Data Science Undergraduate | Full-Stack Developer & Full-Stack Data Analyst</p>
         </div>
         <div class="top-actions">
             <button class="btn" id="themeToggle"><i class="fa-solid fa-sun"></i> Theme</button>
@@ -452,7 +452,7 @@
         <div class="profile-info">
             <h3>About Me</h3>
             <p>
-                Data Science student based in Bogor with strong expertise in data analytical pipelines, econometric modeling, and full-stack front-end development. Experienced in turning raw datasets into actionable predictive insights and building interactive digital applications.
+                Data Science student based in Bogor operating as a **Full-Stack Data Analyst** & **Full-Stack Web Developer**. Capable of managing end-to-end data pipelines—from raw database extraction (SQL, Go, Python) to advanced statistical modeling and BI dashboards—as well as engineering scalable web applications using **Laravel, Go, JavaScript, and Tailwind CSS**.
             </p>
             <div class="contact-list">
                 <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Bogor, ID</div>
@@ -462,46 +462,47 @@
         </div>
     </div>
 
-    <!-- Technical Stack -->
+    <!-- Technical Stack (UPDATED) -->
     <section>
         <div class="section-header"><h2>Technical Stack</h2></div>
         <div class="tech-grid">
             <div class="tech-card">
-                <h4>Programming</h4>
+                <h4>Backend & Core Dev</h4>
                 <div class="skills-tags">
+                    <span class="tag"><i class="devicon-go-original-wordmark colored"></i> Go (Golang)</span>
+                    <span class="tag"><i class="devicon-laravel-original colored"></i> Laravel</span>
                     <span class="tag"><i class="devicon-python-plain colored"></i> Python</span>
-                    <span class="tag"><i class="devicon-mysql-original colored"></i> SQL / MySQL</span>
-                    <span class="tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
-                    <span class="tag"><i class="devicon-html5-plain colored"></i> HTML5</span>
-                    <span class="tag"><i class="devicon-css3-plain colored"></i> CSS3</span>
+                    <span class="tag"><i class="devicon-mysql-original colored"></i> MySQL / SQL</span>
+                    <span class="tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
                     <span class="tag"><i class="devicon-java-plain colored"></i> Java</span>
                 </div>
             </div>
             <div class="tech-card">
-                <h4>Data Analytics</h4>
+                <h4>Frontend & Interactive UI</h4>
                 <div class="skills-tags">
-                    <span class="tag">Pandas</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">Statsmodels</span>
-                    <span class="tag">Matplotlib</span>
-                    <span class="tag">OpenCV</span>
+                    <span class="tag"><i class="devicon-javascript-plain colored"></i> JavaScript (ES6+)</span>
+                    <span class="tag"><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+                    <span class="tag"><i class="devicon-html5-plain colored"></i> HTML5 & CSS3</span>
+                    <span class="tag">Three.js</span>
+                    <span class="tag">Chart.js</span>
+                    <span class="tag">GSAP</span>
                 </div>
             </div>
             <div class="tech-card">
-                <h4>Tools & Platforms</h4>
+                <h4>Full-Stack Data Analytics</h4>
                 <div class="skills-tags">
-                    <span class="tag">Tableau BI</span>
+                    <span class="tag">Pandas / NumPy</span>
+                    <span class="tag">Statsmodels</span>
+                    <span class="tag">Tableau BI (Certified)</span>
                     <span class="tag">Advanced Excel</span>
                     <span class="tag"><i class="devicon-git-plain colored"></i> Git</span>
                     <span class="tag"><i class="devicon-linux-plain colored"></i> Linux</span>
-                    <span class="tag">OBS Studio</span>
-                    <span class="tag">Meta Suite</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION DIPISAH: EDUCATION -->
+    <!-- EDUCATION -->
     <section>
         <div class="section-header"><h2>Education</h2></div>
         <div class="card-item">
@@ -511,12 +512,12 @@
             </div>
             <div class="card-sub">Bachelor of Science in Data Science | Bogor, Indonesia</div>
             <div class="card-desc">
-                Core Coursework: Database Systems (SQL), Applied Linear Models, Data Structures, Python/Java OOP, and Statistical Inference.
+                Core Coursework: Database Systems (SQL), Applied Linear Models, Data Structures & Algorithms, Object-Oriented Programming (Python/Java), and Statistical Inference.
             </div>
         </div>
     </section>
 
-    <!-- SECTION DIPISAH: EXPERIENCE -->
+    <!-- EXPERIENCE -->
     <section>
         <div class="section-header"><h2>Experience</h2></div>
         <div class="card-item">
@@ -545,13 +546,34 @@
         </div>
     </section>
 
-    <!-- Projects (Diberi Action Link Buka Repo/PDF) -->
+    <!-- FEATURED PROJECTS (UPDATED WITH VAPE POS & FULLSTACK DATA) -->
     <section>
         <div class="section-header"><h2>Featured Projects</h2></div>
         
+        <!-- NEW: POS System Project -->
         <div class="card-item">
             <div class="card-header">
-                <span class="card-title">01 / ECU Hexadecimal Data Parser & 3D Mapping</span>
+                <span class="card-title">01 / Full-Stack Vape Store POS & Financial System</span>
+                <span class="card-date">Web Application & Analytics</span>
+            </div>
+            <div class="card-desc">
+                Engineered a role-based POS web system (Owner vs Cashier) designed to optimize inventory tracking for complex vape variants (nicotine levels, ohm resistance) and real-time Net Profit/COGS calculation. Features fast-tap cashier interface, multi-payment tracking (Cash, QRIS, BCA Transfer), and automated daily sales analytics.
+            </div>
+            <div class="skills-tags">
+                <span class="tag">Laravel</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Tailwind CSS</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">Chart.js</span>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/santoph13" target="_blank" class="btn"><i class="fa-brands fa-github"></i> View Source Code</a>
+            </div>
+        </div>
+
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-title">02 / ECU Hexadecimal Data Parser & 3D Mapping</span>
                 <span class="card-date">Hex-to-Matrix Automation</span>
             </div>
             <div class="card-desc">
@@ -570,7 +592,7 @@
 
         <div class="card-item">
             <div class="card-header">
-                <span class="card-title">02 / Econometric Logistic Regression (SUSENAS BPS)</span>
+                <span class="card-title">03 / Econometric Logistic Regression (SUSENAS BPS)</span>
                 <span class="card-date">McFadden Pseudo R²: 60.8%</span>
             </div>
             <div class="card-desc">
@@ -589,7 +611,7 @@
 
         <div class="card-item">
             <div class="card-header">
-                <span class="card-title">03 / Enterprise Business Intelligence Dashboard</span>
+                <span class="card-title">04 / Enterprise BI Dashboard & Automation</span>
                 <span class="card-date">80% Reporting Automation</span>
             </div>
             <div class="card-desc">
@@ -603,7 +625,7 @@
         </div>
     </section>
 
-    <!-- Certifications (Klik Gambar Buat Popup Zoom) -->
+    <!-- CERTIFICATIONS -->
     <section>
         <div class="section-header"><h2>Certifications</h2></div>
         <div class="cert-grid">
