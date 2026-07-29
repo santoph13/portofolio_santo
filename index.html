@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santo Parningotan Hutapea | Full-Stack & Data Portfolio</title>
+    <title>Santo Parningotan Hutapea | Full-Stack Developer & Data Analyst</title>
     
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Santo Parningotan Hutapea - Portfolio">
+    <meta property="og:description" content="Data Science Undergraduate | Full-Stack Developer & Full-Stack Data Analyst Portfolio">
+    <meta property="og:image" content="cyingot.jpeg">
+    <meta property="og:type" content="website">
+
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -22,12 +28,24 @@
             --blue-glow-rgba: rgba(59, 130, 246, 0.25);
         }
 
+        [data-theme="light"] {
+            --bg-dark: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --card-border: rgba(59, 130, 246, 0.25);
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --primary-blue: #2563EB;
+            --cyan-glow: #0284C7;
+            --blue-glow-rgba: rgba(37, 99, 235, 0.12);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
+            word-break: break-word;
         }
 
         body {
@@ -35,9 +53,10 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* CUSTOM GLOW CURSOR */
+        /* GLOW CURSOR */
         .cursor-dot {
             width: 8px;
             height: 8px;
@@ -73,7 +92,7 @@
             background: rgba(6, 182, 212, 0.08);
         }
 
-        /* NAVBAR */
+        /* NAVIGATION BAR */
         nav {
             position: fixed;
             top: 0;
@@ -86,6 +105,10 @@
             padding: 16px 24px;
         }
 
+        [data-theme="light"] nav {
+            background: rgba(248, 250, 252, 0.85);
+        }
+
         .nav-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -95,7 +118,7 @@
         }
 
         .logo {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
             color: var(--text-main);
             display: flex;
@@ -127,6 +150,13 @@
 
         .nav-links a:hover { color: var(--primary-blue); }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -144,6 +174,11 @@
             color: var(--text-main);
         }
 
+        .btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
         .btn-primary {
             background: var(--primary-blue);
             color: white !important;
@@ -152,10 +187,12 @@
         }
 
         .btn-primary:hover {
+            background: #2563EB;
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
         }
 
+        /* CONTAINER & SECTIONS */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -194,8 +231,16 @@
 
         /* HERO SECTION */
         .hero {
-            padding-top: 140px;
+            padding-top: 130px;
             padding-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (min-width: 850px) {
+            .hero { grid-template-columns: 1.2fr 0.8fr; }
         }
 
         .hero-title-typing {
@@ -208,7 +253,7 @@
         }
 
         @media (min-width: 640px) {
-            .hero-title-typing { font-size: 46px; }
+            .hero-title-typing { font-size: 44px; }
         }
 
         .hero-title-typing span.typed-text {
@@ -229,151 +274,177 @@
             50% { opacity: 0; }
         }
 
-        /* SKILLS GRID */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
 
-        .skill-card {
+        .contact-list-hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-item a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-blue);
+            text-decoration: underline;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .tech-icons-strip {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .tech-icons-strip span {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .tech-icons-strip i {
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+
+        .tech-icons-strip i:hover { transform: translateY(-3px); }
+
+        /* HERO VISUAL AVATAR & CODE BOX */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar-glow {
+            position: relative;
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--blue-glow-rgba) 0%, rgba(8, 12, 20, 0) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-glow img {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 0 30px var(--blue-glow-rgba);
+        }
+
+        .code-snippet {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-main);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            display: none;
+        }
+
+        @media (min-width: 500px) { .code-snippet { display: block; } }
+
+        .code-snippet .keyword { color: #F472B6; }
+        .code-snippet .var { color: #60A5FA; }
+        .code-snippet .string { color: #34D399; }
+
+        /* TECH TOOLKIT CARDS & BADGES */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .tech-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .tech-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 20px;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: border-color 0.25s, transform 0.25s;
         }
 
-        .skill-card:hover {
-            transform: translateY(-4px);
+        .tech-card:hover {
             border-color: var(--primary-blue);
+            transform: translateY(-2px);
         }
 
-        .skill-card h3 {
-            font-size: 16px;
+        .tech-card h4 {
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .skill-tags {
+        .skills-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
 
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 4px 10px;
+        .tag {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 5px 12px;
             border-radius: 6px;
             font-size: 12px;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
         }
 
-        /* PROJECTS GRID */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
+        .tag i { font-size: 14px; }
 
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            overflow: hidden;
-            transition: transform 0.25s, border-color 0.25s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
+        .tag:hover {
+            background: rgba(59, 130, 246, 0.2);
             border-color: var(--primary-blue);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .project-content {
-            padding: 20px;
-        }
-
-        .project-title {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .project-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        /* FOCUS CERTIFICATE VIEW */
-        .cert-focus-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 24px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        @media (min-width: 768px) {
-            .cert-focus-box {
-                grid-template-columns: 1.1fr 0.9fr;
-                padding: 32px;
-            }
-        }
-
-        .cert-preview-img {
-            width: 100%;
-            height: 250px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: opacity 0.3s ease;
-        }
-
-        .cert-detail-content h3 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .cert-issuer-tag {
-            color: var(--primary-blue);
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .cert-learning-list {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .cert-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--card-border);
-            padding-top: 16px;
+            color: #FFFFFF;
         }
 
         /* SQL PLAYGROUND SECTION */
@@ -445,7 +516,197 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
+        /* CARDS & EXPERIENCES */
+        .card-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+
+        .card-item:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (min-width: 640px) {
+            .card-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+            }
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .card-date {
+            font-size: 11.5px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .card-sub {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .card-desc ul { padding-left: 18px; }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        /* LANGUAGES SECTION */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 640px) {
+            .lang-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (min-width: 900px) {
+            .lang-grid { grid-template-columns: repeat(6, 1fr); }
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .lang-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .lang-level {
+            font-size: 11px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* CERTIFICATES & LIGHTBOX */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+            .cert-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.25s;
+        }
+
+        .cert-card:hover { border-color: var(--primary-blue); }
+
+        .cert-img-container {
+            width: 100%;
+            height: 160px;
+            background: #1E293B;
+            border-bottom: 1px solid var(--card-border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-img-container:hover img { transform: scale(1.05); }
+
+        .cert-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1;
+        }
+
+        .cert-title { font-size: 14px; font-weight: 700; }
+        .cert-issuer { font-size: 11.5px; color: var(--primary-blue); font-weight: 600; }
+        .cert-learned { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+        /* MODAL LIGHTBOX */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         footer {
+            margin-top: 40px;
             padding: 30px 0;
             border-top: 1px solid var(--card-border);
             text-align: center;
@@ -460,18 +721,22 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- NAVBAR WITH LOGO </> -->
+    <!-- NAVBAR -->
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">&lt;/&gt; Santo<span>.dev</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#sql-playground">Data Query</a></li>
+                <li><a href="#toolkit">Toolkit</a></li>
+                <li><a href="#sql-playground">Query Engine</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#certifications">Certificates</a></li>
+                <li><a href="#languages">Languages</a></li>
             </ul>
-            <a href="mailto:santoph13@gmail.com" class="btn btn-primary interactive-hover"><i class="fa-regular fa-paper-plane"></i> Let's Talk</a>
+            <div class="nav-actions">
+                <button class="btn interactive-hover" id="themeToggle"><i class="fa-solid fa-sun"></i> Theme</button>
+                <a href="CV_SANTO%20HUTAPEA.pdf" target="_blank" class="btn btn-primary interactive-hover"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+            </div>
         </div>
     </nav>
 
@@ -479,50 +744,120 @@
         
         <!-- HERO SECTION WITH TYPING EFFECT -->
         <section class="hero" id="about">
-            <div class="badge-sub">Full-Stack Developer & Data Science Student</div>
-            <h1 class="hero-title-typing">
-                <span class="typed-text"></span><span class="cursor-blink">&nbsp;</span>
-            </h1>
-            <p style="color: var(--text-muted); font-size: 14.5px; max-width: 650px; margin-bottom: 24px;">
-                I am Santo Parningotan Hutapea, an active Data Science undergraduate student based in Bogor, Indonesia. Specialized in building end-to-end Web Applications and executing robust Data Analytics pipelines (Python, SQL, Tableau, JavaScript).
-            </p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <a href="#projects" class="btn btn-primary interactive-hover">View Featured Projects <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="#sql-playground" class="btn interactive-hover"><i class="fa-solid fa-terminal"></i> Interactive SQL Demo</a>
+            <div class="hero-text">
+                <div class="badge-sub">Full-Stack & Data Science</div>
+                <h1 class="hero-title-typing">
+                    <span class="typed-text"></span><span class="cursor-blink">&nbsp;</span>
+                </h1>
+                <p class="hero-desc">
+                    Data Science Undergraduate at Universitas Terbuka based in Bogor. Operating as a <strong>Full-Stack Web Developer</strong> and <strong>Full-Stack Data Analyst</strong>. Capable of building scalable web applications (Go, Next.js, React, Supabase, Laravel) and end-to-end data pipelines (SQL extraction, Python statistical modeling, Tableau BI).
+                </p>
+
+                <div class="contact-list-hero">
+                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Bogor, ID</div>
+                    <div class="contact-item"><i class="fa-regular fa-envelope"></i> <a href="mailto:santoph13@gmail.com">santoph13@gmail.com</a></div>
+                    <div class="contact-item"><i class="fa-brands fa-github"></i> <a href="https://github.com/santoph13" target="_blank">github.com/santoph13</a></div>
+                </div>
+
+                <div class="hero-btns">
+                    <a href="#projects" class="btn btn-primary interactive-hover">View Featured Work <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#sql-playground" class="btn interactive-hover"><i class="fa-solid fa-terminal"></i> Interactive SQL Demo</a>
+                </div>
+
+                <div class="tech-icons-strip">
+                    <span>Core Stack:</span>
+                    <i class="devicon-go-original-wordmark colored" title="Go"></i>
+                    <i class="devicon-nextjs-original colored" title="Next.js"></i>
+                    <i class="devicon-react-original colored" title="React"></i>
+                    <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+                    <i class="devicon-python-plain colored" title="Python"></i>
+                    <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="avatar-glow">
+                    <img src="cyingot.jpeg" alt="Santo Parningotan Hutapea" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="code-snippet">
+                    <span class="keyword">const</span> <span class="var">developer</span> = {<br>
+                    &nbsp;&nbsp;name: <span class="string">"Santo Parningotan"</span>,<br>
+                    &nbsp;&nbsp;role: <span class="string">"Full-Stack & Data Science"</span>,<br>
+                    &nbsp;&nbsp;location: <span class="string">"Bogor, ID"</span><br>
+                    };
+                </div>
             </div>
         </section>
 
-        <!-- TECHNICAL SKILLS SECTION -->
-        <section id="skills">
-            <div class="badge-sub">Expertise & Tools</div>
-            <h2 class="section-title">Technical Stack</h2>
-            <p class="section-desc">Core competencies across data science, web development, and modern framework technologies.</p>
+        <!-- TECHNICAL TOOLKIT SECTION -->
+        <section id="toolkit">
+            <div class="badge-sub">Capabilities</div>
+            <h2 class="section-title">Technical Toolkit</h2>
+            <p class="section-desc">Structured tech stack and libraries I leverage across full-stack software development, data science, and AI pipelines.</p>
 
-            <div class="skills-grid">
-                <div class="skill-card interactive-hover">
-                    <h3><i class="fa-solid fa-chart-line" style="color: var(--primary-blue);"></i> Data Analytics</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Statsmodels</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">Advanced Excel</span>
-                        <span class="skill-tag">Tableau</span>
+            <div class="tech-grid">
+                
+                <!-- Full-Stack Web Development -->
+                <div class="tech-card interactive-hover">
+                    <h4>💻 Full-Stack Web Development</h4>
+                    <div class="skills-tags">
+                        <span class="tag"><i class="devicon-go-original-wordmark colored"></i> Go (Golang)</span>
+                        <span class="tag"><i class="devicon-nextjs-original colored"></i> Next.js</span>
+                        <span class="tag"><i class="devicon-react-original colored"></i> React</span>
+                        <span class="tag"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                        <span class="tag"><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+                        <span class="tag"><i class="devicon-supabase-plain colored"></i> Supabase</span>
+                        <span class="tag"><i class="devicon-javascript-plain colored"></i> JavaScript (ES6+)</span>
+                        <span class="tag"><i class="devicon-html5-plain colored"></i> HTML5</span>
+                        <span class="tag"><i class="devicon-css3-plain colored"></i> CSS3</span>
+                        <span class="tag"><i class="devicon-threejs-original colored"></i> Three.js</span>
+                        <span class="tag"><i class="fa-solid fa-bolt"></i> GSAP</span>
+                        <span class="tag"><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+                        <span class="tag"><i class="devicon-laravel-original colored"></i> Laravel</span>
                     </div>
                 </div>
-                <div class="skill-card interactive-hover">
-                    <h3><i class="fa-solid fa-code" style="color: var(--cyan-glow);"></i> Frontend & Creative Web</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript (ES6+)</span>
-                        <span class="skill-tag">Three.js</span>
-                        <span class="skill-tag">Chart.js</span>
-                        <span class="skill-tag">GSAP</span>
-                        <span class="skill-tag">Tailwind CSS</span>
+
+                <!-- Data Analytics & Data Science -->
+                <div class="tech-card interactive-hover">
+                    <h4>📊 Data Analytics & Data Science</h4>
+                    <div class="skills-tags">
+                        <span class="tag"><i class="devicon-python-plain colored"></i> Python</span>
+                        <span class="tag"><i class="devicon-pandas-plain colored"></i> Pandas</span>
+                        <span class="tag"><i class="devicon-numpy-plain colored"></i> NumPy</span>
+                        <span class="tag"><i class="fa-solid fa-square-poll-vertical"></i> Statsmodels</span>
+                        <span class="tag"><i class="devicon-postgresql-plain colored"></i> PostgreSQL</span>
+                        <span class="tag"><i class="devicon-mysql-original colored"></i> MySQL</span>
+                        <span class="tag"><i class="fa-solid fa-database"></i> phpMyAdmin</span>
+                        <span class="tag"><i class="devicon-sqlite-plain colored"></i> SQLite</span>
+                        <span class="tag"><i class="fa-solid fa-feather"></i> DuckDB</span>
+                        <span class="tag"><i class="fa-solid fa-chart-pie"></i> Tableau BI</span>
+                        <span class="tag"><i class="fa-solid fa-file-excel"></i> Advanced Excel</span>
+                        <span class="tag"><i class="fa-solid fa-chart-area"></i> Matplotlib</span>
                     </div>
                 </div>
+
+                <!-- AI & Generative AI -->
+                <div class="tech-card interactive-hover">
+                    <h4>🤖 AI & Generative AI</h4>
+                    <div class="skills-tags">
+                        <span class="tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini API</span>
+                        <span class="tag"><i class="fa-solid fa-brain"></i> LLM Integration</span>
+                        <span class="tag"><i class="fa-solid fa-robot"></i> AI Workflows</span>
+                    </div>
+                </div>
+
+                <!-- Tools & Infrastructure -->
+                <div class="tech-card interactive-hover">
+                    <h4>🛠️ Tools & Infrastructure</h4>
+                    <div class="skills-tags">
+                        <span class="tag"><i class="devicon-git-plain colored"></i> Git & GitHub</span>
+                        <span class="tag"><i class="devicon-vercel-original colored"></i> Vercel</span>
+                        <span class="tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+                        <span class="tag"><i class="fa-solid fa-network-wired"></i> RESTful API</span>
+                        <span class="tag"><i class="devicon-linux-plain colored"></i> Linux</span>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -551,76 +886,277 @@
             </div>
         </section>
 
-        <!-- FEATURED PROJECTS SECTION -->
-        <section id="projects">
-            <div class="badge-sub">Portfolio</div>
-            <h2 class="section-title">Featured Work</h2>
-            <p class="section-desc">Selected projects combining data analysis and interactive web applications.</p>
-
-            <div class="projects-grid">
-                <div class="project-card interactive-hover">
-                    <img class="project-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Data Analytics Dashboard">
-                    <div class="project-content">
-                        <h3 class="project-title">Business Analytics & Tableau Dashboard</h3>
-                        <p class="project-desc">Interactive executive dashboard analyzing key performance metrics, revenue growth trends, and consumer behavior segments using Tableau and SQL.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Tableau</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Python</span>
-                        </div>
-                    </div>
+        <!-- EDUCATION -->
+        <section id="education">
+            <div class="badge-sub">Academic Background</div>
+            <h2 class="section-title">Education</h2>
+            
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">Universitas Terbuka</span>
+                    <span class="card-date">2025 — Present</span>
                 </div>
-
-                <div class="project-card interactive-hover">
-                    <img class="project-img" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Interactive Web App">
-                    <div class="project-content">
-                        <h3 class="project-title">Interactive Web Experience</h3>
-                        <p class="project-desc">Dynamic web application integrated with smooth GSAP animations, Three.js 3D elements, and real-time Chart.js visualizers.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">Three.js</span>
-                            <span class="skill-tag">GSAP</span>
-                        </div>
-                    </div>
+                <div class="card-sub">Bachelor of Science in Data Science | Bogor, Indonesia</div>
+                <div class="card-desc">
+                    Core Coursework: Database Systems (SQL), Applied Linear Models, Data Structures & Algorithms, Object-Oriented Programming (Python/Java), and Statistical Inference.
                 </div>
             </div>
         </section>
 
-        <!-- FOCUS CERTIFICATES SHOWCASE -->
+        <!-- EXPERIENCE -->
+        <section id="experience">
+            <div class="badge-sub">Career History</div>
+            <h2 class="section-title">Experience</h2>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">Social Media & Operations Specialist</span>
+                    <span class="card-date">2019 — 2023</span>
+                </div>
+                <div class="card-sub">Freelance / Contract</div>
+                <div class="card-desc">
+                    <ul>
+                        <li>Analyzed metric performance via Meta Business Suite to scale organic account reach up to 70,000 followers.</li>
+                        <li>Formulated content strategy based on audience retention patterns, averaging 10,000 engagements per post.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">Multimedia & Broadcasting Staff</span>
+                    <span class="card-date">2020 — 2021</span>
+                </div>
+                <div class="card-sub">Part-time | Bogor, Indonesia</div>
+                <div class="card-desc">
+                    Managed OBS Studio streaming setups, network routing, and hardware troubleshooting ensuring continuous zero downtime live broadcasts.
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PROJECTS -->
+        <section id="projects">
+            <div class="badge-sub">Portfolio</div>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-desc">A list of full-stack web applications, automated binary parsers, econometric modeling, and enterprise BI dashboards.</p>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">01 / Modern POS System (Forge Barber)</span>
+                    <span class="card-date">Full-Stack Web App & Deployment</span>
+                </div>
+                <div class="card-desc">
+                    Developed a production-ready Point of Sale (POS) system for barbershop operations. Features service catalog management, product retail tracking, clean transaction processing, real-time analytics dashboard, and automated database cleanup procedures for client handover.
+                </div>
+                <div class="skills-tags" style="margin-top: 8px;">
+                    <span class="tag"><i class="devicon-nextjs-original colored"></i> Next.js</span>
+                    <span class="tag"><i class="devicon-supabase-plain colored"></i> Supabase</span>
+                    <span class="tag"><i class="devicon-go-original-wordmark colored"></i> Go</span>
+                    <span class="tag"><i class="devicon-vercel-original colored"></i> Vercel</span>
+                    <span class="tag">REST API</span>
+                    <span class="tag"><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/santoph13/forge-barber-pos" target="_blank" class="btn interactive-hover"><i class="fa-brands fa-github"></i> View Source Code</a>
+                </div>
+            </div>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">02 / Full-Stack Vape Store POS & Financial System</span>
+                    <span class="card-date">Web Application & Analytics</span>
+                </div>
+                <div class="card-desc">
+                    Engineered a role-based POS web system (Owner vs Cashier) designed to optimize inventory tracking for complex vape variants (nicotine levels, ohm resistance) and real-time Net Profit/COGS calculation. Features fast-tap cashier interface, multi-payment tracking (Cash, QRIS, BCA Transfer), and automated daily sales analytics.
+                </div>
+                <div class="skills-tags" style="margin-top: 8px;">
+                    <span class="tag"><i class="devicon-laravel-original colored"></i> Laravel</span>
+                    <span class="tag"><i class="devicon-mysql-original colored"></i> MySQL</span>
+                    <span class="tag"><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+                    <span class="tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+                    <span class="tag"><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/santoph13" target="_blank" class="btn interactive-hover"><i class="fa-brands fa-github"></i> View Source Code</a>
+                </div>
+            </div>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">03 / ECU Hexadecimal Data Parser & 3D Mapping</span>
+                    <span class="card-date">Hex-to-Matrix Automation</span>
+                </div>
+                <div class="card-desc">
+                    Extracted raw binary memory dumps from vehicle ECU flash memory. Developed automated Python scripts using byte-pattern matching to convert raw hexadecimal data into structured numerical matrices for interactive 3D surface visualizations.
+                </div>
+                <div class="skills-tags" style="margin-top: 8px;">
+                    <span class="tag"><i class="devicon-python-plain colored"></i> Python</span>
+                    <span class="tag"><i class="devicon-numpy-plain colored"></i> NumPy</span>
+                    <span class="tag"><i class="fa-solid fa-chart-area"></i> Matplotlib</span>
+                    <span class="tag">Binary Parsing</span>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/santoph13" target="_blank" class="btn interactive-hover"><i class="fa-brands fa-github"></i> View Source Code</a>
+                </div>
+            </div>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">04 / Econometric Logistic Regression (SUSENAS BPS)</span>
+                    <span class="card-date">McFadden Pseudo R²: 60.8%</span>
+                </div>
+                <div class="card-desc">
+                    Constructed a Multiple Logistic Regression econometric model using Pandas and Statsmodels to predict household vehicle asset ownership. Processed thousands of micro-sample rows from BPS national survey data, performing data cleaning, outlier removal, and multicollinearity diagnostics.
+                </div>
+                <div class="skills-tags" style="margin-top: 8px;">
+                    <span class="tag"><i class="devicon-python-plain colored"></i> Python</span>
+                    <span class="tag"><i class="fa-solid fa-square-poll-vertical"></i> Statsmodels</span>
+                    <span class="tag"><i class="devicon-pandas-plain colored"></i> Pandas</span>
+                    <span class="tag">Inference Stats</span>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/santoph13" target="_blank" class="btn interactive-hover"><i class="fa-brands fa-github"></i> View Notebook</a>
+                </div>
+            </div>
+
+            <div class="card-item interactive-hover">
+                <div class="card-header">
+                    <span class="card-title">05 / Enterprise BI Dashboard & Automation</span>
+                    <span class="card-date">80% Reporting Automation</span>
+                </div>
+                <div class="card-desc">
+                    Designed interactive business intelligence dashboards in Tableau Desktop to track operational KPIs. Integrated complex Excel matrix functions (XLOOKUP, INDEX/MATCH, Pivot Tables) to streamline periodic reporting workflows.
+                </div>
+                <div class="skills-tags" style="margin-top: 8px;">
+                    <span class="tag"><i class="fa-solid fa-chart-pie"></i> Tableau BI</span>
+                    <span class="tag"><i class="fa-solid fa-file-excel"></i> Advanced Excel</span>
+                    <span class="tag">KPI Optimization</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS SECTION -->
         <section id="certifications">
             <div class="badge-sub">Verified Credentials</div>
-            <h2 class="section-title">Certifications Focus View</h2>
-            <p class="section-desc">Interactive split-view highlighting core learnings and official credentials.</p>
-
-            <div class="cert-focus-box">
-                <div>
-                    <img id="certImage" class="cert-preview-img" src="revou_sertif.jpeg" alt="Certificate Preview" onerror="this.src='https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=600&q=80'">
-                </div>
-                <div class="cert-detail-content">
-                    <h3 id="certTitle">Intro to Data Analytics</h3>
-                    <span class="cert-issuer-tag" id="certIssuer">RevoU • Verified 2026</span>
-                    <p class="cert-learning-list" id="certDesc">
-                        Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive decision-making.
-                    </p>
-                    <div class="cert-controls">
-                        <span id="certCounter" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted);">1 / 3</span>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn interactive-hover" onclick="prevCert()"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="btn interactive-hover" onclick="nextCert()"><i class="fa-solid fa-chevron-right"></i></button>
+            <h2 class="section-title">Certifications</h2>
+            
+            <div class="cert-grid">
+                
+                <div class="cert-card interactive-hover">
+                    <div class="cert-img-container" onclick="openModal(this)">
+                        <img src="revou_sertif.jpeg" alt="RevoU Certificate" onerror="this.src='https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=500&q=80'">
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-title">Intro to Data Analytics</div>
+                        <div class="cert-issuer">RevoU (2026)</div>
+                        <div class="cert-learned">
+                            <strong>Key Learnings:</strong> Core data analytics lifecycle, data storytelling framework, exploratory data analysis (EDA), and business case study metrics.
                         </div>
                     </div>
+                </div>
+
+                <div class="cert-card interactive-hover">
+                    <div class="cert-img-container" onclick="openModal(this)">
+                        <img src="zenith_academy.jpeg" alt="Tableau Certificate" onerror="this.src='https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=500&q=80'">
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-title">Tableau Desktop Fundamentals</div>
+                        <div class="cert-issuer">Zenith Academy (2025)</div>
+                        <div class="cert-learned">
+                            <strong>Key Learnings:</strong> Data source modeling, calculated fields, dynamic parameters, interactive dashboard design, and visual analytics.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card interactive-hover">
+                    <div class="cert-img-container" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80" alt="Snowflake Certificate">
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-title">Snowflake Discover AI</div>
+                        <div class="cert-issuer">Snowflake (2026)</div>
+                        <div class="cert-learned">
+                            <strong>Key Learnings:</strong> Cloud data lakehouse architecture, scalable AI-driven data pipelines, and distributed data warehousing.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card interactive-hover">
+                    <div class="cert-img-container" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80" alt="Peking University Certificate">
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-title">Chinese for HSK 1</div>
+                        <div class="cert-issuer">Peking University / Coursera (2026)</div>
+                        <div class="cert-learned">
+                            <strong>Key Learnings:</strong> Mandarin Chinese communication proficiency, Pinyin phonetics, structural vocabulary, and HSK 1 grammar.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card interactive-hover">
+                    <div class="cert-img-container" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80" alt="Yonsei Certificate">
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-title">First Step Korean</div>
+                        <div class="cert-issuer">Yonsei University / Coursera (2026)</div>
+                        <div class="cert-learned">
+                            <strong>Key Learnings:</strong> Foundational Korean language skills, Hangul writing/reading system, everyday expressions, and conversational structures.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LANGUAGES SECTION -->
+        <section id="languages">
+            <div class="badge-sub">Communication</div>
+            <h2 class="section-title">Languages</h2>
+            
+            <div class="lang-grid">
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">Indonesian</div>
+                    <div class="lang-level">Native / Fluent</div>
+                </div>
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">English</div>
+                    <div class="lang-level">Professional</div>
+                </div>
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">Spanish</div>
+                    <div class="lang-level">Basic / Elementary</div>
+                </div>
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">Korean</div>
+                    <div class="lang-level">Basic (Yonsei Cert)</div>
+                </div>
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">Mandarin</div>
+                    <div class="lang-level">Basic (HSK 1 / Peking)</div>
+                </div>
+                <div class="lang-card interactive-hover">
+                    <div class="lang-title">German</div>
+                    <div class="lang-level">Basic / Elementary</div>
                 </div>
             </div>
         </section>
 
         <footer>
-            © 2026 Santo Parningotan Hutapea • Crafted with Precision & Interactive UI
+            © 2026 Santo Parningotan Hutapea • Built with Electric Blue Modern Dark UI
         </footer>
 
     </div>
 
+    <!-- Lightbox Modal for Certificate Preview -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" class="modal-content" alt="Enlarged Certificate">
+    </div>
+
     <script>
-        // 1. CUSTOM GLOW CURSOR LOGIC
+        // 1. GLOW CURSOR LOGIC
         const dot = document.querySelector('.cursor-dot');
         const outline = document.querySelector('.cursor-outline');
 
@@ -632,13 +1168,13 @@
             outline.style.transform = `translate(${posX}px, ${posY}px)`;
         });
 
-        document.querySelectorAll('.interactive-hover, a, button').forEach(el => {
+        document.querySelectorAll('.interactive-hover, a, button, .cert-img-container').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
         });
 
         // 2. HERO TYPING EFFECT LOGIC
-        const words = ["Hi, I'm Santo Parningotan Hutapea.", "I Build Scalable Web Apps.", "I Analyze Complex Data Systems."];
+        const words = ["Santo Parningotan Hutapea", "Full-Stack Web Developer", "Full-Stack Data Analyst"];
         let i = 0, timer;
 
         function typingEffect() {
@@ -672,7 +1208,18 @@
         }
         typingEffect();
 
-        // 3. SQL PLAYGROUND LOGIC
+        // 3. THEME SWITCHER
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        });
+
+        // 4. SQL PLAYGROUND LOGIC
         const queries = {
             revenue: {
                 sql: "SELECT DATE_TRUNC('month', order_date) AS month,\n       SUM(amount) AS total_revenue\nFROM transactions\nGROUP BY 1 ORDER BY 1 DESC;",
@@ -698,47 +1245,17 @@
         }
         runQuery('revenue', null);
 
-        // 4. CERTIFICATES FOCUS VIEW LOGIC
-        const certs = [
-            {
-                title: "Intro to Data Analytics",
-                issuer: "RevoU • Verified 2026",
-                desc: "Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive stakeholders.",
-                img: "revou_sertif.jpeg"
-            },
-            {
-                title: "Tableau Desktop Fundamentals",
-                issuer: "Zenith Academy • Certified 2025",
-                desc: "Certified in Tableau Desktop Fundamentals. Built interactive executive dashboards, dynamic parameters, Level of Detail (LOD) expressions, and business analytics reports.",
-                img: "zenith_academy.jpeg"
-            },
-            {
-                title: "Full-Stack Frontend Development",
-                issuer: "Self-Trained / Interactive Web • 2026",
-                desc: "Proficient in modern web architecture utilizing HTML5, CSS3, JavaScript, and creative libraries including Three.js, Chart.js, and GSAP.",
-                img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
-
-        let currentCert = 0;
-
-        function updateCertView() {
-            const cert = certs[currentCert];
-            document.getElementById('certTitle').innerText = cert.title;
-            document.getElementById('certIssuer').innerText = cert.issuer;
-            document.getElementById('certDesc').innerText = cert.desc;
-            document.getElementById('certImage').src = cert.img;
-            document.getElementById('certCounter').innerText = `${currentCert + 1} / ${certs.length}`;
+        // 5. LIGHTBOX MODAL FUNCTIONALITY
+        function openModal(container) {
+            const img = container.querySelector('img');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
         }
 
-        function nextCert() {
-            currentCert = (currentCert + 1) % certs.length;
-            updateCertView();
-        }
-
-        function prevCert() {
-            currentCert = (currentCert - 1 + certs.length) % certs.length;
-            updateCertView();
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
         }
     </script>
 </body>
