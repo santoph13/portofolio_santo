@@ -317,7 +317,7 @@
             margin-bottom: 16px;
         }
 
-        /* FOCUS CERTIFICATE VIEW (OPTION 2) */
+        /* FOCUS CERTIFICATE VIEW */
         .cert-focus-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -526,7 +526,7 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE SQL PLAYGROUND (CORPORATE READY) -->
+        <!-- INTERACTIVE SQL PLAYGROUND -->
         <section id="sql-playground">
             <div class="badge-sub">Interactive Engine</div>
             <h2 class="section-title">Live Data Query Engine</h2>
@@ -541,9 +541,9 @@
                 </div>
                 <div class="sql-body">
                     <div class="sql-btn-group">
-                        <button class="sql-btn active interactive-hover" onclick="runQuery('revenue')">Monthly Revenue Growth</button>
-                        <button class="sql-btn interactive-hover" onclick="runQuery('churn')">Customer Churn Analysis</button>
-                        <button class="sql-btn interactive-hover" onclick="runQuery('inventory')">Inventory Reorder Warning</button>
+                        <button class="sql-btn active interactive-hover" onclick="runQuery('revenue', event)">Monthly Revenue Growth</button>
+                        <button class="sql-btn interactive-hover" onclick="runQuery('churn', event)">Customer Churn Analysis</button>
+                        <button class="sql-btn interactive-hover" onclick="runQuery('inventory', event)">Inventory Reorder Warning</button>
                     </div>
                     <div class="sql-code" id="sqlDisplay">-- Select a scenario to render SQL script</div>
                     <div class="sql-result" id="sqlOutput">Database execution output will be displayed here...</div>
@@ -586,7 +586,7 @@
             </div>
         </section>
 
-        <!-- FOCUS CERTIFICATES SHOWCASE (OPTION 2) -->
+        <!-- FOCUS CERTIFICATES SHOWCASE -->
         <section id="certifications">
             <div class="badge-sub">Verified Credentials</div>
             <h2 class="section-title">Certifications Focus View</h2>
@@ -688,16 +688,17 @@
             }
         };
 
-        function runQuery(type) {
+        function runQuery(type, evt) {
             document.querySelectorAll('.sql-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
+            if(evt && evt.target) {
+                evt.target.classList.add('active');
+            }
             document.getElementById('sqlDisplay').innerText = queries[type].sql;
             document.getElementById('sqlOutput').innerText = queries[type].output;
         }
-        runQuery('revenue');
+        runQuery('revenue', null);
 
-        // 4. CERTIFICATES FOCUS VIEW LOGIC (OPTION 2)
+        // 4. CERTIFICATES FOCUS VIEW LOGIC
         const certs = [
             {
                 title: "Intro to Data Analytics",
