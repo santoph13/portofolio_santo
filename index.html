@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,17 +22,6 @@
             --blue-glow-rgba: rgba(59, 130, 246, 0.25);
         }
 
-        [data-theme="light"] {
-            --bg-dark: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --card-border: rgba(59, 130, 246, 0.25);
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --primary-blue: #2563EB;
-            --cyan-glow: #0284C7;
-            --blue-glow-rgba: rgba(37, 99, 235, 0.12);
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -46,7 +35,6 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background 0.3s, color 0.3s;
         }
 
         /* CUSTOM GLOW CURSOR */
@@ -392,7 +380,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#sql-playground">Data Query</a></li>
                 <li><a href="#certifications">Certificates</a></li>
-                <li><a href="#projects">Projects</a></li>
             </ul>
             <a href="mailto:santoph13@gmail.com" class="btn btn-primary interactive-hover"><i class="fa-regular fa-paper-plane"></i> Let's Talk</a>
         </div>
@@ -407,7 +394,7 @@
                 <span class="typed-text"></span><span class="cursor-blink">&nbsp;</span>
             </h1>
             <p style="color: var(--text-muted); font-size: 14.5px; max-width: 650px; margin-bottom: 24px;">
-                Data Science Student at Universitas Terbuka based in Bogor. Specialized in building end-to-end Web Applications and high-performance Data Analytics pipelines.
+                Halo, saya Santo Parningotan Hutapea. Mahasiswa S1 Sains Data di Universitas Terbuka yang berdomisili di Bogor. Memiliki keahlian kuat di bidang Data Analysis (Python, SQL, Tableau) serta Full-Stack Frontend Development (HTML, CSS, JS, Three.js, GSAP).
             </p>
             <div style="display: flex; gap: 12px;">
                 <a href="#certifications" class="btn btn-primary interactive-hover">Explore Credentials <i class="fa-solid fa-arrow-right"></i></a>
@@ -419,7 +406,7 @@
         <section id="sql-playground">
             <div class="badge-sub">Interactive Showcase</div>
             <h2 class="section-title">Live Data Query Engine</h2>
-            <p class="section-desc">Click any analytics task below to test how I structure analytical queries for production environments.</p>
+            <p class="section-desc">Klik tombol skenario di bawah untuk menguji cara kerja query analitik data secara interaktif.</p>
 
             <div class="sql-box">
                 <div class="sql-header">
@@ -444,7 +431,7 @@
         <section id="certifications">
             <div class="badge-sub">Verified Credentials</div>
             <h2 class="section-title">Certifications Focus View</h2>
-            <p class="section-desc">Interactive split-view showcasing key technical learnings and verified credentials.</p>
+            <p class="section-desc">Tampilan detail sertifikat profesional dengan navigasi interaktif.</p>
 
             <div class="cert-focus-box">
                 <div>
@@ -454,10 +441,10 @@
                     <h3 id="certTitle">Intro to Data Analytics</h3>
                     <span class="cert-issuer-tag" id="certIssuer">RevoU • Verified 2026</span>
                     <p class="cert-learning-list" id="certDesc">
-                        Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive stakeholders.
+                        Menguasai siklus hidup data analytics, teknik Exploratory Data Analysis (EDA) menggunakan Python, serta penyajian metrik bisnis untuk stakeholder eksekutif.
                     </p>
                     <div class="cert-controls">
-                        <span id="certCounter" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted);">1 / 4</span>
+                        <span id="certCounter" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted);">1 / 3</span>
                         <div style="display: flex; gap: 8px;">
                             <button class="btn interactive-hover" onclick="prevCert()"><i class="fa-solid fa-chevron-left"></i></button>
                             <button class="btn interactive-hover" onclick="nextCert()"><i class="fa-solid fa-chevron-right"></i></button>
@@ -492,7 +479,7 @@
         });
 
         // 2. HERO TYPING EFFECT LOGIC
-        const words = ["Hi, I'm Santo Parningotan.", "I Build Scalable Web Apps.", "I Analyze Complex Data."];
+        const words = ["Hi, I'm Santo Parningotan Hutapea.", "I Build Scalable Web Apps.", "I Analyze Complex Data."];
         let i = 0, timer;
 
         function typingEffect() {
@@ -556,26 +543,20 @@
             {
                 title: "Intro to Data Analytics",
                 issuer: "RevoU • Verified 2026",
-                desc: "Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive stakeholders.",
+                desc: "Menguasai siklus hidup data analytics, teknik Exploratory Data Analysis (EDA) menggunakan Python, serta penyajian metrik bisnis untuk stakeholder eksekutif.",
                 img: "revou_sertif.jpeg"
             },
             {
                 title: "Tableau Desktop Fundamentals",
                 issuer: "Zenith Academy • Verified 2025",
-                desc: "Built dynamic executive dashboards, custom LOD expressions, dynamic parameters, and streamlined complex business reporting structures.",
+                desc: "Bersertifikat Tableau Desktop Fundamentals. Membangun dashboard eksekutif interaktif, parameter dinamis, dan visualisasi data bisnis yang kompleks.",
                 img: "zenith_academy.jpeg"
             },
             {
-                title: "Snowflake Discover AI",
-                issuer: "Snowflake • Verified 2026",
-                desc: "Explored cloud data lakehouse architecture, AI-driven data pipelining, and distributed SQL query optimization.",
-                img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "First Step Korean",
-                issuer: "Yonsei University • Verified 2026",
-                desc: "Acquired fundamental Korean communication skills, Hangul phonetics structure, and practical conversational expressions.",
-                img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
+                title: "Full-Stack Frontend Development",
+                issuer: "Self-Trained / Projects • 2026",
+                desc: "Menguasai implementasi HTML5, CSS3, JavaScript modern, serta pustaka interaktif tingkat lanjut seperti Three.js, Chart.js, dan GSAP.",
+                img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
