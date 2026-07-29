@@ -1,4 +1,4 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -229,7 +229,95 @@ l<!DOCTYPE html>
             50% { opacity: 0; }
         }
 
-        /* FOCUS CERTIFICATE VIEW (OPSI 2) */
+        /* SKILLS GRID */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-blue);
+        }
+
+        .skill-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* PROJECTS GRID */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* FOCUS CERTIFICATE VIEW (OPTION 2) */
         .cert-focus-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -344,7 +432,7 @@ l<!DOCTYPE html>
         .sql-code {
             color: #7EE787;
             margin-bottom: 14px;
-            min-height: 40px;
+            min-height: 45px;
             white-space: pre-wrap;
         }
 
@@ -378,7 +466,9 @@ l<!DOCTYPE html>
             <a href="#" class="logo">&lt;/&gt; Santo<span>.dev</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#sql-playground">Data Query</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#certifications">Certificates</a></li>
             </ul>
             <a href="mailto:santoph13@gmail.com" class="btn btn-primary interactive-hover"><i class="fa-regular fa-paper-plane"></i> Let's Talk</a>
@@ -389,49 +479,118 @@ l<!DOCTYPE html>
         
         <!-- HERO SECTION WITH TYPING EFFECT -->
         <section class="hero" id="about">
-            <div class="badge-sub">Full-Stack & Data Science</div>
+            <div class="badge-sub">Full-Stack Developer & Data Science Student</div>
             <h1 class="hero-title-typing">
                 <span class="typed-text"></span><span class="cursor-blink">&nbsp;</span>
             </h1>
             <p style="color: var(--text-muted); font-size: 14.5px; max-width: 650px; margin-bottom: 24px;">
-                Halo, saya Santo Parningotan Hutapea. Mahasiswa S1 Sains Data di Universitas Terbuka yang berdomisili di Bogor. Memiliki keahlian kuat di bidang Data Analysis (Python, SQL, Tableau) serta Full-Stack Frontend Development (HTML, CSS, JS, Three.js, GSAP).
+                I am Santo Parningotan Hutapea, an active Data Science undergraduate student based in Bogor, Indonesia. Specialized in building end-to-end Web Applications and executing robust Data Analytics pipelines (Python, SQL, Tableau, JavaScript).
             </p>
-            <div style="display: flex; gap: 12px;">
-                <a href="#certifications" class="btn btn-primary interactive-hover">Explore Credentials <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="#sql-playground" class="btn interactive-hover"><i class="fa-solid fa-terminal"></i> Try Live SQL</a>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="#projects" class="btn btn-primary interactive-hover">View Featured Projects <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#sql-playground" class="btn interactive-hover"><i class="fa-solid fa-terminal"></i> Interactive SQL Demo</a>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS SECTION -->
+        <section id="skills">
+            <div class="badge-sub">Expertise & Tools</div>
+            <h2 class="section-title">Technical Stack</h2>
+            <p class="section-desc">Core competencies across data science, web development, and modern framework technologies.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card interactive-hover">
+                    <h3><i class="fa-solid fa-chart-line" style="color: var(--primary-blue);"></i> Data Analytics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Statsmodels</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Advanced Excel</span>
+                        <span class="skill-tag">Tableau</span>
+                    </div>
+                </div>
+                <div class="skill-card interactive-hover">
+                    <h3><i class="fa-solid fa-code" style="color: var(--cyan-glow);"></i> Frontend & Creative Web</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript (ES6+)</span>
+                        <span class="skill-tag">Three.js</span>
+                        <span class="skill-tag">Chart.js</span>
+                        <span class="skill-tag">GSAP</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- INTERACTIVE SQL PLAYGROUND (CORPORATE READY) -->
         <section id="sql-playground">
-            <div class="badge-sub">Interactive Showcase</div>
+            <div class="badge-sub">Interactive Engine</div>
             <h2 class="section-title">Live Data Query Engine</h2>
-            <p class="section-desc">Klik tombol skenario di bawah untuk menguji cara kerja query analitik data secara interaktif.</p>
+            <p class="section-desc">Click any business scenario below to test real-time analytical SQL query execution.</p>
 
             <div class="sql-box">
                 <div class="sql-header">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <span style="font-size: 11px; color: #8B949E; margin-left: 8px;">analytics_db.sql</span>
+                    <span style="font-size: 11px; color: #8B949E; margin-left: 8px;">production_db.sql</span>
                 </div>
                 <div class="sql-body">
                     <div class="sql-btn-group">
                         <button class="sql-btn active interactive-hover" onclick="runQuery('revenue')">Monthly Revenue Growth</button>
-                        <button class="sql-btn interactive-hover" onclick="runQuery('churn')">Customer Churn Metric</button>
+                        <button class="sql-btn interactive-hover" onclick="runQuery('churn')">Customer Churn Analysis</button>
                         <button class="sql-btn interactive-hover" onclick="runQuery('inventory')">Inventory Reorder Warning</button>
                     </div>
-                    <div class="sql-code" id="sqlDisplay">-- Select a query to execute</div>
-                    <div class="sql-result" id="sqlOutput">Output table preview will render here...</div>
+                    <div class="sql-code" id="sqlDisplay">-- Select a scenario to render SQL script</div>
+                    <div class="sql-result" id="sqlOutput">Database execution output will be displayed here...</div>
                 </div>
             </div>
         </section>
 
-        <!-- FOCUS CERTIFICATES SHOWCASE (OPSI 2) -->
+        <!-- FEATURED PROJECTS SECTION -->
+        <section id="projects">
+            <div class="badge-sub">Portfolio</div>
+            <h2 class="section-title">Featured Work</h2>
+            <p class="section-desc">Selected projects combining data analysis and interactive web applications.</p>
+
+            <div class="projects-grid">
+                <div class="project-card interactive-hover">
+                    <img class="project-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Data Analytics Dashboard">
+                    <div class="project-content">
+                        <h3 class="project-title">Business Analytics & Tableau Dashboard</h3>
+                        <p class="project-desc">Interactive executive dashboard analyzing key performance metrics, revenue growth trends, and consumer behavior segments using Tableau and SQL.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card interactive-hover">
+                    <img class="project-img" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Interactive Web App">
+                    <div class="project-content">
+                        <h3 class="project-title">Interactive Web Experience</h3>
+                        <p class="project-desc">Dynamic web application integrated with smooth GSAP animations, Three.js 3D elements, and real-time Chart.js visualizers.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Three.js</span>
+                            <span class="skill-tag">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOCUS CERTIFICATES SHOWCASE (OPTION 2) -->
         <section id="certifications">
             <div class="badge-sub">Verified Credentials</div>
             <h2 class="section-title">Certifications Focus View</h2>
-            <p class="section-desc">Tampilan detail sertifikat profesional dengan navigasi interaktif.</p>
+            <p class="section-desc">Interactive split-view highlighting core learnings and official credentials.</p>
 
             <div class="cert-focus-box">
                 <div>
@@ -441,7 +600,7 @@ l<!DOCTYPE html>
                     <h3 id="certTitle">Intro to Data Analytics</h3>
                     <span class="cert-issuer-tag" id="certIssuer">RevoU • Verified 2026</span>
                     <p class="cert-learning-list" id="certDesc">
-                        Menguasai siklus hidup data analytics, teknik Exploratory Data Analysis (EDA) menggunakan Python, serta penyajian metrik bisnis untuk stakeholder eksekutif.
+                        Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive decision-making.
                     </p>
                     <div class="cert-controls">
                         <span id="certCounter" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted);">1 / 3</span>
@@ -479,7 +638,7 @@ l<!DOCTYPE html>
         });
 
         // 2. HERO TYPING EFFECT LOGIC
-        const words = ["Hi, I'm Santo Parningotan Hutapea.", "I Build Scalable Web Apps.", "I Analyze Complex Data."];
+        const words = ["Hi, I'm Santo Parningotan Hutapea.", "I Build Scalable Web Apps.", "I Analyze Complex Data Systems."];
         let i = 0, timer;
 
         function typingEffect() {
@@ -517,7 +676,7 @@ l<!DOCTYPE html>
         const queries = {
             revenue: {
                 sql: "SELECT DATE_TRUNC('month', order_date) AS month,\n       SUM(amount) AS total_revenue\nFROM transactions\nGROUP BY 1 ORDER BY 1 DESC;",
-                output: "Status: 200 OK | Rendered 3 Rows\n+------------+---------------+ \n| Month      | Total Revenue | \n+------------+---------------+ \n| 2026-03-01 | $42,500.00    | \n| 2026-02-01 | $38,120.00    | \n+------------+---------------+ "
+                output: "Status: 200 OK | Rendered 2 Rows\n+------------+---------------+ \n| Month      | Total Revenue | \n+------------+---------------+ \n| 2026-03-01 | $42,500.00    | \n| 2026-02-01 | $38,120.00    | \n+------------+---------------+ "
             },
             churn: {
                 sql: "SELECT user_id, DATEDIFF(day, max(last_login), CURRENT_DATE) as inactive_days\nFROM user_logs\nHAVING inactive_days > 30;",
@@ -538,24 +697,24 @@ l<!DOCTYPE html>
         }
         runQuery('revenue');
 
-        // 4. CERTIFICATES FOCUS VIEW LOGIC (OPSI 2)
+        // 4. CERTIFICATES FOCUS VIEW LOGIC (OPTION 2)
         const certs = [
             {
                 title: "Intro to Data Analytics",
                 issuer: "RevoU • Verified 2026",
-                desc: "Menguasai siklus hidup data analytics, teknik Exploratory Data Analysis (EDA) menggunakan Python, serta penyajian metrik bisnis untuk stakeholder eksekutif.",
+                desc: "Mastered core data analytics lifecycle, exploratory data analysis (EDA) techniques using Python, and business metric storytelling for executive stakeholders.",
                 img: "revou_sertif.jpeg"
             },
             {
                 title: "Tableau Desktop Fundamentals",
-                issuer: "Zenith Academy • Verified 2025",
-                desc: "Bersertifikat Tableau Desktop Fundamentals. Membangun dashboard eksekutif interaktif, parameter dinamis, dan visualisasi data bisnis yang kompleks.",
+                issuer: "Zenith Academy • Certified 2025",
+                desc: "Certified in Tableau Desktop Fundamentals. Built interactive executive dashboards, dynamic parameters, Level of Detail (LOD) expressions, and business analytics reports.",
                 img: "zenith_academy.jpeg"
             },
             {
                 title: "Full-Stack Frontend Development",
-                issuer: "Self-Trained / Projects • 2026",
-                desc: "Menguasai implementasi HTML5, CSS3, JavaScript modern, serta pustaka interaktif tingkat lanjut seperti Three.js, Chart.js, dan GSAP.",
+                issuer: "Self-Trained / Interactive Web • 2026",
+                desc: "Proficient in modern web architecture utilizing HTML5, CSS3, JavaScript, and creative libraries including Three.js, Chart.js, and GSAP.",
                 img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
             }
         ];
